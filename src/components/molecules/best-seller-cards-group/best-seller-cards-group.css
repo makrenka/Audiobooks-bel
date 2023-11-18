@@ -1,0 +1,67 @@
+.best-seller-home__cards {
+    margin-top: 16px;
+    display: flex;
+    overflow: auto;
+    margin-right: -28px;
+}
+
+.best-seller-home__cards::-webkit-scrollbar {
+    width: 0;
+    height: 0;
+}
+
+.best-seller-home__card {
+    margin-right: 16px;
+    padding: 12px;
+    display: flex;
+    width: 315px;
+    background: #F5F5FA;
+    border-radius: 12px;
+}
+
+.best-seller-home__card-img {
+    width: 120px;
+    height: 120px;
+    border-radius: 4px;
+}
+
+.best-seller-home__card-description {
+    margin-left: 16px;
+}
+
+.best-seller-home__card-description-heading {
+    margin-top: 4px;
+    margin-bottom: 0;
+    font-family: 'Poppins', sans-serif;
+    font-style: normal;
+    font-weight: 500;
+    font-size: 16px;
+    line-height: 24px;
+    color: var(--headings);
+}
+
+.best-seller-home__card-description-author {
+    margin-top: 4px;
+    margin-bottom: 0;
+    font-family: 'Poppins', sans-serif;
+    font-style: normal;
+    font-weight: 400;
+    font-size: 12px;
+    line-height: 18px;
+    color: #6A6A8B;
+}
+
+.best-seller-home__card-description-rating {
+    margin-top: 20px;
+}
+
+.best-seller-home__card-description-listeners-counter {
+    margin-top: 8px;
+    margin-bottom: 0;
+    font-family: 'Poppins', sans-serif;
+    font-style: normal;
+    font-weight: 400;
+    font-size: 12px;
+    line-height: 18px;
+    color: #6A6A8B;
+}

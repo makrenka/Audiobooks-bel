@@ -1,0 +1,45 @@
+.search-page__latest-search {
+    margin-top: 32px;
+}
+
+.search-page__latest-search-heading {
+    margin: 0;
+    font-family: 'Poppins', sans-serif;
+    font-style: normal;
+    font-weight: 500;
+    font-size: 16px;
+    line-height: 24px;
+    color: var(--heading);
+}
+
+.search-page__latest-search-cards {
+    margin-top: 16px;
+    display: flex;
+    overflow: auto;
+    margin-right: -28px;
+}
+
+.search-page__latest-search-cards::-webkit-scrollbar {
+    width: 0;
+    height: 0;
+}
+
+.search-page__latest-search-card {
+    margin-right: 12px;
+}
+
+.search-page__latest-search-card-img {
+    width: 160px;
+    height: 160px;
+}
+
+.search-page__latest-search-card-heading {
+    font-family: 'Poppins', sans-serif;
+    font-style: normal;
+    font-weight: 500;
+    font-size: 16px;
+    line-height: 24px;
+    color: #2E2E5D;
+    margin-top: 12px;
+    margin-bottom: 0;
+}

@@ -1,0 +1,50 @@
+.detail-page__card-img-wrapper {
+    display: flex;
+    justify-content: center;
+}
+
+.detail-page__card-img {
+    margin-top: 24px;
+    width: 260px;
+    height: 260px;
+}
+
+.detail-page__card-heading {
+    margin-top: 28px;
+    margin-bottom: 0;
+    font-family: 'Poppins', sans-serif;
+    font-style: normal;
+    font-weight: 500;
+    font-size: 20px;
+    line-height: 30px;
+    color: var(--headings);
+}
+
+.detail-page__card-author {
+    margin-top: 4px;
+    margin-bottom: 0;
+    font-family: 'Poppins', sans-serif;
+    font-style: normal;
+    font-weight: 400;
+    font-size: 16px;
+    line-height: 24px;
+    color: #9292A2;
+}
+
+.detail-page__card-rating-wrapper {
+    margin-top: 16px;
+    display: flex;
+    align-items: center;
+    height: 20px;
+}
+
+.detail-page__card-rating-number {
+    font-family: 'Poppins', sans-serif;
+    font-style: normal;
+    font-weight: 400;
+    font-size: 20px;
+    line-height: 30px;
+    text-align: center;
+    color: #9292A2;
+    margin-left: 12px;
+}

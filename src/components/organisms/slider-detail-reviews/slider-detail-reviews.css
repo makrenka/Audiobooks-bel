@@ -1,0 +1,105 @@
+.detail-page__reviews-slider {
+    overflow: hidden;
+}
+
+.detail-page__reviews-slider-slides {
+    display: flex;
+    transition: transform 0.5s ease-in-out;
+}
+
+.detail-page__reviews-slider-slide {
+    margin-top: 20px;
+    min-width: 100%;
+}
+
+.detail-page__reviews-slider-slide-info-wrapper {
+    display: flex;
+}
+
+.detail-page__reviews-slider-slide-info {
+    margin-left: 20px;
+}
+
+.detail-page__reviews-slider-slide-img {
+    width: 48px;
+    height: 48px;
+    border-radius: 8px;
+}
+
+.detail-page__reviews-slider-slide-info-name {
+    margin-top: 4px;
+    font-family: 'Poppins', sans-serif;
+    font-style: normal;
+    font-weight: 500;
+    font-size: 14px;
+    line-height: 21px;
+    color: var(--detail-headings);
+}
+
+.detail-page__reviews-slider-slide-info-rating {
+    display: flex;
+    align-items: center;
+    margin-top: 4px;
+}
+
+.detail-page__reviews-slider-slide-info-rating-img {
+    width: 96px;
+    height: 16px;
+}
+
+.detail-page__reviews-slider-slide-info-rating-date {
+    margin-left: 10px;
+    font-family: 'Poppins', sans-serif;
+    font-style: normal;
+    font-weight: 400;
+    font-size: 10px;
+    line-height: 15px;
+    color: #9292A2;
+}
+
+.detail-page__reviews-slider-slide-review {
+    margin-top: 16px;
+    font-family: 'Poppins', sans-serif;
+    font-style: normal;
+    font-weight: 300;
+    font-size: 14px;
+    line-height: 21px;
+    color: var(--detail-text);
+}
+
+.detail-page__reviews-slider-dots {
+    display: flex;
+    cursor: pointer;
+}
+
+.detail-page__reviews-slider-dots .selected {
+    background: #4838D1;
+}
+
+.detail-page__reviews-slider-dot {
+    width: 12px;
+    height: 12px;
+    background: #D5D5E3;
+    border-radius: 6px;
+    margin-right: 12px;
+}
+
+.detail-page__reviews-slider-links-wrapper {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-top: 16px;
+}
+
+.detail-page__reviews-slider-view-link {
+    width: 78px;
+    height: 21px;
+    background: none;
+    border: none;
+    font-family: 'Poppins', sans-serif;
+    font-style: normal;
+    font-weight: 500;
+    font-size: 14px;
+    line-height: 21px;
+    color: #F77A55;
+}

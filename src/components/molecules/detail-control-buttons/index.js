@@ -1,0 +1,1 @@
+export { DetailControlButtons } from './detail-control-buttons';
