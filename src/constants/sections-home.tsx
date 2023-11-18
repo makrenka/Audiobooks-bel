@@ -4,9 +4,25 @@ import { BestSellerCardsGroup } from "../components/molecules/best-seller-cards-
 import { NewAndTrendCardsGroup } from "../components/molecules/new-and-trend-cards-group";
 
 export const sections = [
-    { name: "Categories", content: <CategoryHomeBtnGroup />, url: "categories" },
-    { name: "Recommended For You", content: <RecommendedCardGroup />, url: "recommended" },
-    { name: "Best Seller", content: <BestSellerCardsGroup section="best" />, url: "best" },
-    { name: "New Releases", content: <NewAndTrendCardsGroup section="new" />, url: "new" },
-    { name: "Trending Now", content: <NewAndTrendCardsGroup section="trending" />, url: "trending" },
-]
+  { name: "Катэгорыі", content: <CategoryHomeBtnGroup />, url: "categories" },
+  {
+    name: "Рэкамэндавана для вас",
+    content: <RecommendedCardGroup />,
+    url: "recommended",
+  },
+  {
+    name: "Лідары продажу",
+    content: <BestSellerCardsGroup section="best" />,
+    url: "best",
+  },
+  {
+    name: "Навінкі",
+    content: <NewAndTrendCardsGroup section="new" />,
+    url: "new",
+  },
+  {
+    name: "Папулярнае",
+    content: <NewAndTrendCardsGroup section="trending" />,
+    url: "trending",
+  },
+];
