@@ -4,16 +4,19 @@ import { RootState } from "../../../store";
 
 import "./best-seller-cards-group.css";
 
+import card1 from "./assets/card1.jpg";
+
 export const BestSellerCardsGroup = ({ section }: { section: string }) => {
   const books = useSelector((state: RootState) => state.books.bookList.data);
 
   return (
     <div className="best-seller-home__cards">
-      {books?.filter((item) => item.section.includes(section))
+      {books
+        ?.filter((item) => item.section.includes(section))
         .map(({ cover, title, author, rating, listeners, id }) => (
           <div className="best-seller-home__card" key={id}>
             <img
-              src={cover.url}
+              src={cover.url ? cover.url : card1}
               alt="Cover of the book"
               className="best-seller-home__card-img"
             />
@@ -36,5 +39,5 @@ export const BestSellerCardsGroup = ({ section }: { section: string }) => {
           </div>
         ))}
     </div>
-  )
+  );
 };

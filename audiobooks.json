@@ -2,35 +2,29 @@
   "audiobooks": [
     {
       "cover": {
-        "url": "../assets/images/cards/card1.jpg"
+        "url": ""
       },
       "coverBigSize": {
-        "url": "../assets/images/cards/recommended-card.jpg"
+        "url": ""
       },
       "title": "The Kidnapper’s Accomplice",
       "author": "Laurie Forest",
       "rating": {
-        "url": "../assets/images/icons/rating.png"
+        "url": ""
       },
       "ratingNumber": 4,
       "listeners": "1,000+ Listeners",
       "id": "1",
-      "section": [
-        "recommended",
-        "best",
-        "trending"
-      ],
-      "category": [
-        "Fantasy",
-        "Drama",
-        "Fiction"
-      ],
+      "section": ["recommended", "best", "trending"],
+      "category": ["Fantasy", "Drama", "Fiction"],
       "reviews": [
         {
           "number": 1,
           "image": "../assets/images/customer-photo.jpg",
           "name": "Ronald Richards",
-          "rating": "../assets/images/icons/rating.png",
+          "rating": {
+            "url": ""
+          },
           "date": "2 days ago",
           "text": "Amet minim mollit non deserunt ullamco est sit aliqua dolor do amet sint. Exercitation veniam consequat sunt nostrud amet. Velit officia consequat duis enim velit mollit."
         },
@@ -38,7 +32,9 @@
           "number": 2,
           "image": "../assets/images/customer-photo.jpg",
           "name": "Ronald Richards",
-          "rating": "../assets/images/icons/rating.png",
+          "rating": {
+            "url": ""
+          },
           "date": "3 days ago",
           "text": "Amet minim mollit non deserunt ullamco est sit aliqua dolor do amet sint. Exercitation veniam consequat sunt nostrud amet. Velit officia consequat duis enim velit mollit."
         },
@@ -46,7 +42,9 @@
           "number": 3,
           "image": "../assets/images/customer-photo.jpg",
           "name": "Ronald Richards",
-          "rating": "../assets/images/icons/rating.png",
+          "rating": {
+            "url": ""
+          },
           "date": "4 days ago",
           "text": "Amet minim mollit non deserunt ullamco est sit aliqua dolor do amet sint. Exercitation veniam consequat sunt nostrud amet. Velit officia consequat duis enim velit mollit."
         }
@@ -54,49 +52,49 @@
       "summary": "Amet minim mollit non deserunt ullamco est sit aliqua dolor do amet sint. Velit officia consequat duis enim velit mollit. Exercitation veniam consequat sunt nostrud amet. Mollit non deserunt ullamco est sit aliqua dolor do amet sint. Velit officia consequat duis enim velit mollit. Exercitation veniam consequat sunt. Velit officia consequat duis enim velit mollit. Amet minim mollit non deserunt ullamco est sit aliqua dolor do amet sint. Velit officia consequat duis enim velit mollit. Exercitation veniam consequat sunt nostrud amet. Amet minim mollit non deserunt ullamco est sit aliqua dolor do amet sint. Velit officia consequat duis enim velit mollit. Exercitation veniam consequat sunt nostrud amet. Mollit non deserunt ullamco est sit aliqua dolor do amet sint. Velit officia consequat duis enim velit mollit. Exercitation veniam consequat sunt. Velit officia consequat duis enim velit mollit. Amet minim mollit non deserunt ullamco est sit aliqua dolor do amet sint. Velit officia consequat duis enim velit mollit. Exercitation veniam consequat sunt nostrud amet."
     },
     {
-      "cover": "../assets/images/cards/card2.jpg",
-      "coverBigSize": "../assets/images/cards/recommended-card.jpg",
+      "cover": {
+        "url": ""
+      },
+      "coverBigSize": {
+        "url": ""
+      },
       "title": "The Black Witch",
       "author": "Laurie Forest",
-      "rating": "../assets/images/icons/rating.png",
+      "rating": {
+        "url": ""
+      },
       "ratingNumber": 4,
       "listeners": "1,000+ Listeners",
       "id": "2",
-      "section": [
-        "recommended",
-        "best",
-        "new"
-      ],
-      "category": [
-        "Fantasy",
-        "Comedy"
-      ],
+      "section": ["recommended", "best", "new"],
+      "category": ["Fantasy", "Comedy"],
       "summary": "Amet minim mollit non deserunt ullamco est sit aliqua dolor do amet sint. Velit officia consequat duis enim velit mollit. Exercitation veniam consequat sunt nostrud amet. Mollit non deserunt ullamco est sit aliqua dolor do amet sint. Velit officia consequat duis enim velit mollit. Exercitation veniam consequat sunt. Velit officia consequat duis enim velit mollit. Amet minim mollit non deserunt ullamco est sit aliqua dolor do amet sint. Velit officia consequat duis enim velit mollit. Exercitation veniam consequat sunt nostrud amet. Amet minim mollit non deserunt ullamco est sit aliqua dolor do amet sint. Velit officia consequat duis enim velit mollit. Exercitation veniam consequat sunt nostrud amet. Mollit non deserunt ullamco est sit aliqua dolor do amet sint. Velit officia consequat duis enim velit mollit. Exercitation veniam consequat sunt. Velit officia consequat duis enim velit mollit. Amet minim mollit non deserunt ullamco est sit aliqua dolor do amet sint. Velit officia consequat duis enim velit mollit. Exercitation veniam consequat sunt nostrud amet."
     },
     {
-      "cover": "../assets/images/cards/card3.jpg",
-      "coverBigSize": "../assets/images/cards/recommended-card.jpg",
+      "cover": {
+        "url": ""
+      },
+      "coverBigSize": {
+        "url": ""
+      },
       "title": "The Prisoner’s Key",
       "author": "Laurie Forest",
-      "rating": "../assets/images/icons/rating.png",
+      "rating": {
+        "url": ""
+      },
       "ratingNumber": 4,
       "listeners": "1,000+ Listeners",
       "id": "3",
-      "section": [
-        "best",
-        "trending"
-      ],
-      "category": [
-        "Fantasy",
-        "Drama",
-        "Travel"
-      ],
+      "section": ["best", "trending"],
+      "category": ["Fantasy", "Drama", "Travel"],
       "reviews": [
         {
           "number": 1,
           "image": "../assets/images/customer-photo.jpg",
           "name": "Ronald Richards",
-          "rating": "../assets/images/icons/rating.png",
+          "rating": {
+            "url": ""
+          },
           "date": "2 days ago",
           "text": "Amet minim mollit non deserunt ullamco est sit aliqua dolor do amet sint. Exercitation veniam consequat sunt nostrud amet. Velit officia consequat duis enim velit mollit."
         },
@@ -104,7 +102,9 @@
           "number": 2,
           "image": "../assets/images/customer-photo.jpg",
           "name": "Ronald Richards",
-          "rating": "../assets/images/icons/rating.png",
+          "rating": {
+            "url": ""
+          },
           "date": "3 days ago",
           "text": "Amet minim mollit non deserunt ullamco est sit aliqua dolor do amet sint. Exercitation veniam consequat sunt nostrud amet. Velit officia consequat duis enim velit mollit."
         },
@@ -112,7 +112,9 @@
           "number": 3,
           "image": "../assets/images/customer-photo.jpg",
           "name": "Ronald Richards",
-          "rating": "../assets/images/icons/rating.png",
+          "rating": {
+            "url": ""
+          },
           "date": "4 days ago",
           "text": "Amet minim mollit non deserunt ullamco est sit aliqua dolor do amet sint. Exercitation veniam consequat sunt nostrud amet. Velit officia consequat duis enim velit mollit."
         }
@@ -120,29 +122,28 @@
       "summary": "Amet minim mollit non deserunt ullamco est sit aliqua dolor do amet sint. Velit officia consequat duis enim velit mollit. Exercitation veniam consequat sunt nostrud amet. Mollit non deserunt ullamco est sit aliqua dolor do amet sint. Velit officia consequat duis enim velit mollit. Exercitation veniam consequat sunt. Velit officia consequat duis enim velit mollit. Amet minim mollit non deserunt ullamco est sit aliqua dolor do amet sint. Velit officia consequat duis enim velit mollit. Exercitation veniam consequat sunt nostrud amet. Amet minim mollit non deserunt ullamco est sit aliqua dolor do amet sint. Velit officia consequat duis enim velit mollit. Exercitation veniam consequat sunt nostrud amet. Mollit non deserunt ullamco est sit aliqua dolor do amet sint. Velit officia consequat duis enim velit mollit. Exercitation veniam consequat sunt. Velit officia consequat duis enim velit mollit. Amet minim mollit non deserunt ullamco est sit aliqua dolor do amet sint. Velit officia consequat duis enim velit mollit. Exercitation veniam consequat sunt nostrud amet."
     },
     {
-      "cover": "../assets/images/cards/card4.jpg",
+      "cover": {
+        "url": ""
+      },
       "coverBigSize": "../assets/images/cards/recommended-card.jpg",
       "title": "Light Mage",
       "author": "Laurie Forest",
-      "rating": "../assets/images/icons/rating.png",
+      "rating": {
+        "url": ""
+      },
       "ratingNumber": 4,
       "listeners": "1,000+ Listeners",
       "id": "4",
-      "section": [
-        "new",
-        "trending"
-      ],
-      "category": [
-        "Fantasy",
-        "Drama",
-        "Fiction"
-      ],
+      "section": ["new", "trending"],
+      "category": ["Fantasy", "Drama", "Fiction"],
       "reviews": [
         {
           "number": 1,
           "image": "../assets/images/customer-photo.jpg",
           "name": "Ronald Richards",
-          "rating": "../assets/images/icons/rating.png",
+          "rating": {
+            "url": ""
+          },
           "date": "2 days ago",
           "text": "Amet minim mollit non deserunt ullamco est sit aliqua dolor do amet sint. Exercitation veniam consequat sunt nostrud amet. Velit officia consequat duis enim velit mollit."
         },
@@ -150,7 +151,9 @@
           "number": 2,
           "image": "../assets/images/customer-photo.jpg",
           "name": "Ronald Richards",
-          "rating": "../assets/images/icons/rating.png",
+          "rating": {
+            "url": ""
+          },
           "date": "3 days ago",
           "text": "Amet minim mollit non deserunt ullamco est sit aliqua dolor do amet sint. Exercitation veniam consequat sunt nostrud amet. Velit officia consequat duis enim velit mollit."
         },
@@ -158,7 +161,9 @@
           "number": 3,
           "image": "../assets/images/customer-photo.jpg",
           "name": "Ronald Richards",
-          "rating": "../assets/images/icons/rating.png",
+          "rating": {
+            "url": ""
+          },
           "date": "4 days ago",
           "text": "Amet minim mollit non deserunt ullamco est sit aliqua dolor do amet sint. Exercitation veniam consequat sunt nostrud amet. Velit officia consequat duis enim velit mollit."
         }
@@ -166,29 +171,28 @@
       "summary": "Amet minim mollit non deserunt ullamco est sit aliqua dolor do amet sint. Velit officia consequat duis enim velit mollit. Exercitation veniam consequat sunt nostrud amet. Mollit non deserunt ullamco est sit aliqua dolor do amet sint. Velit officia consequat duis enim velit mollit. Exercitation veniam consequat sunt. Velit officia consequat duis enim velit mollit. Amet minim mollit non deserunt ullamco est sit aliqua dolor do amet sint. Velit officia consequat duis enim velit mollit. Exercitation veniam consequat sunt nostrud amet. Amet minim mollit non deserunt ullamco est sit aliqua dolor do amet sint. Velit officia consequat duis enim velit mollit. Exercitation veniam consequat sunt nostrud amet. Mollit non deserunt ullamco est sit aliqua dolor do amet sint. Velit officia consequat duis enim velit mollit. Exercitation veniam consequat sunt. Velit officia consequat duis enim velit mollit. Amet minim mollit non deserunt ullamco est sit aliqua dolor do amet sint. Velit officia consequat duis enim velit mollit. Exercitation veniam consequat sunt nostrud amet."
     },
     {
-      "cover": "../assets/images/cards/card5.jpg",
+      "cover": {
+        "url": ""
+      },
       "coverBigSize": "../assets/images/cards/recommended-card.jpg",
       "title": "The Fire Queen",
       "author": "Emily R. King",
-      "rating": "../assets/images/icons/rating.png",
+      "rating": {
+        "url": ""
+      },
       "ratingNumber": 4,
       "listeners": "1,000+ Listeners",
       "id": "5",
-      "section": [
-        "recommended",
-        "best"
-      ],
-      "category": [
-        "Biography",
-        "Drama",
-        "Fiction"
-      ],
+      "section": ["recommended", "best"],
+      "category": ["Biography", "Drama", "Fiction"],
       "reviews": [
         {
           "number": 1,
           "image": "../assets/images/customer-photo.jpg",
           "name": "Ronald Richards",
-          "rating": "../assets/images/icons/rating.png",
+          "rating": {
+            "url": ""
+          },
           "date": "2 days ago",
           "text": "Amet minim mollit non deserunt ullamco est sit aliqua dolor do amet sint. Exercitation veniam consequat sunt nostrud amet. Velit officia consequat duis enim velit mollit."
         },
@@ -196,7 +200,9 @@
           "number": 2,
           "image": "../assets/images/customer-photo.jpg",
           "name": "Ronald Richards",
-          "rating": "../assets/images/icons/rating.png",
+          "rating": {
+            "url": ""
+          },
           "date": "3 days ago",
           "text": "Amet minim mollit non deserunt ullamco est sit aliqua dolor do amet sint. Exercitation veniam consequat sunt nostrud amet. Velit officia consequat duis enim velit mollit."
         },
@@ -204,7 +210,9 @@
           "number": 3,
           "image": "../assets/images/customer-photo.jpg",
           "name": "Ronald Richards",
-          "rating": "../assets/images/icons/rating.png",
+          "rating": {
+            "url": ""
+          },
           "date": "4 days ago",
           "text": "Amet minim mollit non deserunt ullamco est sit aliqua dolor do amet sint. Exercitation veniam consequat sunt nostrud amet. Velit officia consequat duis enim velit mollit."
         }
