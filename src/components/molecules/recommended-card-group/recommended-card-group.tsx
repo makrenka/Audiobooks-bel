@@ -1,25 +1,19 @@
 import { Link } from "react-router-dom";
-import { useEffect } from "react";
-import { useDispatch } from "react-redux";
+import { useSelector } from "react-redux";
 
-import { audiobooks } from "../../../constants/audiobooks";
-import { fetchBooks } from "../../../store/books";
+import { RootState } from "../../../store";
 
 import "./recommended-card-group.css";
 
 export const RecommendedCardGroup = () => {
-  const dispatch = useDispatch();
-
-  useEffect(() => {
-    dispatch(fetchBooks());
-  }, []);
+  const books = useSelector((state: RootState) => state.books.bookList.data);
 
   return (
     <div className="recommended-home__images">
-      {audiobooks.map(({ coverBigSize, id }) => (
+      {books?.map(({ coverBigSize, id }) => (
         <Link to={"detail/" + id} key={id}>
           <img
-            src={coverBigSize}
+            src={coverBigSize.url}
             alt="Cover of the book"
             className="recommended-home__img"
           />

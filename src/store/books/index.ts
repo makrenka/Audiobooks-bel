@@ -45,7 +45,7 @@ export const booksSlice = createSlice({
       })
       .addCase(
         fetchBooks.fulfilled,
-        (state, action: PayloadAction<BookListItem>) => {
+        (state, action: PayloadAction<BookListItem[]>) => {
           state.bookList.isLoading = false;
           state.bookList.isSuccess = true;
           state.bookList.isError = false;
@@ -58,7 +58,7 @@ export const booksSlice = createSlice({
         state.bookList.isSuccess = false;
         state.bookList.data = null;
       })
-      .addDefaultCase(() => {});
+      .addDefaultCase(() => { });
   },
 });
 

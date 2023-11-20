@@ -1,16 +1,30 @@
 {
   "audiobooks": [
     {
-      "cover": "../assets/images/cards/card1.jpg",
-      "coverBigSize": "../assets/images/cards/recommended-card.jpg",
+      "cover": {
+        "url": "../assets/images/cards/card1.jpg"
+      },
+      "coverBigSize": {
+        "url": "../assets/images/cards/recommended-card.jpg"
+      },
       "title": "The Kidnapper’s Accomplice",
       "author": "Laurie Forest",
-      "rating": "../assets/images/icons/rating.png",
+      "rating": {
+        "url": "../assets/images/icons/rating.png"
+      },
       "ratingNumber": 4,
       "listeners": "1,000+ Listeners",
       "id": "1",
-      "section": ["recommended", "best", "trending"],
-      "category": ["Fantasy", "Drama", "Fiction"],
+      "section": [
+        "recommended",
+        "best",
+        "trending"
+      ],
+      "category": [
+        "Fantasy",
+        "Drama",
+        "Fiction"
+      ],
       "reviews": [
         {
           "number": 1,
@@ -48,8 +62,15 @@
       "ratingNumber": 4,
       "listeners": "1,000+ Listeners",
       "id": "2",
-      "section": ["recommended", "best", "new"],
-      "category": ["Fantasy", "Comedy"],
+      "section": [
+        "recommended",
+        "best",
+        "new"
+      ],
+      "category": [
+        "Fantasy",
+        "Comedy"
+      ],
       "summary": "Amet minim mollit non deserunt ullamco est sit aliqua dolor do amet sint. Velit officia consequat duis enim velit mollit. Exercitation veniam consequat sunt nostrud amet. Mollit non deserunt ullamco est sit aliqua dolor do amet sint. Velit officia consequat duis enim velit mollit. Exercitation veniam consequat sunt. Velit officia consequat duis enim velit mollit. Amet minim mollit non deserunt ullamco est sit aliqua dolor do amet sint. Velit officia consequat duis enim velit mollit. Exercitation veniam consequat sunt nostrud amet. Amet minim mollit non deserunt ullamco est sit aliqua dolor do amet sint. Velit officia consequat duis enim velit mollit. Exercitation veniam consequat sunt nostrud amet. Mollit non deserunt ullamco est sit aliqua dolor do amet sint. Velit officia consequat duis enim velit mollit. Exercitation veniam consequat sunt. Velit officia consequat duis enim velit mollit. Amet minim mollit non deserunt ullamco est sit aliqua dolor do amet sint. Velit officia consequat duis enim velit mollit. Exercitation veniam consequat sunt nostrud amet."
     },
     {
@@ -61,8 +82,15 @@
       "ratingNumber": 4,
       "listeners": "1,000+ Listeners",
       "id": "3",
-      "section": ["best", "trending"],
-      "category": ["Fantasy", "Drama", "Travel"],
+      "section": [
+        "best",
+        "trending"
+      ],
+      "category": [
+        "Fantasy",
+        "Drama",
+        "Travel"
+      ],
       "reviews": [
         {
           "number": 1,
@@ -100,8 +128,15 @@
       "ratingNumber": 4,
       "listeners": "1,000+ Listeners",
       "id": "4",
-      "section": ["new", "trending"],
-      "category": ["Fantasy", "Drama", "Fiction"],
+      "section": [
+        "new",
+        "trending"
+      ],
+      "category": [
+        "Fantasy",
+        "Drama",
+        "Fiction"
+      ],
       "reviews": [
         {
           "number": 1,
@@ -139,8 +174,15 @@
       "ratingNumber": 4,
       "listeners": "1,000+ Listeners",
       "id": "5",
-      "section": ["recommended", "best"],
-      "category": ["Biography", "Drama", "Fiction"],
+      "section": [
+        "recommended",
+        "best"
+      ],
+      "category": [
+        "Biography",
+        "Drama",
+        "Fiction"
+      ],
       "reviews": [
         {
           "number": 1,

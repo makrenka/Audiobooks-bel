@@ -3,7 +3,7 @@ export type BooksType = {
     isLoading: boolean;
     isSuccess: boolean;
     isError: boolean;
-    data: null | BookListItem;
+    data: null | BookListItem[];
   };
 };
 
