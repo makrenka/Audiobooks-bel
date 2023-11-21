@@ -4,7 +4,7 @@ import { RootState } from "../../../store";
 
 import "./best-seller-cards-group.css";
 
-import card1 from "./assets/card1.jpg";
+import noImage from "./assets/no-image.png";
 
 export const BestSellerCardsGroup = ({ section }: { section: string }) => {
   const books = useSelector((state: RootState) => state.books.bookList.data);
@@ -16,7 +16,7 @@ export const BestSellerCardsGroup = ({ section }: { section: string }) => {
         .map(({ cover, title, author, rating, listeners, id }) => (
           <div className="best-seller-home__card" key={id}>
             <img
-              src={cover.url ? cover.url : card1}
+              src={cover.url ? cover.url : noImage}
               alt="Cover of the book"
               className="best-seller-home__card-img"
             />

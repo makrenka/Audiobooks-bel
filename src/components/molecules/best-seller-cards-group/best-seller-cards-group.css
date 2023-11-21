@@ -14,7 +14,7 @@
     margin-right: 16px;
     padding: 12px;
     display: flex;
-    width: 315px;
+    min-width: 315px;
     background: #F5F5FA;
     border-radius: 12px;
 }

@@ -3,7 +3,7 @@ import { useSelector } from "react-redux";
 
 import { RootState } from "../../../store";
 
-import recommendedCard from "./assets/recommended-card.jpg";
+import noImage from "./assets/No-Image-Available-200x300.jpg";
 
 import "./recommended-card-group.css";
 
@@ -15,7 +15,7 @@ export const RecommendedCardGroup = () => {
       {books?.map(({ coverBigSize, id }) => (
         <Link to={"detail/" + id} key={id}>
           <img
-            src={coverBigSize.url ? coverBigSize.url : recommendedCard}
+            src={coverBigSize.url ? coverBigSize.url : noImage}
             alt="Cover of the book"
             className="recommended-home__img"
           />
