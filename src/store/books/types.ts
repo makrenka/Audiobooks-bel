@@ -16,9 +16,6 @@ export type BookListItem = {
   };
   title: string;
   author: string;
-  rating: {
-    url: string;
-  };
   ratingNumber: number;
   listeners: string;
   id: string;
@@ -31,36 +28,10 @@ export type BookListItem = {
         url: string;
       };
       name: string;
-      rating: {
-        url: string;
-      };
+      rating: number;
       date: string;
       text: string;
     },
-    {
-      number: number;
-      image: {
-        url: string;
-      };
-      name: string;
-      rating: {
-        url: string;
-      };
-      date: string;
-      text: string;
-    },
-    {
-      number: number;
-      image: {
-        url: string;
-      };
-      name: string;
-      rating: {
-        url: string;
-      };
-      date: string;
-      text: string;
-    }
   ];
   summary: string;
 };

@@ -51,9 +51,24 @@
     color: #6A6A8B;
 }
 
-.best-seller-home__card-description-rating {
+.best-seller-home__card-description-rating-wrapper {
     margin-top: 20px;
+    width: 133px;
+    height: 20px;
+    /* overflow: hidden; */
+    background: url(./assets/star-outlined.png);
+    background-repeat: space repeat;
 }
+
+/* 
+.best-seller-home__card-description-rating {
+    position: relative;
+    top: -100px;
+}
+
+.rating-4 {
+    transform: translateY(80px);
+} */
 
 .best-seller-home__card-description-listeners-counter {
     margin-top: 8px;
