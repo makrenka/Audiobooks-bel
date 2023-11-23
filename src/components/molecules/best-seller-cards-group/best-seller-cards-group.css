@@ -56,7 +56,7 @@
     width: 133px;
     height: 20px;
     /* overflow: hidden; */
-    background: url(./assets/star-outlined.png);
+    /* background: url(./assets/star-outlined.png); */
     background-repeat: space repeat;
 }
 

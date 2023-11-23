@@ -1,52 +1,42 @@
-import { ChangeEvent, Component, ReactNode } from "react";
+import { ChangeEvent, useState } from "react";
+
 import "./search-panel.css";
 
-interface Props {
+type SearchPanelProps = {
   onValueChange: (value: string) => void;
   onSubmit: (onSubmit: boolean) => void;
 }
 
-export class SearchPanel extends Component<
-  Props,
-  { value: string; onSubmit: boolean }
-> {
-  constructor(props: Props) {
-    super(props);
+export const SearchPanel = ({ onValueChange, onSubmit }: SearchPanelProps) => {
+  const [value, setValue] = useState("");
 
-    this.state = {
-      value: "",
-      onSubmit: true,
-    };
-  }
-
-  onValueChange = (e: ChangeEvent<HTMLInputElement>) => {
+  const changeValue = (e: ChangeEvent<HTMLInputElement>) => {
     const value = e.target.value;
-    this.setState({ value });
-    this.props.onValueChange(value);
+    setValue(value);
+    onValueChange(value);
   };
 
-  onSubmit = (e: ChangeEvent<HTMLFormElement>) => {
+  const changeSubmit = (e: ChangeEvent<HTMLFormElement>) => {
     e.preventDefault();
-    this.props.onSubmit(this.state.onSubmit);
+    onSubmit(true);
   };
 
-  render(): ReactNode {
-    return (
-      <div className="container">
-        <form className="search-page__search-panel" onSubmit={this.onSubmit}>
-          <label htmlFor="search" className="search-page__search-panel-label">
-            Explore
-          </label>
-          <input
-            id="search"
-            type="text"
-            placeholder="Search Books or Author..."
-            className="search-page__search-panel-input"
-            onChange={this.onValueChange}
-            value={this.state.value}
-          />
-        </form>
-      </div>
-    );
-  }
-}
+  return (
+    <div className="container">
+      <form className="search-page__search-panel" onSubmit={changeSubmit}>
+        <label htmlFor="search" className="search-page__search-panel-label">
+          Explore
+        </label>
+        <input
+          id="search"
+          type="text"
+          placeholder="Search Books or Author..."
+          className="search-page__search-panel-input"
+          onChange={changeValue}
+          value={value}
+        />
+      </form>
+    </div>
+  );
+};
+

@@ -7,6 +7,7 @@ import "./best-seller-cards-group.css";
 import noImage from "./assets/no-image.png";
 import rating from "./assets/Rating.png";
 import classNames from "classnames";
+import { RatingGroup } from "../rating-group";
 
 export const BestSellerCardsGroup = ({ section }: { section: string }) => {
   const books = useSelector((state: RootState) => state.books.bookList.data);
@@ -15,7 +16,7 @@ export const BestSellerCardsGroup = ({ section }: { section: string }) => {
     <div className="best-seller-home__cards">
       {books
         ?.filter((item) => item.section.includes(section))
-        .map(({ cover, title, author, listeners, id, ratingNumber }) => (
+        .map(({ cover, title, author, listeners, id, reviews }) => (
           <div className="best-seller-home__card" key={id}>
             <img
               src={cover.url ? cover.url : noImage}
@@ -38,6 +39,7 @@ export const BestSellerCardsGroup = ({ section }: { section: string }) => {
                     `rating-${ratingNumber}`
                   )}
                 /> */}
+                <RatingGroup reviews={reviews} />
               </div>
               <p className="best-seller-home__card-description-listeners-counter">
                 {listeners}

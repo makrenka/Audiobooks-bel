@@ -14,7 +14,7 @@ export const HomePage = () => {
 
     useEffect(() => {
         dispatch(fetchBooks());
-    }, []);
+    }, [dispatch]);
 
     return (
         <>

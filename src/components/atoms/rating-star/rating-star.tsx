@@ -1,4 +1,4 @@
-import styles from './rating-star.module.css';
+import styles from './rating-star.module.scss';
 
 export const RatingStar = ({ filling }: { filling: number }) => (
     <div className={styles.ratingStar}>

@@ -25,7 +25,7 @@ export const booksSlice = createSlice({
     // booksListRequest: (state) => {
     //   state.bookList.isLoading = true;
     // },
-    // booksListRequestSuccess: (state, action: PayloadAction<BookListItem>) => {
+    // booksListRequestSuccess: (state, action: PayloadAction<BookListItem[]>) => {
     //   state.bookList.isLoading = false;
     //   state.bookList.isError = false;
     //   state.bookList.isSuccess = true;
