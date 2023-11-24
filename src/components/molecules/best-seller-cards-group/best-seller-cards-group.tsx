@@ -1,13 +1,11 @@
 import { useSelector } from "react-redux";
 
 import { RootState } from "../../../store";
+import { RatingGroup } from "../rating-group";
 
 import "./best-seller-cards-group.css";
 
 import noImage from "./assets/no-image.png";
-import rating from "./assets/Rating.png";
-import classNames from "classnames";
-import { RatingGroup } from "../rating-group";
 
 export const BestSellerCardsGroup = ({ section }: { section: string }) => {
   const books = useSelector((state: RootState) => state.books.bookList.data);

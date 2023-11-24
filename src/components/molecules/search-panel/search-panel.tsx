@@ -4,10 +4,9 @@ import "./search-panel.css";
 
 type SearchPanelProps = {
   onValueChange: (value: string) => void;
-  onSubmit: (onSubmit: boolean) => void;
-}
+};
 
-export const SearchPanel = ({ onValueChange, onSubmit }: SearchPanelProps) => {
+export const SearchPanel = ({ onValueChange }: SearchPanelProps) => {
   const [value, setValue] = useState("");
 
   const changeValue = (e: ChangeEvent<HTMLInputElement>) => {
@@ -16,21 +15,16 @@ export const SearchPanel = ({ onValueChange, onSubmit }: SearchPanelProps) => {
     onValueChange(value);
   };
 
-  const changeSubmit = (e: ChangeEvent<HTMLFormElement>) => {
-    e.preventDefault();
-    onSubmit(true);
-  };
-
   return (
     <div className="container">
-      <form className="search-page__search-panel" onSubmit={changeSubmit}>
+      <form className="search-page__search-panel">
         <label htmlFor="search" className="search-page__search-panel-label">
-          Explore
+          Шукаць
         </label>
         <input
           id="search"
           type="text"
-          placeholder="Search Books or Author..."
+          placeholder="Пошук кніг альбо аўтара..."
           className="search-page__search-panel-input"
           onChange={changeValue}
           value={value}
@@ -39,4 +33,3 @@ export const SearchPanel = ({ onValueChange, onSubmit }: SearchPanelProps) => {
     </div>
   );
 };
-
