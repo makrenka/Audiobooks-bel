@@ -13,6 +13,7 @@
     "@types/react-dom": "^18.0.0",
     "classnames": "^2.3.2",
     "concurrently": "^8.2.2",
+    "express": "^4.18.2",
     "handy-svg": "^1.0.8",
     "normalize.css": "^8.0.1",
     "react": "^18.2.0",
@@ -26,10 +27,12 @@
     "web-vitals": "^2.1.0"
   },
   "scripts": {
-    "start": "concurrently \"react-scripts start\" \"npx json-server audiobooks.json --port 3001\"",
+    "start": "react-scripts start",
     "build": "react-scripts build",
     "test": "react-scripts test",
-    "eject": "react-scripts eject"
+    "eject": "react-scripts eject",
+    "start-server": "node server/index.js",
+    "dev": "concurrently\"nodemon server/index.js\"\"react-scripts start\""
   },
   "eslintConfig": {
     "extends": [
@@ -48,5 +51,8 @@
       "last 1 firefox version",
       "last 1 safari version"
     ]
+  },
+  "devDependencies": {
+    "nodemon": "^3.0.1"
   }
 }
