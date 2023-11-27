@@ -2,10 +2,14 @@ const express = require("express");
 const path = require("path");
 const app = express();
 
-app.use(express.static(path.resolve("public")));
-
-app.get("*", (req, res) => {
-  res.sendFile(path.resolve("public", "index.html"));
+app.get("/api", (req, res) => {
+  res.json({
+    message: "Hello from backend",
+  });
 });
 
-app.listen(3000, () => console.log("Server has been started on port 3000..."));
+const PORT = process.env.PORT || 3001;
+
+app.listen(PORT, () =>
+  console.log(`Server has been started on port ${PORT}...`)
+);

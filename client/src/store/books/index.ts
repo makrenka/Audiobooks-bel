@@ -58,7 +58,7 @@ export const booksSlice = createSlice({
         state.bookList.isSuccess = false;
         state.bookList.data = null;
       })
-      .addDefaultCase(() => { });
+      .addDefaultCase(() => {});
   },
 });
 
