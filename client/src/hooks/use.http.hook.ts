@@ -3,11 +3,10 @@ export const useHttp = () => {
     url = "",
     method = "GET",
     body = null,
-    headers = { "Content-Type": "application/json" },
-    mode = "no-corse" as RequestMode
+    headers = { "Content-Type": "application/json" }
   ) => {
     try {
-      const responce = await fetch(url, { method, body, headers, mode });
+      const responce = await fetch(url, { method, body, headers });
 
       if (!responce.ok) {
         throw new Error(

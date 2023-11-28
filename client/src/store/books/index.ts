@@ -15,7 +15,7 @@ const initialState: BooksType = {
 
 export const fetchBooks = createAsyncThunk("books/fetchBooks", async () => {
   const { request } = useHttp();
-  return await request("http://localhost:3001/audiobooks");
+  return await request("http://localhost:3001/api/books");
 });
 
 export const booksSlice = createSlice({

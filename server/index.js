@@ -1,11 +1,14 @@
 const express = require("express");
 const path = require("path");
+const cors = require("cors");
+const { AUDIOBOOKS } = require("./audiobooks");
+
 const app = express();
 
-app.get("/api", (req, res) => {
-  res.json({
-    message: "Hello from backend",
-  });
+app.use(cors());
+
+app.get("/api/books", (req, res) => {
+  res.json(AUDIOBOOKS);
 });
 
 const PORT = process.env.PORT || 3001;
