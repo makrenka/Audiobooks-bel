@@ -1,15 +1,29 @@
 const express = require("express");
-const path = require("path");
 const cors = require("cors");
-const { AUDIOBOOKS } = require("./audiobooks");
+// const { AUDIOBOOKS } = require("./audiobooks");
+const Sequelize = require("sequelize");
+const db = require("./db");
+
+function t01() {
+  db.audiobooks.findAll().then((res) => {
+    console.log(res);
+  });
+}
+// t01();
+
+async function t02() {
+  const result = await db.audiobooks.findAll();
+  console.log(result[0]);
+}
+t02();
 
 const app = express();
 
 app.use(cors());
 
-app.get("/api/books", (req, res) => {
-  res.json(AUDIOBOOKS);
-});
+// app.get("/api/books", (req, res) => {
+//   res.json(AUDIOBOOKS);
+// });
 
 const PORT = process.env.PORT || 3001;
 
