@@ -8,7 +8,9 @@ const app = express();
 app.use(cors());
 
 app.get("/api/books", async (req, res) => {
-  const result = await db.audiobooks.findAll();
+  const result = await db.audiobooks.findAll({
+    include: db.authors,
+  });
   res.json(result);
 });
 
