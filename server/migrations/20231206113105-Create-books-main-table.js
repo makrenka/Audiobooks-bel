@@ -15,7 +15,7 @@ module.exports = {
         allowNull: false,
       },
       summary: {
-        type: Sequelize.DataTypes.STRING(1000),
+        type: Sequelize.DataTypes.STRING(2000),
         allowNull: true,
       },
     });
