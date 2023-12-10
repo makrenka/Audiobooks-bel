@@ -1,24 +1,31 @@
-const Sequelize = require("sequelize");
+import Sequelize from "sequelize";
+import env from "./env.config";
 
-const sequelize = new Sequelize("audiobooks", "root", "", {
-  dialect: "mysql",
-  host: "127.0.0.1",
-  logging: false,
+import { createNamespace } from "cls-hooked";
+
+export const nameSpace = createNamespace("ns");
+Sequelize.useCLS(nameSpace);
+
+const db = new Sequelize({
+  dialect: env.DB_TYPE,
+  host: env.DB_HOSTNAME,
+  logging: env.DB_LOG ? console.log : false,
+  username: env.DB_USERNAME,
+  password: `${env.DB_PASSWORD}`,
+  port: env.DB_PORT,
+  database: env.DB_DATABASE,
+  timezone: "+00:00",
+  define: {
+    timstamps: false,
+  },
 });
 
-const Audiobooks = require("./Audiobooks")(sequelize);
-const Authors = require("./Authors")(sequelize);
-const Authors_books = require("./Authors_books")(sequelize);
+export default db;
 
-Audiobooks.belongsToMany(Authors, {
-  through: Authors_books,
-  foreignKey: "id_book",
-  otherKey: "id_author",
-});
+export function openConnection() {
+  return db.authenticate();
+}
 
-module.exports = {
-  sequelize: sequelize,
-  audiobooks: Audiobooks,
-  authors: Authors,
-  // authors_books: Authors_books,
-};
+export function closeConnection() {
+  return db.close();
+}
