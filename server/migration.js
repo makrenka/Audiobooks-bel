@@ -1,8 +1,13 @@
 import fs from "fs";
 import path from "path";
 import sequelize, { DataTypes } from "sequelize";
-import Migration from "./models/_Migration";
-import db from "./db";
+import { fileURLToPath } from "url";
+
+import Migration from "./models/_Migration.js";
+import db from "./db/index.js";
+
+const __filename = fileURLToPath(import.meta.url);
+const __dirname = path.dirname(__filename);
 
 const logger = console;
 const migrationsPath = path.join(__dirname, "migrations");

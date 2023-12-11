@@ -1,7 +1,7 @@
-import Sequelize from "sequelize";
-import env from "./env.config";
-
 import { createNamespace } from "cls-hooked";
+
+import Sequelize from "sequelize";
+import env from "./env.config.js";
 
 export const nameSpace = createNamespace("ns");
 Sequelize.useCLS(nameSpace);

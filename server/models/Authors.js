@@ -1,6 +1,6 @@
-const { Model, DataTypes } = require("sequelize");
+import { Model, DataTypes } from "sequelize";
 
-import db from "../db";
+import db from "../db/index.js";
 
 class Authors extends Model {}
 

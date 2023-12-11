@@ -2,9 +2,9 @@
 // const cors = require("cors");
 // const Sequelize = require("sequelize");
 
-import db, { closeConnection, openConnection } from "./db";
-import { runMigrations } from "./migration";
-import Books from "./models/Books";
+import db, { closeConnection, openConnection } from "./db/index.js";
+import { runMigrations } from "./migration.js";
+import Books from "./models/Books.js";
 
 // import db from "./db";
 
