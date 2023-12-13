@@ -2,9 +2,9 @@
 // const cors = require("cors");
 // const Sequelize = require("sequelize");
 
-import db, { closeConnection, openConnection } from "./db/index.js";
-import { runMigrations } from "./migration.js";
-import Books from "./models/Books.js";
+const db = require("./db/index.js");
+const { runMigrations } = require("./migration.js");
+const Books = require("./models/Books.js")(db);
 
 // import db from "./db";
 
@@ -27,7 +27,9 @@ import Books from "./models/Books.js";
 
 async function main() {
   try {
-    await openConnection();
+    await function openConnection() {
+      return db.authenticate();
+    };
 
     await runMigrations();
 
@@ -41,7 +43,9 @@ async function main() {
       console.info(books[0].title);
     });
 
-    await closeConnection();
+    await function closeConnection() {
+      return db.close();
+    };
   } catch (err) {
     console.error(err);
   }

@@ -1,24 +1,24 @@
-import fs from "fs";
-import path from "path";
-import sequelize, { DataTypes } from "sequelize";
-import { fileURLToPath } from "url";
+const fs = require("fs");
+const path = require("path");
+const { DataTypes, Sequelize } = require("sequelize");
+// import { fileURLToPath } from "url";
 
-import Migration from "./models/_Migration.js";
-import db from "./db/index.js";
+const db = require("./db/index.js");
+const Migration = require("./models/_Migration.js")(db);
 
-const __filename = fileURLToPath(import.meta.url);
-const __dirname = path.dirname(__filename);
+// const __filename = fileURLToPath(import.meta.url);
+// const __dirname = path.dirname(__filename);
 
 const logger = console;
 const migrationsPath = path.join(__dirname, "migrations");
 
-export async function runMigrations() {
+exports.runMigrations = async () => {
   const queryInterface = db.getQueryInterface();
   queryInterface.createTable("_migrations", {
     filename: DataTypes.STRING,
     appliedAt: {
       type: DataTypes.DATE,
-      defaultValue: sequelize.fn("current_timestamp"),
+      defaultValue: Sequelize.fn("current_timestamp"),
       allowNull: false,
     },
   });
@@ -54,7 +54,7 @@ export async function runMigrations() {
       throw new Error(`Invalid migration functions in file ${file}`);
     }
 
-    await up(queryInterface, sequelize);
+    await up(queryInterface, Sequelize);
 
     const item = new Migration({
       filename: file,
@@ -73,9 +73,9 @@ export async function runMigrations() {
       });
     });
   }
-}
+};
 
-export async function revertMigration(name) {
+exports.revertMigration = async (name) => {
   const migrationFile = path.join(migrationsPath, name);
 
   logger.debug(`Reverting "${migrationFile}"...`, { scope: "migrations" });
@@ -92,6 +92,6 @@ export async function revertMigration(name) {
   if (!up || !down) {
     throw new Error(`Invalid migration functions in file ${migrationFile}`);
   }
-  await down(db.getQueryInterface(), sequelize);
+  await down(db.getQueryInterface(), Sequelize);
   await migration.destroy();
-}
+};

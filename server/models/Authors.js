@@ -1,25 +1,46 @@
-import { Model, DataTypes } from "sequelize";
+const { DataTypes, Model } = require("sequelize");
 
-import db from "../db/index.js";
+const db = require("../db/index.js");
 
-class Authors extends Model {}
+// class Authors extends Model {}
 
-const model = Authors.init(
-  {
-    id_author: {
-      type: DataTypes.INTEGER,
-      primaryKey: true,
-      autoIncrement: true,
+// exports.model = Authors.init(
+//   {
+//     id_author: {
+//       type: DataTypes.INTEGER,
+//       primaryKey: true,
+//       autoIncrement: true,
+//     },
+//     name: {
+//       type: DataTypes.STRING(100),
+//       allowNull: false,
+//     },
+//   },
+//   {
+//     sequelize: db,
+//     tableName: "authors",
+//   }
+// );
+
+module.exports = (sequelize) => {
+  const Authors = sequelize.define(
+    "Authors",
+    {
+      id_author: {
+        type: DataTypes.INTEGER,
+        primaryKey: true,
+        autoIncrement: true,
+      },
+      name: {
+        type: DataTypes.STRING(100),
+        allowNull: false,
+      },
     },
-    name: {
-      type: DataTypes.STRING(100),
-      allowNull: false,
-    },
-  },
-  {
-    sequelize: db,
-    tableName: "authors",
-  }
-);
+    {
+      sequelize: db,
+      tableName: "authors",
+    }
+  );
 
-export default model;
+  return Authors;
+};

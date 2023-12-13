@@ -1,31 +1,59 @@
-import { Model, DataTypes } from "sequelize";
-import db from "../db/index.js";
+const { DataTypes, Model } = require("sequelize");
+const db = require("../db/index.js");
 
-class AuthorsRefBooks extends Model {}
+// class AuthorsRefBooks extends Model {}
 
-const model = AuthorsRefBooks.init(
-  {
-    id: {
-      type: DataTypes.INTEGER,
-      primaryKey: true,
-      autoIncrement: true,
-      allowNull: false,
-    },
-    id_author: {
-      unique: true,
-      type: DataTypes.BIGINT(20).UNSIGNED,
-      allowNull: false,
-    },
-    id_book: {
-      unique: true,
-      type: DataTypes.BIGINT(20).UNSIGNED,
-      allowNull: false,
-    },
-  },
-  {
-    sequelize: db,
-    tableName: "authors_ref_books",
-  }
-);
+// exports.model = AuthorsRefBooks.init(
+//   {
+//     id: {
+//       type: DataTypes.INTEGER,
+//       primaryKey: true,
+//       autoIncrement: true,
+//       allowNull: false,
+//     },
+//     id_author: {
+//       unique: true,
+//       type: DataTypes.BIGINT(20).UNSIGNED,
+//       allowNull: false,
+//     },
+//     id_book: {
+//       unique: true,
+//       type: DataTypes.BIGINT(20).UNSIGNED,
+//       allowNull: false,
+//     },
+//   },
+//   {
+//     sequelize: db,
+//     tableName: "authors_ref_books",
+//   }
+// );
 
-export default model;
+module.exports = (sequelize) => {
+  const AuthorsRefBooks = sequelize.define(
+    "AuthorsRefBooks",
+    {
+      id: {
+        type: DataTypes.INTEGER,
+        primaryKey: true,
+        autoIncrement: true,
+        allowNull: false,
+      },
+      id_author: {
+        unique: true,
+        type: DataTypes.BIGINT(20).UNSIGNED,
+        allowNull: false,
+      },
+      id_book: {
+        unique: true,
+        type: DataTypes.BIGINT(20).UNSIGNED,
+        allowNull: false,
+      },
+    },
+    {
+      sequelize: db,
+      tableName: "authors_ref_books",
+    }
+  );
+
+  return AuthorsRefBooks;
+};

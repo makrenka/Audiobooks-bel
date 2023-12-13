@@ -1,17 +1,32 @@
-import { DataTypes, Model } from "sequelize";
+const { DataTypes } = require("sequelize");
 
-import db from "../db/index.js";
+const db = require("../db/index.js");
 
-class Migration extends Model {}
+// class Migration extends Model {}
 
-const model = Migration.init(
-  {
-    filename: { type: DataTypes.STRING(255), primaryKey: true },
-    appliedAt: { type: DataTypes.DATE, allowNull: false },
-  },
-  {
-    sequelize: db,
-    tableName: "_migrations",
-  }
-);
-export default model;
+module.exports = (sequelize) => {
+  const Migration = sequelize.define(
+    "Migration",
+    {
+      filename: { type: DataTypes.STRING(255), primaryKey: true },
+      appliedAt: { type: DataTypes.DATE, allowNull: false },
+    },
+    {
+      sequelize: db,
+      tableName: "_migrations",
+    }
+  );
+
+  return Migration;
+};
+
+// module.exports = Migration.init(
+//   {
+//     filename: { type: DataTypes.STRING(255), primaryKey: true },
+//     appliedAt: { type: DataTypes.DATE, allowNull: false },
+//   },
+//   {
+//     sequelize: db,
+//     tableName: "_migrations",
+//   }
+// );

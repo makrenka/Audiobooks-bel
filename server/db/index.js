@@ -1,12 +1,13 @@
-import { createNamespace } from "cls-hooked";
+const { Sequelize } = require("sequelize");
+const cls = require("cls-hooked");
 
-import Sequelize from "sequelize";
-import env from "./env.config.js";
+const env = require("./env.config.js");
 
-export const nameSpace = createNamespace("ns");
+const nameSpace = cls.createNamespace("ns");
 Sequelize.useCLS(nameSpace);
+exports.nameSpace;
 
-const db = new Sequelize({
+module.exports = new Sequelize({
   dialect: env.DB_TYPE,
   host: env.DB_HOSTNAME,
   logging: env.DB_LOG ? console.log : false,
@@ -16,16 +17,14 @@ const db = new Sequelize({
   database: env.DB_DATABASE,
   timezone: "+00:00",
   define: {
-    timstamps: false,
+    timestamps: false,
   },
 });
 
-export default db;
+// exports.openConnection = () => {
+//   return db.authenticate();
+// };
 
-export function openConnection() {
-  return db.authenticate();
-}
-
-export function closeConnection() {
-  return db.close();
-}
+// exports.closeConnection = () => {
+//   return db.close();
+// };
