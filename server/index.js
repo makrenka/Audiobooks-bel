@@ -5,6 +5,7 @@
 const db = require("./db/index.js");
 const { runMigrations } = require("./migration.js");
 const Books = require("./models/Books.js")(db);
+const Authors = require("./models/Authors.js")(db);
 
 // import db from "./db";
 
@@ -36,11 +37,14 @@ async function main() {
     console.info("Connected");
 
     await db.transaction(async () => {
-      const book = new Books({ title: "Book" });
-      await book.save();
-
-      const books = await Books.findAll();
-      console.info(books[0].title);
+      const books = await Books.findAll({
+        include: [
+          {
+            model: Authors,
+            as: "Authors",
+          },
+        ],
+      });
     });
 
     await function closeConnection() {

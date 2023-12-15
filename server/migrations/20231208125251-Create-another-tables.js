@@ -24,12 +24,12 @@ module.exports = {
         allowNull: false,
       },
       id_author: {
-        unique: true,
+        primaryKey: true,
         type: Sequelize.DataTypes.BIGINT(20).UNSIGNED,
         allowNull: false,
       },
       id_book: {
-        unique: true,
+        primaryKey: true,
         type: Sequelize.DataTypes.BIGINT(20).UNSIGNED,
         allowNull: false,
       },
