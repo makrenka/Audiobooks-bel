@@ -5,6 +5,7 @@ import {
   Get,
   Param,
   Post,
+  Query,
   UploadedFiles,
   UseInterceptors,
 } from '@nestjs/common';
@@ -31,8 +32,13 @@ export class BookController {
   }
 
   @Get()
-  getAll() {
-    return this.bookService.getAll();
+  getAll(@Query('count') count: number, @Query('offset') offset: number) {
+    return this.bookService.getAll(count, offset);
+  }
+
+  @Get('/search')
+  search(@Query('query') query: string) {
+    return this.bookService.search(query);
   }
 
   @Get(':id')
@@ -48,5 +54,10 @@ export class BookController {
   @Post('/review')
   addReview(@Body() dto: CreateReviewDto) {
     return this.bookService.addReview(dto);
+  }
+
+  @Post('/listen/:id')
+  listen(@Param('id') id: ObjectId) {
+    return this.bookService.listen(id);
   }
 }

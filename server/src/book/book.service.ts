@@ -27,8 +27,18 @@ export class BookService {
     return book;
   }
 
-  async getAll(): Promise<Book[]> {
-    const books = await this.bookModel.find();
+  async getAll(count = 5, offset = 0): Promise<Book[]> {
+    const books = await this.bookModel
+      .find()
+      .skip(Number(offset))
+      .limit(Number(count));
+    return books;
+  }
+
+  async search(query: string): Promise<Book[]> {
+    const books = await this.bookModel.find({
+      title: { $regex: new RegExp(query, 'i') },
+    });
     return books;
   }
 
@@ -48,5 +58,11 @@ export class BookService {
     book.reviews.push(review);
     await book.save();
     return review;
+  }
+
+  async listen(id: ObjectId) {
+    const book = await this.bookModel.findById(id);
+    book.listens += 1;
+    book.save();
   }
 }
