@@ -22,6 +22,9 @@ export class Book {
   @Prop()
   audio: string;
 
+  @Prop()
+  listens: number;
+
   @Prop({ type: [{ type: mongoose.Schema.Types.ObjectId, ref: 'Review' }] })
   reviews: Review[];
 }

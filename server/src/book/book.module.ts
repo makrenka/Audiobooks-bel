@@ -4,6 +4,7 @@ import { BookService } from './book.service';
 import { MongooseModule } from '@nestjs/mongoose';
 import { Book, BookSchema } from './schemas/book.schema';
 import { Review, ReviewSchema } from './schemas/review.schema';
+import { FileService } from 'src/file/file.service';
 
 @Module({
   imports: [
@@ -11,6 +12,6 @@ import { Review, ReviewSchema } from './schemas/review.schema';
     MongooseModule.forFeature([{ name: Review.name, schema: ReviewSchema }]),
   ],
   controllers: [BookController],
-  providers: [BookService],
+  providers: [BookService, FileService],
 })
 export class BookModule {}
