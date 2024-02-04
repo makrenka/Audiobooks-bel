@@ -6,12 +6,18 @@ import { Review } from './schemas/review.schema';
 import { CreateBookDto } from './dto/create-book.dto';
 import { CreateReviewDto } from './dto/create-review.dto';
 import { FileService, FileType } from 'src/file/file.service';
+import { CreateSectionDto } from './dto/create-section.dto';
+import { Section } from './schemas/section.schema';
+import { Category } from './schemas/category.schema';
+import { CreateCategoryDto } from './dto/create-category.dto';
 
 @Injectable()
 export class BookService {
   constructor(
     @InjectModel(Book.name) private bookModel: Model<Book>,
     @InjectModel(Review.name) private reviewModel: Model<Review>,
+    @InjectModel(Section.name) private sectionModel: Model<Section>,
+    @InjectModel(Category.name) private categoryModel: Model<Category>,
     private fileService: FileService,
   ) {}
 
@@ -43,7 +49,11 @@ export class BookService {
   }
 
   async getOne(id: ObjectId): Promise<Book> {
-    const book = (await this.bookModel.findById(id)).populate('reviews');
+    const book = (
+      await (
+        await (await this.bookModel.findById(id)).populate('reviews')
+      ).populate('sections')
+    ).populate('categories');
     return book;
   }
 
@@ -64,5 +74,21 @@ export class BookService {
     const book = await this.bookModel.findById(id);
     book.listens += 1;
     book.save();
+  }
+
+  async addSection(dto: CreateSectionDto): Promise<Section> {
+    const book = await this.bookModel.findById(dto.bookId);
+    const section = await this.sectionModel.create({ ...dto });
+    book.sections.push(section);
+    await book.save();
+    return section;
+  }
+
+  async addCategory(dto: CreateCategoryDto): Promise<Category> {
+    const book = await this.bookModel.findById(dto.bookId);
+    const category = await this.categoryModel.create({ ...dto });
+    book.categories.push(category);
+    await book.save();
+    return category;
   }
 }

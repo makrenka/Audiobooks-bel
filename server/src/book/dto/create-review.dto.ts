@@ -1,7 +1,7 @@
 import { ObjectId } from 'mongoose';
 
 export class CreateReviewDto {
-  readonly userneme: string;
+  readonly username: string;
   readonly text: string;
   readonly bookId: ObjectId;
 }

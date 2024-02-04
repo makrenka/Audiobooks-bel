@@ -14,6 +14,8 @@ import { CreateBookDto } from './dto/create-book.dto';
 import { ObjectId } from 'mongoose';
 import { CreateReviewDto } from './dto/create-review.dto';
 import { FileFieldsInterceptor } from '@nestjs/platform-express';
+import { CreateSectionDto } from './dto/create-section.dto';
+import { CreateCategoryDto } from './dto/create-category.dto';
 
 @Controller('/books')
 export class BookController {
@@ -59,5 +61,15 @@ export class BookController {
   @Post('/listen/:id')
   listen(@Param('id') id: ObjectId) {
     return this.bookService.listen(id);
+  }
+
+  @Post('/section')
+  addSection(@Body() dto: CreateSectionDto) {
+    return this.bookService.addSection(dto);
+  }
+
+  @Post('/category')
+  addCategory(@Body() dto: CreateCategoryDto) {
+    return this.bookService.addCategory(dto);
   }
 }
