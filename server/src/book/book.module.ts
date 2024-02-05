@@ -7,12 +7,14 @@ import { Review, ReviewSchema } from './schemas/review.schema';
 import { FileService } from 'src/file/file.service';
 import { Section, SectionSchema } from './schemas/section.schema';
 import { Category, CategorySchema } from './schemas/category.schema';
+import { User, UserSchema } from 'src/user/schemas/user.schema';
 
 @Module({
   imports: [
     MongooseModule.forFeature([{ name: Book.name, schema: BookSchema }]),
     MongooseModule.forFeature([{ name: Review.name, schema: ReviewSchema }]),
     MongooseModule.forFeature([{ name: Section.name, schema: SectionSchema }]),
+    MongooseModule.forFeature([{ name: User.name, schema: UserSchema }]),
     MongooseModule.forFeature([
       { name: Category.name, schema: CategorySchema },
     ]),

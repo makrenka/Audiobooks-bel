@@ -5,11 +5,13 @@ import { Book, BookSchema } from 'src/book/schemas/book.schema';
 import { Category, CategorySchema } from 'src/book/schemas/category.schema';
 import { UserController } from './user.controller';
 import { UserService } from './user.service';
+import { Role, RoleSchema } from './schemas/role.schema';
 
 @Module({
   imports: [
     MongooseModule.forFeature([{ name: User.name, schema: UserSchema }]),
     MongooseModule.forFeature([{ name: Book.name, schema: BookSchema }]),
+    MongooseModule.forFeature([{ name: Role.name, schema: RoleSchema }]),
     MongooseModule.forFeature([
       { name: Category.name, schema: CategorySchema },
     ]),
