@@ -6,6 +6,7 @@ import { Category, CategorySchema } from 'src/book/schemas/category.schema';
 import { UserController } from './user.controller';
 import { UserService } from './user.service';
 import { Role, RoleSchema } from './schemas/role.schema';
+import { AuthModule } from 'src/auth/auth.module';
 
 @Module({
   imports: [
@@ -15,8 +16,10 @@ import { Role, RoleSchema } from './schemas/role.schema';
     MongooseModule.forFeature([
       { name: Category.name, schema: CategorySchema },
     ]),
+    AuthModule,
   ],
   controllers: [UserController],
   providers: [UserService],
+  exports: [UserService],
 })
 export class UserModule {}

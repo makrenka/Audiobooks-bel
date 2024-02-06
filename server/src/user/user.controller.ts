@@ -1,4 +1,13 @@
-import { Body, Controller, Delete, Get, Param, Post } from '@nestjs/common';
+import {
+  Body,
+  Controller,
+  Delete,
+  Get,
+  Param,
+  Post,
+  UseGuards,
+  UsePipes,
+} from '@nestjs/common';
 import { UserService } from './user.service';
 import { CreateRoleDto } from './dto/create-role.dto';
 import { CreateUserDto } from './dto/create-user.dto';
@@ -8,6 +17,8 @@ import { BanUserDto } from './dto/ban-user.dto';
 import { UnBanUserDto } from './dto/unban-user.dto';
 import { AddBookUserDto } from './dto/add-book-user.dto';
 import { AddCategoryUserDto } from './dto/add-category-user.dto';
+import { Roles } from 'src/auth/roles-auth.decorator';
+import { RolesGuard } from 'src/auth/roles.guard';
 
 @Controller('/users')
 export class UserController {
@@ -23,6 +34,8 @@ export class UserController {
     return this.userService.createUser(dto);
   }
 
+  @Roles('ADMIN')
+  @UseGuards(RolesGuard)
   @Get()
   getAllUsers() {
     return this.userService.getAllUsers();

@@ -48,6 +48,11 @@ export class UserService {
     return user;
   }
 
+  async getUserByEmail(email: string): Promise<User> {
+    const user = await this.userModel.findOne({ email }).populate('roles');
+    return user;
+  }
+
   async deleteUser(id: ObjectId): Promise<User> {
     const user = await this.userModel.findByIdAndDelete(id);
     return user;
