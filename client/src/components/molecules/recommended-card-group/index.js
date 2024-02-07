@@ -1,1 +1,0 @@
-export { RecommendedCardGroup } from './recommended-card-group';

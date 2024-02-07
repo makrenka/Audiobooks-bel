@@ -1,1 +1,0 @@
-export { BestSellerCardsGroup } from './best-seller-cards-group';

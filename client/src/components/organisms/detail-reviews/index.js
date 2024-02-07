@@ -1,1 +1,0 @@
-export { DetailReviews } from './detail-reviews';

@@ -1,1 +1,0 @@
-export { LatestSearchCardsGroup } from './latest-search-cards-group';

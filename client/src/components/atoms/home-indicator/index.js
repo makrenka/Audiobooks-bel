@@ -1,1 +1,0 @@
-export { HomeIndicator } from './home-indicator';

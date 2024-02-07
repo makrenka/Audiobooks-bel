@@ -1,1 +1,0 @@
-export { SectionHome } from './section-home';

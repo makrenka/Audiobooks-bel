@@ -1,1 +1,0 @@
-export { DetailSummary } from './detail-summary';

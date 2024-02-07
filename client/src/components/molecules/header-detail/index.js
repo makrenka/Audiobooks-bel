@@ -1,1 +1,0 @@
-export { HeaderDetail } from './header-detail';
