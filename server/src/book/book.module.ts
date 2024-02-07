@@ -8,6 +8,7 @@ import { FileService } from 'src/file/file.service';
 import { Section, SectionSchema } from './schemas/section.schema';
 import { Category, CategorySchema } from './schemas/category.schema';
 import { User, UserSchema } from 'src/user/schemas/user.schema';
+import { AuthModule } from 'src/auth/auth.module';
 
 @Module({
   imports: [
@@ -18,6 +19,7 @@ import { User, UserSchema } from 'src/user/schemas/user.schema';
     MongooseModule.forFeature([
       { name: Category.name, schema: CategorySchema },
     ]),
+    AuthModule,
   ],
   controllers: [BookController],
   providers: [BookService, FileService],

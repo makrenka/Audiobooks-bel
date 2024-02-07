@@ -7,6 +7,7 @@ import {
   Post,
   Query,
   UploadedFiles,
+  UseGuards,
   UseInterceptors,
 } from '@nestjs/common';
 import { BookService } from './book.service';
@@ -16,11 +17,16 @@ import { CreateReviewDto } from './dto/create-review.dto';
 import { FileFieldsInterceptor } from '@nestjs/platform-express';
 import { CreateSectionDto } from './dto/create-section.dto';
 import { CreateCategoryDto } from './dto/create-category.dto';
+import { Roles } from 'src/auth/roles-auth.decorator';
+import { RolesGuard } from 'src/auth/roles.guard';
+import { JwtAuthGuard } from 'src/auth/jwt-auth.guard';
 
 @Controller('/books')
 export class BookController {
   constructor(private bookService: BookService) {}
 
+  @Roles('ADMIN')
+  @UseGuards(RolesGuard)
   @Post()
   @UseInterceptors(
     FileFieldsInterceptor([
@@ -48,11 +54,14 @@ export class BookController {
     return this.bookService.getOne(id);
   }
 
+  @Roles('ADMIN')
+  @UseGuards(RolesGuard)
   @Delete(':id')
   delete(@Param('id') id: ObjectId) {
     return this.bookService.delete(id);
   }
 
+  @UseGuards(JwtAuthGuard)
   @Post('/review')
   addReview(@Body() dto: CreateReviewDto) {
     return this.bookService.addReview(dto);
@@ -63,11 +72,15 @@ export class BookController {
     return this.bookService.listen(id);
   }
 
+  @Roles('ADMIN')
+  @UseGuards(RolesGuard)
   @Post('/section')
   addSection(@Body() dto: CreateSectionDto) {
     return this.bookService.addSection(dto);
   }
 
+  @Roles('ADMIN')
+  @UseGuards(RolesGuard)
   @Post('/category')
   addCategory(@Body() dto: CreateCategoryDto) {
     return this.bookService.addCategory(dto);
