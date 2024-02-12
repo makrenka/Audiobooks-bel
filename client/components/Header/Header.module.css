@@ -1,0 +1,36 @@
+.header {
+  padding-top: 43px;
+  padding-bottom: 5px;
+}
+
+.wrapper {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.logo {
+  display: flex;
+  align-items: flex-end;
+}
+
+.logoLink {
+  width: 40px;
+  height: 40px;
+}
+
+.heading {
+  font-family: "SF Pro Display", sans-serif;
+  font-style: normal;
+  font-weight: 700;
+  font-size: 24px;
+  line-height: 29px;
+  color: var(--links);
+  padding-left: 8px;
+  padding-bottom: 5px;
+  margin: 0;
+}
+
+.link {
+  text-decoration: none;
+}

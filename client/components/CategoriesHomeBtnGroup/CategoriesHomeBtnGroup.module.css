@@ -1,0 +1,26 @@
+.buttons {
+  display: flex;
+  align-items: center;
+  overflow: auto;
+  margin-top: 16px;
+  margin-right: -28px;
+}
+
+.buttons::-webkit-scrollbar {
+  width: 0;
+}
+
+.btn {
+  height: 40px;
+  background: #f5f5fa;
+  border-radius: 12px;
+  border: none;
+  font-family: "Poppins", sans-serif;
+  font-style: normal;
+  font-weight: 400;
+  font-size: 16px;
+  line-height: 24px;
+  color: #2e2e5d;
+  padding: 8px 16px;
+  margin-right: 12px;
+}
