@@ -1,0 +1,31 @@
+.cards {
+  display: flex;
+  overflow: auto;
+  margin-right: -28px;
+  margin-top: 16px;
+}
+
+.cards::-webkit-scrollbar {
+  width: 0;
+  height: 0;
+}
+
+.card {
+  margin-right: 16px;
+}
+
+.heading {
+  margin-top: 12px;
+  margin-bottom: 0;
+  font-family: "Poppins", sans-serif;
+  font-style: normal;
+  font-weight: 500;
+  font-size: 16px;
+  line-height: 24px;
+  color: #2e2e5d;
+}
+
+.img {
+  width: 160px;
+  height: 160px;
+}

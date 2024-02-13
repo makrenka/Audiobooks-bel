@@ -1,0 +1,70 @@
+.cards {
+  margin-top: 16px;
+  display: flex;
+  overflow: auto;
+  margin-right: -28px;
+}
+
+.cards::-webkit-scrollbar {
+  width: 0;
+  height: 0;
+}
+
+.card {
+  margin-right: 16px;
+  padding: 12px;
+  display: flex;
+  min-width: 315px;
+  background: #f5f5fa;
+  border-radius: 12px;
+}
+
+.img {
+  width: 120px;
+  height: 120px;
+  border-radius: 4px;
+}
+
+.description {
+  margin-left: 16px;
+}
+
+.heading {
+  margin-top: 4px;
+  margin-bottom: 0;
+  font-family: "Poppins", sans-serif;
+  font-style: normal;
+  font-weight: 500;
+  font-size: 16px;
+  line-height: 24px;
+  color: var(--headings);
+}
+
+.author {
+  margin-top: 4px;
+  margin-bottom: 0;
+  font-family: "Poppins", sans-serif;
+  font-style: normal;
+  font-weight: 400;
+  font-size: 12px;
+  line-height: 18px;
+  color: #6a6a8b;
+}
+
+.ratingWrapper {
+  margin-top: 20px;
+  width: 133px;
+  height: 20px;
+  background-repeat: space repeat;
+}
+
+.counter {
+  margin-top: 8px;
+  margin-bottom: 0;
+  font-family: "Poppins", sans-serif;
+  font-style: normal;
+  font-weight: 400;
+  font-size: 12px;
+  line-height: 18px;
+  color: #6a6a8b;
+}
