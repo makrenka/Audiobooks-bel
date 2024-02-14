@@ -1,0 +1,16 @@
+.link {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-decoration: none;
+  font-family: "Poppins", sans-serif;
+  font-style: normal;
+  font-weight: 500;
+  font-size: 10px;
+  line-height: 15px;
+  color: #6a6a8b;
+}
+
+.active {
+  color: #4838d1;
+}

@@ -10,3 +10,11 @@ body {
   max-width: 375px;
   overflow-x: hidden;
 }
+
+:root {
+  --links: #4838d1;
+  --headings: #010104;
+  --background-buttons: #f5f5fa;
+  --detail-headings: #2e2e5d;
+  --detail-text: #6a6a8b;
+}

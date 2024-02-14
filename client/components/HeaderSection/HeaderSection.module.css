@@ -1,0 +1,26 @@
+.header {
+  padding-bottom: 4px;
+}
+
+.wrapper {
+  display: flex;
+  align-items: center;
+  padding: 54px 23px 10px 23px;
+}
+
+.heading {
+  margin: 0;
+  font-family: "Poppins", sans-serif;
+  font-style: normal;
+  font-weight: 500;
+  font-size: 16px;
+  line-height: 24px;
+  text-align: center;
+  color: #2e2e5d;
+  width: 100%;
+}
+
+.link {
+  width: 24px;
+  height: 24px;
+}
