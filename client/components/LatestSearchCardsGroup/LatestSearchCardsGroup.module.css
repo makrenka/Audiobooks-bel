@@ -1,0 +1,45 @@
+.latestSearch {
+  margin-top: 32px;
+}
+
+.heading {
+  margin: 0;
+  font-family: "Poppins", sans-serif;
+  font-style: normal;
+  font-weight: 500;
+  font-size: 16px;
+  line-height: 24px;
+  color: var(--heading);
+}
+
+.cards {
+  margin-top: 16px;
+  display: flex;
+  overflow: auto;
+  margin-right: -28px;
+}
+
+.cards::-webkit-scrollbar {
+  width: 0;
+  height: 0;
+}
+
+.card {
+  margin-right: 12px;
+}
+
+.img {
+  width: 160px;
+  height: 160px;
+}
+
+.cardHeading {
+  font-family: "Poppins", sans-serif;
+  font-style: normal;
+  font-weight: 500;
+  font-size: 16px;
+  line-height: 24px;
+  color: #2e2e5d;
+  margin-top: 12px;
+  margin-bottom: 0;
+}

@@ -1,0 +1,21 @@
+.wrapper {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding-top: 54px;
+  padding-bottom: 10px;
+}
+
+.heading {
+  font-family: "Poppins", sans-serif;
+  font-style: normal;
+  font-weight: 500;
+  font-size: 16px;
+  line-height: 24px;
+  color: #2e2e5d;
+  margin: 0;
+  white-space: nowrap;
+  overflow: hidden;
+  max-width: 222px;
+  text-overflow: ellipsis;
+}

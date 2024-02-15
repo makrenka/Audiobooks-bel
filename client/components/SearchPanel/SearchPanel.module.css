@@ -1,0 +1,27 @@
+.searchPanel {
+  display: flex;
+  flex-direction: column;
+}
+
+.label {
+  font-family: "Poppins", sans-serif;
+  font-style: normal;
+  font-weight: 600;
+  font-size: 24px;
+  line-height: 36px;
+  color: var(--headings);
+}
+
+.input {
+  margin-top: 12px;
+  padding: 16px 24px;
+  background: var(--background-buttons);
+  border-radius: 8px;
+  font-family: "Poppins", sans-serif;
+  font-style: normal;
+  font-weight: 500;
+  font-size: 14px;
+  line-height: 21px;
+  color: #b8b8c7;
+  border: none;
+}

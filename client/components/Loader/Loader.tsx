@@ -1,7 +1,7 @@
 "use client";
 import Lottie from "lottie-react";
 
-import loader from "./Loader.json";
+import loader from "./Animation - 1707916888412.json";
 
 import styles from "./Loader.module.css";
 
