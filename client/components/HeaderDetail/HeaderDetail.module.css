@@ -19,3 +19,8 @@
   max-width: 222px;
   text-overflow: ellipsis;
 }
+
+.link {
+  width: 24px;
+  height: 24px;
+}

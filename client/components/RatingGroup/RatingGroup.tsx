@@ -22,9 +22,10 @@ export const RatingGroup = ({ reviews }: { reviews: Review[] }) => {
     { id: 4, filling: 0 },
     { id: 5, filling: 0 },
   ]);
-  const ratingNumber = reviews.length
-    ? reviews.reduce((acc, item) => item.rating + acc, 0) / reviews.length
+  const ratingNumber = reviews?.length
+    ? reviews.reduce((acc, item) => item.rating + acc, 0) / reviews?.length
     : 0;
+  console.log(ratingNumber);
 
   const changeFilling = () => {
     let rating = ratingNumber;

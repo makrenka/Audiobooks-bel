@@ -68,3 +68,7 @@
   line-height: 18px;
   color: #6a6a8b;
 }
+
+.link {
+  text-decoration: none;
+}

@@ -1,5 +1,8 @@
 import { HeaderDetail } from "@/components/HeaderDetail/HeaderDetail";
 import { audiobooks } from "@/constants/audiobooks";
+import { DetailCard } from "@/components/DetailCard/DetailCard";
+
+import styles from "./page.module.css";
 
 type Props = {
   params: {
@@ -12,7 +15,17 @@ export default function DetailPage({ params: { id } }: Props) {
 
   return (
     <>
-      <HeaderDetail title={book.id} />
+      <div className={styles.container}>
+        <HeaderDetail title={book?.title} />
+        <main className={styles.main}>
+          <DetailCard
+            cover={book?.cover.url}
+            title={book?.title}
+            author={book?.author}
+            reviews={book?.reviews}
+          />
+        </main>
+      </div>
     </>
   );
 }

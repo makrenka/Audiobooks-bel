@@ -1,0 +1,50 @@
+.imgWrapper {
+  display: flex;
+  justify-content: center;
+}
+
+.cardImg {
+  margin-top: 24px;
+  width: 260px;
+  height: 260px;
+}
+
+.heading {
+  margin-top: 28px;
+  margin-bottom: 0;
+  font-family: "Poppins", sans-serif;
+  font-style: normal;
+  font-weight: 500;
+  font-size: 20px;
+  line-height: 30px;
+  color: var(--headings);
+}
+
+.author {
+  margin-top: 4px;
+  margin-bottom: 0;
+  font-family: "Poppins", sans-serif;
+  font-style: normal;
+  font-weight: 400;
+  font-size: 16px;
+  line-height: 24px;
+  color: #9292a2;
+}
+
+.ratingWrapper {
+  margin-top: 16px;
+  display: flex;
+  align-items: center;
+  height: 20px;
+}
+
+.ratingImg {
+  font-family: "Poppins", sans-serif;
+  font-style: normal;
+  font-weight: 400;
+  font-size: 20px;
+  line-height: 30px;
+  text-align: center;
+  color: #9292a2;
+  margin-left: 12px;
+}

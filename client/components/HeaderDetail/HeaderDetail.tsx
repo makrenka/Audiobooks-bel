@@ -5,12 +5,8 @@ import styles from "./HeaderDetail.module.css";
 export const HeaderDetail = ({ title }: { title: string | undefined }) => (
   <header className={styles.header}>
     <div className={styles.wrapper}>
-      <Link href="/">
-        <img
-          src="/icons/arrow-header-section.svg"
-          alt="arrow to home"
-          className={styles.arrowIcon}
-        />
+      <Link href="/" className={styles.link}>
+        <img src="/icons/arrow-header-section.svg" alt="arrow to home" />
       </Link>
       <h2 className={styles.heading}>{title}</h2>
       <img
