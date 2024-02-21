@@ -25,21 +25,32 @@ export const RatingGroup = ({ reviews }: { reviews: Review[] }) => {
   const ratingNumber = reviews?.length
     ? reviews.reduce((acc, item) => item.rating + acc, 0) / reviews?.length
     : 0;
-  console.log(ratingNumber);
 
   const changeFilling = () => {
-    let rating = ratingNumber;
-    for (let i = 0; i < ratingNumber; i++) {
-      let star = stars[i];
-      if (i <= ratingNumber - 1) {
-        star.filling = 100;
-        rating--;
-      } else {
-        star.filling = Math.floor(rating * 100);
-      }
-    }
+    //   let rating = ratingNumber;
+    //   for (let i = 0; i < ratingNumber; i++) {
+    //     let star = stars[i];
+    //     if (i <= ratingNumber - 1) {
+    //       star.filling = 100;
+    //       rating--;
+    //     } else {
+    //       star.filling = Math.floor(rating * 100);
+    //     }
+    //   }
 
-    return stars;
+    //   return stars;
+
+    const fillingStars = stars.map((star, index) => {
+      let rating = ratingNumber;
+      if (star.filling < rating - index) {
+        console.log(index);
+        return { ...star, filling: 100 };
+      } else {
+        return { ...star, filling: Math.floor(rating * 100) };
+      }
+    });
+
+    return fillingStars;
   };
 
   useEffect(() => {
