@@ -1,0 +1,105 @@
+.slider {
+  overflow: hidden;
+}
+
+.slidesList {
+  display: flex;
+  transition: transform 0.5s ease-in-out;
+}
+
+.slide {
+  margin-top: 20px;
+  min-width: 100%;
+}
+
+.slideWrapper {
+  display: flex;
+}
+
+.slideInfo {
+  margin-left: 20px;
+}
+
+.slideImg {
+  width: 48px;
+  height: 48px;
+  border-radius: 8px;
+}
+
+.slideInfoName {
+  margin-top: 4px;
+  font-family: "Poppins", sans-serif;
+  font-style: normal;
+  font-weight: 500;
+  font-size: 14px;
+  line-height: 21px;
+  color: var(--detail-headings);
+}
+
+.slideInfoRating {
+  display: flex;
+  align-items: center;
+  margin-top: 4px;
+}
+
+.ratingImg {
+  width: 96px;
+  height: 16px;
+}
+
+.reviewDate {
+  margin-left: 10px;
+  font-family: "Poppins", sans-serif;
+  font-style: normal;
+  font-weight: 400;
+  font-size: 10px;
+  line-height: 15px;
+  color: #9292a2;
+}
+
+.reviewText {
+  margin-top: 16px;
+  font-family: "Poppins", sans-serif;
+  font-style: normal;
+  font-weight: 300;
+  font-size: 14px;
+  line-height: 21px;
+  color: var(--detail-text);
+}
+
+.dots {
+  display: flex;
+  cursor: pointer;
+}
+
+.dot {
+  width: 12px;
+  height: 12px;
+  background: #d5d5e3;
+  border-radius: 6px;
+  margin-right: 12px;
+}
+
+.selected {
+  background: #4838d1;
+}
+
+.dotsWrapper {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-top: 16px;
+}
+
+.moreBtn {
+  width: 78px;
+  height: 21px;
+  background: none;
+  border: none;
+  font-family: "Poppins", sans-serif;
+  font-style: normal;
+  font-weight: 500;
+  font-size: 14px;
+  line-height: 21px;
+  color: #f77a55;
+}
