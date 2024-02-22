@@ -1,4 +1,4 @@
-import { createContext } from "react";
+import { Metadata } from "next";
 
 import { HeaderDetail } from "@/components/HeaderDetail/HeaderDetail";
 import { audiobooks } from "@/constants/audiobooks";
@@ -9,6 +9,16 @@ import { DetailSummary } from "@/components/DetailSummary/DetailSummary";
 import { DetailReviews } from "@/components/DetailReviews/DetailReviews";
 
 import styles from "./page.module.css";
+
+export async function generateMetadata({
+  params: { id },
+}: Props): Promise<Metadata> {
+  const book = audiobooks.filter((item) => item.id === id)[0];
+
+  return {
+    title: `Аўдыёкнігі - ${book.title}`,
+  };
+}
 
 type Props = {
   params: {

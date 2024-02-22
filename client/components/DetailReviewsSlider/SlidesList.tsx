@@ -22,6 +22,8 @@ export const SlidesList = ({
     className={styles.slidesList}
     style={{ transform: `translateX(-${slideNumber * 100}%)` }}
   >
-    <Slide reviews={reviews} />
+    {reviews.map((review) => (
+      <Slide review={review} key={review.number} />
+    ))}
   </div>
 );

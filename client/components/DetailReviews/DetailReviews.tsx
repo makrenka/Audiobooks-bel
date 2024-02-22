@@ -29,7 +29,9 @@ export const DetailReviews = ({ reviews }: { reviews: Reviews[] }) => {
         <DetailReviewsSlider reviews={reviews} onSlider={onSlider} />
       ) : (
         <div className={styles.list}>
-          <Slide reviews={reviews} />
+          {reviews.map((review) => (
+            <Slide review={review} key={review.number} />
+          ))}
         </div>
       )}
     </div>
