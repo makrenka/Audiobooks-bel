@@ -16,7 +16,7 @@ export async function generateMetadata({
   const book = audiobooks.filter((item) => item.id === id)[0];
 
   return {
-    title: `Аўдыёкнігі - ${book.title}`,
+    title: `Аўдыёкнігі - ${book?.title}`,
   };
 }
 
