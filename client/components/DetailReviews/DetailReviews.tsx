@@ -24,15 +24,21 @@ export const DetailReviews = ({ reviews }: { reviews: Reviews[] }) => {
 
   return (
     <div className={styles.reviews}>
-      <h3 className={styles.heading}>Reviews</h3>
-      {slider ? (
-        <DetailReviewsSlider reviews={reviews} onSlider={onSlider} />
+      <h3 className={styles.heading}>Водгукі</h3>
+      {reviews?.length ? (
+        slider ? (
+          <DetailReviewsSlider reviews={reviews} onSlider={onSlider} />
+        ) : (
+          <div className={styles.list}>
+            {reviews?.map((review) => (
+              <Slide review={review} key={review.number} />
+            ))}
+          </div>
+        )
       ) : (
-        <div className={styles.list}>
-          {reviews.map((review) => (
-            <Slide review={review} key={review.number} />
-          ))}
-        </div>
+        <h3 className={styles.noneHeading}>
+          На гэтую кнігу яшчэ няма водгукаў
+        </h3>
       )}
     </div>
   );

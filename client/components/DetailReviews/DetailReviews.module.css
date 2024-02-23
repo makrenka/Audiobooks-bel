@@ -10,3 +10,14 @@
   line-height: 21px;
   color: #2e2e5d;
 }
+
+.noneHeading {
+  font-family: "Poppins", sans-serif;
+  font-style: normal;
+  font-weight: 500;
+  font-size: 14px;
+  line-height: 21px;
+  color: #2e2e5d;
+  margin-top: 5px;
+  text-align: center;
+}

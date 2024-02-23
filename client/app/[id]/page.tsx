@@ -9,6 +9,7 @@ import { DetailSummary } from "@/components/DetailSummary/DetailSummary";
 import { DetailReviews } from "@/components/DetailReviews/DetailReviews";
 
 import styles from "./page.module.css";
+import { MiniPlayer } from "@/components/MiniPlayer/MiniPlayer";
 
 export async function generateMetadata({
   params: { id },
@@ -46,6 +47,11 @@ export default function DetailPage({ params: { id } }: Props) {
           <DetailReviews reviews={book?.reviews} />
         </main>
       </div>
+      <MiniPlayer
+        cover={book?.cover.url}
+        title={book?.title}
+        author={book?.author}
+      />
     </>
   );
 }

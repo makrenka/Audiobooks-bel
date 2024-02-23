@@ -9,7 +9,7 @@ export const DetailControlButtons = () => (
         alt="Play Audio"
         className={styles.icon}
       />
-      Play Audio
+      Слухаць аўдыё
     </button>
     <button type="button" className={classNames(styles.btn, styles.btnRead)}>
       <img
@@ -17,7 +17,7 @@ export const DetailControlButtons = () => (
         alt="Read Book"
         className={styles.icon}
       />
-      Read Book
+      Чытаць кнігу
     </button>
   </div>
 );
