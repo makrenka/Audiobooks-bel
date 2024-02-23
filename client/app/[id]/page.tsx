@@ -10,6 +10,7 @@ import { DetailReviews } from "@/components/DetailReviews/DetailReviews";
 
 import styles from "./page.module.css";
 import { MiniPlayer } from "@/components/MiniPlayer/MiniPlayer";
+import { BottomBar } from "@/components/BottomBar/BottomBar";
 
 export async function generateMetadata({
   params: { id },
@@ -52,6 +53,7 @@ export default function DetailPage({ params: { id } }: Props) {
         title={book?.title}
         author={book?.author}
       />
+      <BottomBar />
     </>
   );
 }
