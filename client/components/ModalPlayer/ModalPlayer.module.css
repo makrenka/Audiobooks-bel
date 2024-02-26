@@ -46,7 +46,35 @@
   color: #9292a2;
 }
 
-.buttons {
+.buttonsHigh {
   display: flex;
   justify-content: space-between;
+}
+
+.buttonsLow {
+  display: flex;
+  justify-content: space-around;
+  margin-top: 15px;
+}
+
+.options {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.optionsText {
+  font-size: 10px;
+  color: #2e2e5d;
+  margin-top: 5px;
+}
+
+button {
+  border: none;
+  background: none;
+}
+
+.pauseBtn {
+  width: 73px;
+  height: 72px;
 }

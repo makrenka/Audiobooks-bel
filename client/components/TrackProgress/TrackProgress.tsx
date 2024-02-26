@@ -22,8 +22,8 @@ export const TrackProgress = ({
         className={styles.indicator}
       />
       <div className={styles.times}>
-        <span>{left}</span>
-        <span>{right}</span>
+        <span className={styles.time}>{left}</span>
+        <span className={styles.time}>{right}</span>
       </div>
     </div>
   );

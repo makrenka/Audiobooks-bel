@@ -7,3 +7,8 @@
   display: flex;
   justify-content: space-between;
 }
+
+.time {
+  font-size: 10px;
+  color: #bbb1fa;
+}

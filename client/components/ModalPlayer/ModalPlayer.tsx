@@ -19,6 +19,7 @@ export const ModalPlayer = ({
   closeModal: () => void;
 }) => {
   const modal = useRef(document.createElement("div"));
+  const [isActive, setIsActive] = useState(false);
 
   useEffect(() => {
     const { current } = modal;
@@ -41,11 +42,61 @@ export const ModalPlayer = ({
         <p className={styles.author}>{author}</p>
         <TrackProgress left={0} right={100} onChange={() => {}} />
         <div className={styles.buttons}>
-          <img src="icons/Volume.svg" alt="Volume" />
-          <img src="icons/Arrow-Left-Circle.svg" alt="Arrow-Left" />
-          <img src="icons/Play.svg" alt="Play" />
-          <img src="icons/Arrow-Right-Circle.svg" alt="Arrow-Right" />
-          <img src="icons/Upload.svg" alt="Upload" />
+          <div className={styles.buttonsHigh}>
+            <button>
+              <img src="icons/Volume.svg" alt="Volume" />
+            </button>
+            <button>
+              <img src="icons/Arrow-Left-Circle.svg" alt="Arrow-Left" />
+            </button>
+            <div>
+              {isActive ? (
+                <button onClick={() => setIsActive(false)}>
+                  <img
+                    src="icons/pause-button.png"
+                    alt="Pause"
+                    className={styles.pauseBtn}
+                  />
+                </button>
+              ) : (
+                <button onClick={() => setIsActive(true)}>
+                  <img src="icons/Play-big.svg" alt="Play" />
+                </button>
+              )}
+            </div>
+            <button>
+              <img src="icons/Arrow-Right-Circle.svg" alt="Arrow-Right" />
+            </button>
+            <button>
+              <img src="icons/Upload.svg" alt="Upload" />
+            </button>
+          </div>
+          <div className={styles.buttonsLow}>
+            <div className={styles.options}>
+              <button>
+                <img src="icons/Bookmark.svg" alt="Bookmark" />
+              </button>
+              <p className={styles.optionsText}>Закладка</p>
+            </div>
+            <div className={styles.options}>
+              <button>
+                <img src="icons/Paper.svg" alt="Chapter 2" />
+              </button>
+              <p className={styles.optionsText}>Глава 2</p>
+            </div>
+            <div className={styles.options}>
+              <button>
+                <img src="icons/Time-Square.svg" alt="Time" />
+              </button>
+              <p className={styles.optionsText}>Хуткасьць 10x</p>
+            </div>
+            <div className={styles.options}>
+              <button>
+                <img src="icons/Arrow-Down-Square.svg" alt="Download" />
+              </button>
+              <p className={styles.optionsText}>Спампаваць</p>
+            </div>
+          </div>
         </div>
       </div>
     </div>,
