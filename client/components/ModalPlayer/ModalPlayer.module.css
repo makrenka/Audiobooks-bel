@@ -1,4 +1,52 @@
+.modalOuter {
+  position: fixed;
+  width: 100%;
+  top: 0;
+  left: 0;
+  bottom: 0;
+  background-color: white;
+}
+
 .container {
   margin: 0 auto;
   max-width: 319px;
+}
+
+.imgWrapper {
+  display: flex;
+  justify-content: center;
+}
+
+.cardImg {
+  margin-top: 14px;
+  width: 300px;
+  height: 300px;
+  border-radius: 12px;
+}
+
+.heading {
+  margin-top: 20px;
+  margin-bottom: 0;
+  font-family: "Poppins", sans-serif;
+  font-style: normal;
+  font-weight: 500;
+  font-size: 20px;
+  line-height: 30px;
+  color: var(--headings);
+}
+
+.author {
+  margin-top: 4px;
+  margin-bottom: 0;
+  font-family: "Poppins", sans-serif;
+  font-style: normal;
+  font-weight: 400;
+  font-size: 16px;
+  line-height: 24px;
+  color: #9292a2;
+}
+
+.buttons {
+  display: flex;
+  justify-content: space-between;
 }

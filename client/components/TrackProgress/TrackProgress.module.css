@@ -1,0 +1,9 @@
+.indicator {
+  width: 100%;
+  margin-top: 20px;
+}
+
+.times {
+  display: flex;
+  justify-content: space-between;
+}

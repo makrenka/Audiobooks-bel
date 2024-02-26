@@ -16,6 +16,10 @@ export const MiniPlayer = ({
 }) => {
   const [showPlayer, setShowPlayer] = useState(false);
 
+  const closeModal = () => {
+    setShowPlayer(false);
+  };
+
   return (
     <>
       <div className={styles.player} onClick={() => setShowPlayer(true)}>
@@ -35,7 +39,14 @@ export const MiniPlayer = ({
           </button>
         </div>
       </div>
-      {showPlayer && <ModalPlayer title={title} />}
+      {showPlayer && (
+        <ModalPlayer
+          cover={cover}
+          author={author}
+          title={title}
+          closeModal={closeModal}
+        />
+      )}
     </>
   );
 };

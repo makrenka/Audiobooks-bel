@@ -14,7 +14,7 @@ type Review = {
   text: string;
 };
 
-export const RatingGroup = ({ reviews }: { reviews: Review[] }) => {
+export const RatingGroup = ({ reviews }: { reviews: Review[] | undefined }) => {
   const [stars, setStars] = useState<{ id: number; filling: number }[]>([
     { id: 1, filling: 0 },
     { id: 2, filling: 0 },
