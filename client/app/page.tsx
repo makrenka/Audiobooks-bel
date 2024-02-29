@@ -1,4 +1,6 @@
-import { Metadata } from "next";
+import { GetServerSideProps, Metadata } from "next";
+
+import { wrapper } from "@/store";
 import { Header } from "@/components/Header/Header";
 import { sections } from "@/constants/sectionsHome";
 import { SectionHome } from "@/components/SectionHome/SectionHome";
@@ -26,3 +28,9 @@ export default function Home() {
     </>
   );
 }
+
+export const getServerSideProps: GetServerSideProps =
+  wrapper.getServerSideProps((store) => async (ctx) => {
+    console.log(store);
+    return { props: {} };
+  });
