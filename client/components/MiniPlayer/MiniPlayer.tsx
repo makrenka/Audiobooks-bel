@@ -39,7 +39,7 @@ export const MiniPlayer = ({
           {isActive ? (
             <button onClick={() => setIsActive(false)}>
               <img
-                src="icons/pause-button.png"
+                src="/icons/pause-button.png"
                 alt="Pause"
                 className={styles.pauseBtn}
               />
@@ -50,7 +50,7 @@ export const MiniPlayer = ({
               onClick={() => setIsActive(true)}
             >
               <img
-                src="icons/Play.svg"
+                src="/icons/Play.svg"
                 alt="play button"
                 className={styles.btnPlayImg}
               />
