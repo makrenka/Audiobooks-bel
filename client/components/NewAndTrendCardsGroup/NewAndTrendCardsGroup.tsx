@@ -8,8 +8,8 @@ export const NewAndTrendCardsGroup = ({ section }: { section: string }) => (
     {audiobooks
       .filter((item) => item.section.includes(section))
       .map(({ cover, title, id }) => (
-        <Link href={`${id}`} className={styles.link}>
-          <div className={styles.card} key={id}>
+        <Link href={`/books/${id}`} className={styles.link} key={id}>
+          <div className={styles.card}>
             <img
               src={cover.url ? cover.url : "/no-image.png"}
               alt="Cover of the book"

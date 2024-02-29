@@ -7,7 +7,7 @@ import styles from "./RecommendedCardGroup.module.css";
 export const RecommendedCardGroup = () => (
   <div className={styles.images}>
     {audiobooks.map(({ coverBigSize, id }) => (
-      <Link href={`/${id}`} key={id}>
+      <Link href={`/books/${id}`} key={id}>
         <img
           src={
             coverBigSize.url

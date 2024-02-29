@@ -11,7 +11,7 @@ export const BestSellerCardsGroup = ({ section }: { section: string }) => (
       .filter((item) => item.section.includes(section))
       .map(({ cover, title, author, listeners, id, reviews }) => (
         <div className={styles.card} key={id}>
-          <Link href={`/${id}`}>
+          <Link href={`/books/${id}`}>
             <img
               src={cover.url ? cover.url : "/no-image.png"}
               alt="Cover of the book"
@@ -19,7 +19,7 @@ export const BestSellerCardsGroup = ({ section }: { section: string }) => (
             />
           </Link>
           <div className={styles.description}>
-            <Link href={`/${id}`} className={styles.link}>
+            <Link href={`/books/${id}`} className={styles.link}>
               <h3 className={styles.heading}>{title}</h3>
             </Link>
             <p className={styles.author}>{author}</p>

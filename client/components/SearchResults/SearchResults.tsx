@@ -1,4 +1,4 @@
-import { highlightMatches } from "@/app/services/highlightMatches";
+import { highlightMatches } from "@/pages/services/highlightMatches";
 import { audiobooks } from "@/constants/audiobooks";
 
 import styles from "./SearchResults.module.css";
