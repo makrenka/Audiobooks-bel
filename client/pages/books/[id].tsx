@@ -1,4 +1,4 @@
-import { Metadata } from "next";
+import { NextSeo } from "next-seo";
 
 import { HeaderDetail } from "@/components/HeaderDetail/HeaderDetail";
 import { DetailCard } from "@/components/DetailCard/DetailCard";
@@ -8,9 +8,9 @@ import { DetailSummary } from "@/components/DetailSummary/DetailSummary";
 import { DetailReviews } from "@/components/DetailReviews/DetailReviews";
 import { MiniPlayer } from "@/components/MiniPlayer/MiniPlayer";
 import { BottomBar } from "@/components/BottomBar/BottomBar";
+import { audiobooks } from "@/constants/audiobooks";
 
 import styles from "./page.module.css";
-import { audiobooks } from "@/constants/audiobooks";
 
 // export async function generateMetadata({
 //   params: { id },
@@ -27,6 +27,7 @@ export default function DetailPage() {
 
   return (
     <>
+      <NextSeo title={"Аўдыёкнігі | " + book?.title} />
       <div className={styles.container}>
         <HeaderDetail title={book?.title} />
         <main className={styles.main}>
@@ -46,6 +47,7 @@ export default function DetailPage() {
         cover={book?.cover.url}
         title={book?.title}
         author={book?.author}
+        audio={book?.audio}
       />
       <BottomBar />
     </>

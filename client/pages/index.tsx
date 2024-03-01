@@ -1,4 +1,5 @@
-import { GetServerSideProps, Metadata } from "next";
+import { GetServerSideProps } from "next";
+import { NextSeo } from "next-seo";
 
 import { wrapper } from "@/store";
 import { Header } from "@/components/Header/Header";
@@ -8,14 +9,15 @@ import { BottomBar } from "@/components/BottomBar/BottomBar";
 
 import styles from "./page.module.css";
 
-export const metadata: Metadata = {
-  title: "Аўдыёкнігі",
-  description: "Audiobooks app",
-};
+// export const metadata: Metadata = {
+//   title: "Аўдыёкнігі",
+//   description: "Audiobooks app",
+// };
 
 export default function Home() {
   return (
     <>
+      <NextSeo title="Аўдыёкнігі" description="Audiobooks app" />
       <div className={styles.container}>
         <Header />
         <main className={styles.main}>

@@ -14,10 +14,10 @@ export const playerSlice = createSlice({
   name: "player",
   initialState,
   reducers: {
-    pause: (state) => {
+    pauseBook: (state) => {
       state.pause = true;
     },
-    play: (state) => {
+    playBook: (state) => {
       state.pause = false;
     },
     setCurrentTime: (state, action: PayloadAction<number>) => {
@@ -38,8 +38,8 @@ export const playerSlice = createSlice({
 });
 
 export const {
-  pause,
-  play,
+  pauseBook,
+  playBook,
   setCurrentTime,
   setVolume,
   setDuration,

@@ -9,10 +9,12 @@ export const MiniPlayer = ({
   cover,
   title,
   author,
+  audio,
 }: {
   cover: string;
   title: string;
   author: string;
+  audio: string;
 }) => {
   const [showPlayer, setShowPlayer] = useState(false);
   const [isActive, setIsActive] = useState(false);
@@ -63,6 +65,7 @@ export const MiniPlayer = ({
           cover={cover}
           author={author}
           title={title}
+          audio={audio}
           closeModal={closeModal}
         />
       )}

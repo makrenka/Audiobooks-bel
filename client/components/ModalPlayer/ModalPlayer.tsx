@@ -1,25 +1,34 @@
 "use client";
+import { useEffect, useRef } from "react";
+import { createPortal } from "react-dom";
 
-import { useEffect, useRef, useState } from "react";
 import { HeaderPlayer } from "../HeaderPlayer/HeaderPlayer";
+import { TrackProgress } from "../TrackProgress/TrackProgress";
+import { useAppDispatch, useAppSelector } from "@/store/hooks";
+import { pauseBook, playBook } from "@/store/player";
 
 import styles from "./ModalPlayer.module.css";
-import { createPortal } from "react-dom";
-import { TrackProgress } from "../TrackProgress/TrackProgress";
+
+let audioBook: HTMLAudioElement;
 
 export const ModalPlayer = ({
   cover,
   title,
   author,
+  audio,
   closeModal,
 }: {
   cover: string;
   title: string;
   author: string;
+  audio: string;
   closeModal: () => void;
 }) => {
   const modal = useRef(document.createElement("div"));
-  const [isActive, setIsActive] = useState(false);
+  const { active, volume, duration, currentTime, pause } = useAppSelector(
+    (state) => state.player
+  );
+  const dispatch = useAppDispatch();
 
   useEffect(() => {
     const { current } = modal;
@@ -30,6 +39,23 @@ export const ModalPlayer = ({
       document.body.removeChild(current);
     };
   }, []);
+
+  useEffect(() => {
+    if (!audioBook) {
+      audioBook = new Audio();
+      audioBook.src = audio;
+    }
+  }, []);
+
+  const play = () => {
+    if (pause) {
+      dispatch(playBook());
+      audioBook.play();
+    } else {
+      dispatch(pauseBook());
+      audioBook.pause();
+    }
+  };
 
   return createPortal(
     <div className={styles.modalOuter}>
@@ -50,8 +76,8 @@ export const ModalPlayer = ({
               <img src="/icons/Arrow-Left-Circle.svg" alt="Arrow-Left" />
             </button>
             <div>
-              {isActive ? (
-                <button onClick={() => setIsActive(false)}>
+              {pause ? (
+                <button onClick={play}>
                   <img
                     src="/icons/pause-button.png"
                     alt="Pause"
@@ -59,7 +85,7 @@ export const ModalPlayer = ({
                   />
                 </button>
               ) : (
-                <button onClick={() => setIsActive(true)}>
+                <button onClick={play}>
                   <img src="/icons/Play-big.svg" alt="Play" />
                 </button>
               )}

@@ -10,6 +10,7 @@ export const audiobooks = [
     author: "Laurie Forest",
     listeners: "1,000+ Listeners",
     id: "1",
+    audio: "http://localhost:5000/audio/file_example_MP3_700KB.mp3",
     section: ["recommended", "best", "trending"],
     category: ["Fantasy", "Drama", "Fiction"],
     reviews: [
@@ -52,6 +53,7 @@ export const audiobooks = [
     author: "Laurie Forest",
     listeners: "1,000+ Listeners",
     id: "2",
+    audio: "http://localhost:5000/audio/file_example_MP3_700KB.mp3",
     section: ["recommended", "best", "new"],
     category: ["Fantasy", "Comedy"],
     reviews: [],
@@ -69,6 +71,7 @@ export const audiobooks = [
     author: "Laurie Forest",
     listeners: "1,000+ Listeners",
     id: "3",
+    audio: "http://localhost:5000/audio/file_example_MP3_700KB.mp3",
     section: ["best", "trending"],
     category: ["Fantasy", "Drama", "Travel"],
     reviews: [
@@ -109,6 +112,7 @@ export const audiobooks = [
     author: "Laurie Forest",
     listeners: "1,000+ Listeners",
     id: "4",
+    audio: "http://localhost:5000/audio/file_example_MP3_700KB.mp3",
     section: ["new", "trending"],
     category: ["Fantasy", "Drama", "Fiction"],
     reviews: [
@@ -149,6 +153,7 @@ export const audiobooks = [
     author: "Emily R. King",
     listeners: "1,000+ Listeners",
     id: "5",
+    audio: "http://localhost:5000/audio/file_example_MP3_700KB.mp3",
     section: ["recommended", "best"],
     category: ["Biography", "Drama", "Fiction"],
     reviews: [
