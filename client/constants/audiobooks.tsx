@@ -10,7 +10,8 @@ export const audiobooks = [
     author: "Laurie Forest",
     listeners: "1,000+ Listeners",
     id: "1",
-    audio: "http://localhost:5000/audio/file_example_MP3_700KB.mp3",
+    audio:
+      "http://localhost:5000/audio/65f0ede7-b700-4abf-b33c-107391addfa6.mp3",
     section: ["recommended", "best", "trending"],
     category: ["Fantasy", "Drama", "Fiction"],
     reviews: [

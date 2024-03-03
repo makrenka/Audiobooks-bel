@@ -15,9 +15,9 @@ export const TrackProgress = ({
     <div>
       <input
         type="range"
-        min={left}
+        min={0}
         max={right}
-        value={left}
+        // value={left}
         onChange={onChange}
         className={styles.indicator}
       />

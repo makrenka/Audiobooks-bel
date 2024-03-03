@@ -8,6 +8,7 @@ const initialState: PlayerState = {
   duration: 0,
   currentTime: 0,
   pause: true,
+  showMiniPlayer: false,
 };
 
 export const playerSlice = createSlice({
@@ -34,6 +35,9 @@ export const playerSlice = createSlice({
       state.duration = 0;
       state.currentTime = 0;
     },
+    setShowMiniPlayer: (state) => {
+      state.showMiniPlayer = true;
+    },
   },
 });
 
@@ -44,4 +48,5 @@ export const {
   setVolume,
   setDuration,
   setActive,
+  setShowMiniPlayer,
 } = playerSlice.actions;

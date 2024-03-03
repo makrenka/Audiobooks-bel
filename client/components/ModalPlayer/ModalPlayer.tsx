@@ -1,15 +1,14 @@
 "use client";
-import { useEffect, useRef } from "react";
+import { useEffect, useRef, useState } from "react";
 import { createPortal } from "react-dom";
 
 import { HeaderPlayer } from "../HeaderPlayer/HeaderPlayer";
 import { TrackProgress } from "../TrackProgress/TrackProgress";
-import { useAppDispatch, useAppSelector } from "@/store/hooks";
-import { pauseBook, playBook } from "@/store/player";
+import { useAppSelector } from "@/store/hooks";
+import { setVolume } from "@/store/player";
 
 import styles from "./ModalPlayer.module.css";
-
-let audioBook: HTMLAudioElement;
+import { PlayerControlButtons } from "../PlayerControlButtons/PlayerControlButtons";
 
 export const ModalPlayer = ({
   cover,
@@ -24,11 +23,11 @@ export const ModalPlayer = ({
   audio: string;
   closeModal: () => void;
 }) => {
+  const [showVolume, setShowVolume] = useState(false);
   const modal = useRef(document.createElement("div"));
   const { active, volume, duration, currentTime, pause } = useAppSelector(
     (state) => state.player
   );
-  const dispatch = useAppDispatch();
 
   useEffect(() => {
     const { current } = modal;
@@ -40,21 +39,8 @@ export const ModalPlayer = ({
     };
   }, []);
 
-  useEffect(() => {
-    if (!audioBook) {
-      audioBook = new Audio();
-      audioBook.src = audio;
-    }
-  }, []);
-
-  const play = () => {
-    if (pause) {
-      dispatch(playBook());
-      audioBook.play();
-    } else {
-      dispatch(pauseBook());
-      audioBook.pause();
-    }
+  const changeVolume = (e: React.ChangeEvent<HTMLInputElement>) => {
+    setVolume(Number(e.target.value));
   };
 
   return createPortal(
@@ -66,33 +52,25 @@ export const ModalPlayer = ({
         </div>
         <h2 className={styles.heading}>{title}</h2>
         <p className={styles.author}>{author}</p>
-        <TrackProgress left={0} right={100} onChange={() => {}} />
+        <TrackProgress
+          left={currentTime}
+          right={duration}
+          onChange={() => {}}
+        />
         <div className={styles.buttons}>
           <div className={styles.buttonsHigh}>
-            <button>
+            <button onClick={() => setShowVolume(!showVolume)}>
               <img src="/icons/Volume.svg" alt="Volume" />
             </button>
-            <button>
-              <img src="/icons/Arrow-Left-Circle.svg" alt="Arrow-Left" />
-            </button>
-            <div>
-              {pause ? (
-                <button onClick={play}>
-                  <img
-                    src="/icons/pause-button.png"
-                    alt="Pause"
-                    className={styles.pauseBtn}
-                  />
-                </button>
-              ) : (
-                <button onClick={play}>
-                  <img src="/icons/Play-big.svg" alt="Play" />
-                </button>
-              )}
-            </div>
-            <button>
-              <img src="/icons/Arrow-Right-Circle.svg" alt="Arrow-Right" />
-            </button>
+            {!showVolume ? (
+              <PlayerControlButtons pause={pause} />
+            ) : (
+              <TrackProgress
+                left={volume}
+                right={100}
+                onChange={changeVolume}
+              />
+            )}
             <button>
               <img src="/icons/Upload.svg" alt="Upload" />
             </button>
