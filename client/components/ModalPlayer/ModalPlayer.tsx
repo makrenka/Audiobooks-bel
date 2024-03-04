@@ -6,9 +6,9 @@ import { HeaderPlayer } from "../HeaderPlayer/HeaderPlayer";
 import { TrackProgress } from "../TrackProgress/TrackProgress";
 import { useAppSelector } from "@/store/hooks";
 import { setVolume } from "@/store/player";
+import { PlayerControlButtons } from "../PlayerControlButtons/PlayerControlButtons";
 
 import styles from "./ModalPlayer.module.css";
-import { PlayerControlButtons } from "../PlayerControlButtons/PlayerControlButtons";
 
 export const ModalPlayer = ({
   cover,
@@ -52,11 +52,13 @@ export const ModalPlayer = ({
         </div>
         <h2 className={styles.heading}>{title}</h2>
         <p className={styles.author}>{author}</p>
-        <TrackProgress
-          left={currentTime}
-          right={duration}
-          onChange={() => {}}
-        />
+        <div className={styles.playingTime}>
+          <TrackProgress
+            left={currentTime}
+            right={duration}
+            onChange={() => {}}
+          />
+        </div>
         <div className={styles.buttons}>
           <div className={styles.buttonsHigh}>
             <button onClick={() => setShowVolume(!showVolume)}>
@@ -65,11 +67,14 @@ export const ModalPlayer = ({
             {!showVolume ? (
               <PlayerControlButtons pause={pause} />
             ) : (
-              <TrackProgress
-                left={volume}
-                right={100}
-                onChange={changeVolume}
-              />
+              <div className={styles.volume}>
+                <h6 className={styles.volumeHeading}>Узровень гуку:</h6>
+                <TrackProgress
+                  left={volume}
+                  right={100}
+                  onChange={changeVolume}
+                />
+              </div>
             )}
             <button>
               <img src="/icons/Upload.svg" alt="Upload" />
