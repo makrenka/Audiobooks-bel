@@ -5,7 +5,13 @@ import { ModalPlayer } from "../ModalPlayer/ModalPlayer";
 
 import styles from "./MiniPlayer.module.css";
 import { useAppDispatch, useAppSelector } from "@/store/hooks";
-import { pauseBook, playBook, setActive } from "@/store/player";
+import {
+  pauseBook,
+  playBook,
+  setActive,
+  setCurrentTime,
+  setDuration,
+} from "@/store/player";
 
 export let audioBook: HTMLAudioElement;
 
@@ -30,10 +36,24 @@ export const MiniPlayer = ({
     setShowPlayer(false);
   };
 
+  const setAudio = () => {
+    if (active) {
+      audioBook.src = audio;
+      audioBook.volume = volume / 100;
+      audioBook.onloadedmetadata = () => {
+        dispatch(setDuration(Math.ceil(audioBook.duration)));
+      };
+      audioBook.ontimeupdate = () => {
+        dispatch(setCurrentTime(Math.ceil(audioBook.currentTime)));
+      };
+    }
+  };
+
   useEffect(() => {
     if (!audioBook) {
       audioBook = new Audio();
-      audioBook.src = audio;
+    } else {
+      setAudio();
     }
   }, []);
 

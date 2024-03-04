@@ -4,11 +4,12 @@ import { createPortal } from "react-dom";
 
 import { HeaderPlayer } from "../HeaderPlayer/HeaderPlayer";
 import { TrackProgress } from "../TrackProgress/TrackProgress";
-import { useAppSelector } from "@/store/hooks";
-import { setVolume } from "@/store/player";
+import { useAppDispatch, useAppSelector } from "@/store/hooks";
+import { setCurrentTime, setVolume } from "@/store/player";
 import { PlayerControlButtons } from "../PlayerControlButtons/PlayerControlButtons";
 
 import styles from "./ModalPlayer.module.css";
+import { audioBook } from "../MiniPlayer/MiniPlayer";
 
 export const ModalPlayer = ({
   cover,
@@ -28,6 +29,7 @@ export const ModalPlayer = ({
   const { active, volume, duration, currentTime, pause } = useAppSelector(
     (state) => state.player
   );
+  const dispatch = useAppDispatch();
 
   useEffect(() => {
     const { current } = modal;
@@ -40,7 +42,13 @@ export const ModalPlayer = ({
   }, []);
 
   const changeVolume = (e: React.ChangeEvent<HTMLInputElement>) => {
-    setVolume(Number(e.target.value));
+    audioBook.volume = Number(e.target.value) / 100;
+    dispatch(setVolume(Number(e.target.value)));
+  };
+
+  const changeCurrentTime = (e: React.ChangeEvent<HTMLInputElement>) => {
+    audioBook.currentTime = Number(e.target.value);
+    dispatch(setCurrentTime(Number(e.target.value)));
   };
 
   return createPortal(
@@ -56,7 +64,7 @@ export const ModalPlayer = ({
           <TrackProgress
             left={currentTime}
             right={duration}
-            onChange={() => {}}
+            onChange={changeCurrentTime}
           />
         </div>
         <div className={styles.buttons}>
