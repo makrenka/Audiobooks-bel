@@ -3,12 +3,16 @@ import styles from "./TrackProgress.module.css";
 type TrackProgressProps = {
   left: number;
   right: number;
+  leftLabel?: string;
+  rightLabel?: string;
   onChange: (e: any) => void;
 };
 
 export const TrackProgress = ({
   left,
   right,
+  leftLabel,
+  rightLabel,
   onChange,
 }: TrackProgressProps) => {
   return (
@@ -22,8 +26,8 @@ export const TrackProgress = ({
         className={styles.indicator}
       />
       <div className={styles.times}>
-        <span className={styles.time}>{left}</span>
-        <span className={styles.time}>{right}</span>
+        <span className={styles.time}>{leftLabel}</span>
+        <span className={styles.time}>{rightLabel}</span>
       </div>
     </div>
   );

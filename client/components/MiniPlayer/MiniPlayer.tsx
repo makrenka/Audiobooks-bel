@@ -12,6 +12,7 @@ import {
   setCurrentTime,
   setDuration,
 } from "@/store/player";
+import { TrackProgress } from "../TrackProgress/TrackProgress";
 
 export let audioBook: HTMLAudioElement;
 
@@ -36,8 +37,9 @@ export const MiniPlayer = ({
     setShowPlayer(false);
   };
 
-  const setAudio = () => {
-    if (active) {
+  useEffect(() => {
+    if (!audioBook) {
+      audioBook = new Audio();
       audioBook.src = audio;
       audioBook.volume = volume / 100;
       audioBook.onloadedmetadata = () => {
@@ -46,14 +48,6 @@ export const MiniPlayer = ({
       audioBook.ontimeupdate = () => {
         dispatch(setCurrentTime(Math.ceil(audioBook.currentTime)));
       };
-    }
-  };
-
-  useEffect(() => {
-    if (!audioBook) {
-      audioBook = new Audio();
-    } else {
-      setAudio();
     }
   }, []);
 
@@ -71,11 +65,20 @@ export const MiniPlayer = ({
     }
   };
 
+  const changeCurrentTime = (e: React.ChangeEvent<HTMLInputElement>) => {
+    audioBook.currentTime = Number(e.target.value);
+    dispatch(setCurrentTime(Number(e.target.value)));
+  };
+
   if (isActive)
     return (
       <>
         <div className={styles.player}>
-          <input type="range" className={styles.input} />
+          <TrackProgress
+            left={currentTime}
+            right={duration}
+            onChange={changeCurrentTime}
+          />
           <div className={styles.wrapper}>
             <img
               src={cover}

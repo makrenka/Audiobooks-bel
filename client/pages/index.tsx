@@ -7,7 +7,7 @@ import { sections } from "@/constants/sectionsHome";
 import { SectionHome } from "@/components/SectionHome/SectionHome";
 import { BottomBar } from "@/components/BottomBar/BottomBar";
 
-import styles from "./page.module.css";
+import styles from "./index.module.css";
 
 // export const metadata: Metadata = {
 //   title: "Аўдыёкнігі",

@@ -1,15 +1,11 @@
 .player {
-  padding: 0 20px 8px 8px;
   position: fixed;
   bottom: 83px;
   background-color: rgb(243, 248, 250);
 }
 
-.input {
-  width: 100%;
-}
-
 .wrapper {
+  padding: 0 20px 8px 8px;
   display: flex;
   align-items: center;
   justify-content: space-between;

@@ -51,6 +51,23 @@ export const ModalPlayer = ({
     dispatch(setCurrentTime(Number(e.target.value)));
   };
 
+  const formateTime = (time: number) => {
+    const hours = Math.floor(time / 60 / 60);
+    const minutes = Math.floor(time / 60) - hours * 60;
+    const seconds = time % 60;
+
+    const formattedTime = [
+      hours.toString().padStart(2, "0"),
+      minutes.toString().padStart(2, "0"),
+      seconds.toString().padStart(2, "0"),
+    ].join(":");
+
+    return formattedTime;
+  };
+
+  const editedCurrentTime = formateTime(currentTime);
+  const editedDuration = formateTime(duration);
+
   return createPortal(
     <div className={styles.modalOuter}>
       <div className={styles.container}>
@@ -64,6 +81,8 @@ export const ModalPlayer = ({
           <TrackProgress
             left={currentTime}
             right={duration}
+            leftLabel={editedCurrentTime}
+            rightLabel={editedDuration}
             onChange={changeCurrentTime}
           />
         </div>
@@ -80,6 +99,8 @@ export const ModalPlayer = ({
                 <TrackProgress
                   left={volume}
                   right={100}
+                  leftLabel={"0"}
+                  rightLabel={"100"}
                   onChange={changeVolume}
                 />
               </div>
