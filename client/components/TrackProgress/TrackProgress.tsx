@@ -26,7 +26,7 @@ export const TrackProgress = ({
       style={{
         background: `linear-gradient(90deg, #4838d1 ${
           (left * 100) / right
-        }%, #bbb1fa ${(left * 100) / right}%)`,
+        }%, #DDD7FC ${(left * 100) / right}%)`,
       }}
     />
     <div className={styles.times}>
