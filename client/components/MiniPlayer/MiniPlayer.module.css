@@ -51,3 +51,25 @@
   width: 40px;
   height: 40px;
 }
+
+.indicator {
+  width: 100%;
+  appearance: none;
+  height: 2px;
+}
+
+.indicator::-webkit-slider-thumb {
+  appearance: none;
+  width: 2px;
+  height: 2px;
+  border-radius: 50%;
+  background-color: #4838d1;
+}
+
+.indicator::-moz-range-thumb {
+  appearance: none;
+  width: 2px;
+  height: 2px;
+  border-radius: 50%;
+  background-color: #4838d1;
+}

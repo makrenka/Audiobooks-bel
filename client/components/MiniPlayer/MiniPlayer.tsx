@@ -1,9 +1,6 @@
 "use client";
 import { useEffect, useState } from "react";
 
-import { ModalPlayer } from "../ModalPlayer/ModalPlayer";
-
-import styles from "./MiniPlayer.module.css";
 import { useAppDispatch, useAppSelector } from "@/store/hooks";
 import {
   pauseBook,
@@ -12,7 +9,11 @@ import {
   setCurrentTime,
   setDuration,
 } from "@/store/player";
+
+import { ModalPlayer } from "../ModalPlayer/ModalPlayer";
 import { TrackProgress } from "../TrackProgress/TrackProgress";
+
+import styles from "./MiniPlayer.module.css";
 
 export let audioBook: HTMLAudioElement;
 
@@ -74,10 +75,18 @@ export const MiniPlayer = ({
     return (
       <>
         <div className={styles.player}>
-          <TrackProgress
-            left={currentTime}
-            right={duration}
+          <input
+            type="range"
+            min={0}
+            max={duration}
+            value={currentTime}
             onChange={changeCurrentTime}
+            className={styles.indicator}
+            style={{
+              background: `linear-gradient(90deg, #4838d1 ${
+                (currentTime * 100) / duration
+              }%, #bbb1fa ${(currentTime * 100) / duration}%)`,
+            }}
           />
           <div className={styles.wrapper}>
             <img

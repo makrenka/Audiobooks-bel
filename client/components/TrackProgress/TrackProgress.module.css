@@ -11,41 +11,21 @@
 .indicator {
   width: 100%;
   appearance: none;
-  background-color: #ddd7fc;
   height: 2px;
-  overflow: hidden;
 }
 
 .indicator::-webkit-slider-thumb {
   appearance: none;
   width: 8px;
   height: 8px;
-  border-radius: 4px;
+  border-radius: 50%;
   background-color: #4838d1;
-  /* box-shadow: -275px 0 0 200px #4838d1; */
-  /* border: 0; */
 }
 
 .indicator::-moz-range-thumb {
   appearance: none;
   width: 8px;
   height: 8px;
-  border-radius: 4px;
+  border-radius: 50%;
   background-color: #4838d1;
-  /* box-shadow: -275px 0 0 200px #4838d1; */
-  /* border: 0; */
 }
-
-/* .indicator::-webkit-slider-runnable-track {
-  background-color: #ddd7fc;
-  height: 2px;
-}
-
-.indicator::-moz-range-track {
-  background-color: #ddd7fc;
-  height: 2px;
-}
-
-
-
- */
