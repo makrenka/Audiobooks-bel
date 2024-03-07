@@ -7,7 +7,7 @@ import { Dots } from "./Dots";
 import styles from "./DetailReviewsSlider.module.css";
 
 type Reviews = {
-  number: number;
+  id: number;
   image: { url: string };
   name: string;
   rating: number;

@@ -3,7 +3,7 @@ import { RatingGroup } from "../RatingGroup/RatingGroup";
 import styles from "./DetailCard.module.css";
 
 type Reviews = {
-  number: number;
+  id: number;
   image: { url: string };
   name: string;
   rating: number;

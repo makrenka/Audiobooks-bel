@@ -3,7 +3,7 @@ import { Slide } from "./Slide";
 import styles from "./DetailReviewsSlider.module.css";
 
 type Reviews = {
-  number: number;
+  id: number;
   image: { url: string };
   name: string;
   rating: number;
@@ -23,7 +23,7 @@ export const SlidesList = ({
     style={{ transform: `translateX(-${slideNumber * 100}%)` }}
   >
     {reviews?.map((review) => (
-      <Slide review={review} key={review.number} />
+      <Slide review={review} key={review.id} />
     ))}
   </div>
 );

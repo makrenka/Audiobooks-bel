@@ -11,19 +11,7 @@ import { PlayerControlButtons } from "../PlayerControlButtons/PlayerControlButto
 import styles from "./ModalPlayer.module.css";
 import { audioBook } from "../MiniPlayer/MiniPlayer";
 
-export const ModalPlayer = ({
-  cover,
-  title,
-  author,
-  audio,
-  closeModal,
-}: {
-  cover: string;
-  title: string;
-  author: string;
-  audio: string;
-  closeModal: () => void;
-}) => {
+export const ModalPlayer = ({ closeModal }: { closeModal: () => void }) => {
   const [showVolume, setShowVolume] = useState(false);
   const modal = useRef(document.createElement("div"));
   const { active, volume, duration, currentTime, pause } = useAppSelector(
@@ -71,12 +59,16 @@ export const ModalPlayer = ({
   return createPortal(
     <div className={styles.modalOuter}>
       <div className={styles.container}>
-        <HeaderPlayer title={title} closeModal={closeModal} />
+        <HeaderPlayer title={active?.title} closeModal={closeModal} />
         <div className={styles.imgWrapper}>
-          <img src={cover} alt="Book cover" className={styles.cardImg} />
+          <img
+            src={active?.cover.url}
+            alt="Book cover"
+            className={styles.cardImg}
+          />
         </div>
-        <h2 className={styles.heading}>{title}</h2>
-        <p className={styles.author}>{author}</p>
+        <h2 className={styles.heading}>{active?.title}</h2>
+        <p className={styles.author}>{active?.author}</p>
         <div className={styles.playingTime}>
           <TrackProgress
             left={currentTime}

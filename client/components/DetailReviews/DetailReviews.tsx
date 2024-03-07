@@ -7,7 +7,7 @@ import { Slide } from "../DetailReviewsSlider/Slide";
 import styles from "./DetailReviews.module.css";
 
 type Reviews = {
-  number: number;
+  id: number;
   image: { url: string };
   name: string;
   rating: number;
@@ -31,7 +31,7 @@ export const DetailReviews = ({ reviews }: { reviews: Reviews[] }) => {
         ) : (
           <div className={styles.list}>
             {reviews?.map((review) => (
-              <Slide review={review} key={review.number} />
+              <Slide review={review} key={review.id} />
             ))}
           </div>
         )

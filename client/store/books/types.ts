@@ -9,17 +9,16 @@ export type Book = {
   author: string;
   listeners: string;
   id: string;
+  audio: string;
   section: string[];
   category: string[];
-  reviews: [
-    {
-      id: string;
-      image: { url: string };
-      name: string;
-      rating: number;
-      date: string;
-      text: string;
-    }
-  ];
+  reviews: {
+    id: number;
+    image: { url: string };
+    name: string;
+    rating: number;
+    date: string;
+    text: string;
+  }[];
   summary: string;
 };

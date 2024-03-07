@@ -1,17 +1,25 @@
 import classNames from "classnames";
-import styles from "./DetailControlButtons.module.css";
-import { useAppDispatch } from "@/store/hooks";
-import { setShowMiniPlayer } from "@/store/player";
 
-export const DetailControlButtons = () => {
+import { useAppDispatch } from "@/store/hooks";
+import { playBook, setActive } from "@/store/player";
+import { Book } from "@/store/books/types";
+
+import styles from "./DetailControlButtons.module.css";
+
+export const DetailControlButtons = ({ book }: { book: Book }) => {
   const dispatch = useAppDispatch();
+
+  const play = () => {
+    dispatch(setActive(book));
+    dispatch(playBook());
+  };
 
   return (
     <div className={styles.buttons}>
       <button
         type="button"
         className={classNames(styles.btn, styles.btnPlay)}
-        onClick={() => dispatch(setShowMiniPlayer())}
+        onClick={play}
       >
         <img
           src="/icons/audio-play-button.svg"

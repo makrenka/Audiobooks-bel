@@ -4,7 +4,7 @@ export const HeaderPlayer = ({
   title,
   closeModal,
 }: {
-  title: string;
+  title: string | undefined;
   closeModal: () => void;
 }) => (
   <header className={styles.header}>

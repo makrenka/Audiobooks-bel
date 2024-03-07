@@ -4,7 +4,7 @@ import styles from "./RatingGroup.module.css";
 import { RatingStar } from "../RatingStar/RatingStar";
 
 type Review = {
-  number: number;
+  id: number;
   image: {
     url: string;
   };

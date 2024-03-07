@@ -38,17 +38,12 @@ export default function DetailPage() {
             reviews={book?.reviews}
           />
           <DetailCategories category={book?.category} />
-          <DetailControlButtons />
+          <DetailControlButtons book={book} />
           <DetailSummary summary={book?.summary} />
           <DetailReviews reviews={book?.reviews} />
         </main>
       </div>
-      <MiniPlayer
-        cover={book?.cover.url}
-        title={book?.title}
-        author={book?.author}
-        audio={book?.audio}
-      />
+      <MiniPlayer />
       <BottomBar />
     </>
   );

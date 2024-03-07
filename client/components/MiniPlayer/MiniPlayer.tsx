@@ -11,23 +11,12 @@ import {
 } from "@/store/player";
 
 import { ModalPlayer } from "../ModalPlayer/ModalPlayer";
-import { TrackProgress } from "../TrackProgress/TrackProgress";
 
 import styles from "./MiniPlayer.module.css";
 
 export let audioBook: HTMLAudioElement;
 
-export const MiniPlayer = ({
-  cover,
-  title,
-  author,
-  audio,
-}: {
-  cover: string;
-  title: string;
-  author: string;
-  audio: string;
-}) => {
+export const MiniPlayer = () => {
   const [showPlayer, setShowPlayer] = useState(false);
   const [isActive, setIsActive] = useState(false);
   const { active, volume, duration, currentTime, pause, showMiniPlayer } =
@@ -38,10 +27,9 @@ export const MiniPlayer = ({
     setShowPlayer(false);
   };
 
-  useEffect(() => {
-    if (!audioBook) {
-      audioBook = new Audio();
-      audioBook.src = audio;
+  const setAudio = () => {
+    if (active) {
+      audioBook.src = active.audio;
       audioBook.volume = volume / 100;
       audioBook.onloadedmetadata = () => {
         dispatch(setDuration(Math.ceil(audioBook.duration)));
@@ -50,7 +38,15 @@ export const MiniPlayer = ({
         dispatch(setCurrentTime(Math.ceil(audioBook.currentTime)));
       };
     }
-  }, []);
+  };
+
+  useEffect(() => {
+    if (!audioBook) {
+      audioBook = new Audio();
+    } else {
+      setAudio();
+    }
+  }, [active]);
 
   useEffect(() => {
     if (showMiniPlayer) setIsActive(true);
@@ -90,14 +86,14 @@ export const MiniPlayer = ({
           />
           <div className={styles.wrapper}>
             <img
-              src={cover}
+              src={active?.cover.url}
               alt="book's cover"
               className={styles.cover}
               onClick={() => setShowPlayer(true)}
             />
             <div className={styles.info} onClick={() => setShowPlayer(true)}>
-              <h3 className={styles.heading}>{title}</h3>
-              <p className={styles.author}>{author}</p>
+              <h3 className={styles.heading}>{active?.title}</h3>
+              <p className={styles.author}>{active?.author}</p>
             </div>
             {!pause ? (
               <button onClick={play}>
@@ -118,15 +114,7 @@ export const MiniPlayer = ({
             )}
           </div>
         </div>
-        {showPlayer && (
-          <ModalPlayer
-            cover={cover}
-            author={author}
-            title={title}
-            audio={audio}
-            closeModal={closeModal}
-          />
-        )}
+        {showPlayer && <ModalPlayer closeModal={closeModal} />}
       </>
     );
 };

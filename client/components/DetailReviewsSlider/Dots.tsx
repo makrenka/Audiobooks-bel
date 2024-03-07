@@ -5,7 +5,7 @@ import styles from "./DetailReviewsSlider.module.css";
 const cx = classNames.bind(styles);
 
 type Reviews = {
-  number: number;
+  id: number;
   image: { url: string };
   name: string;
   rating: number;

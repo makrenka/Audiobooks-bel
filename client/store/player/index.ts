@@ -34,8 +34,6 @@ export const playerSlice = createSlice({
       state.active = action.payload;
       state.duration = 0;
       state.currentTime = 0;
-    },
-    setShowMiniPlayer: (state) => {
       state.showMiniPlayer = true;
     },
   },
@@ -48,5 +46,4 @@ export const {
   setVolume,
   setDuration,
   setActive,
-  setShowMiniPlayer,
 } = playerSlice.actions;
