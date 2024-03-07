@@ -22,3 +22,12 @@ export type Book = {
   }[];
   summary: string;
 };
+
+export type BookState = {
+  bookList: {
+    isLoading: boolean;
+    isSuccess: boolean;
+    isError: boolean;
+    data: Book[] | null;
+  };
+};

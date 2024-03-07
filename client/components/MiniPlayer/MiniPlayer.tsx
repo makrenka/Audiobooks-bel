@@ -5,7 +5,6 @@ import { useAppDispatch, useAppSelector } from "@/store/hooks";
 import {
   pauseBook,
   playBook,
-  setActive,
   setCurrentTime,
   setDuration,
 } from "@/store/player";
