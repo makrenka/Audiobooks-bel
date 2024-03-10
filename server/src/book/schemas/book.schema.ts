@@ -20,6 +20,9 @@ export class Book {
   cover: string;
 
   @Prop()
+  coverBigSize: string;
+
+  @Prop()
   summary: string;
 
   @Prop()

@@ -21,14 +21,19 @@ export class BookService {
     private fileService: FileService,
   ) {}
 
-  async create(dto: CreateBookDto, cover, audio): Promise<Book> {
+  async create(dto: CreateBookDto, cover, audio, coverBigSize): Promise<Book> {
     const audioPath = this.fileService.createFile(FileType.AUDIO, audio);
     const coverPath = this.fileService.createFile(FileType.IMAGE, cover);
+    const coverBigSizePath = this.fileService.createFile(
+      FileType.IMAGE,
+      coverBigSize,
+    );
     const book = await this.bookModel.create({
       ...dto,
       listens: 0,
       audio: audioPath,
       cover: coverPath,
+      coverBigSize: coverBigSizePath,
     });
     return book;
   }

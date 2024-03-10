@@ -32,11 +32,12 @@ export class BookController {
     FileFieldsInterceptor([
       { name: 'cover', maxCount: 1 },
       { name: 'audio', maxCount: 1 },
+      { name: 'coverBigSize', maxCount: 1 },
     ]),
   )
   create(@UploadedFiles() files, @Body() dto: CreateBookDto) {
-    const { cover, audio } = files;
-    return this.bookService.create(dto, cover[0], audio[0]);
+    const { cover, audio, coverBigSize } = files;
+    return this.bookService.create(dto, cover[0], audio[0], coverBigSize[0]);
   }
 
   @Get()

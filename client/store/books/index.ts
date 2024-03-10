@@ -1,12 +1,31 @@
-import { PayloadAction, createSlice } from "@reduxjs/toolkit";
+import { PayloadAction, createAsyncThunk, createSlice } from "@reduxjs/toolkit";
 
 import { Book, BookState } from "./types";
+
+export const fetchBooks = createAsyncThunk(
+  "books/fetchBooks",
+  async (_, { rejectWithValue }) => {
+    try {
+      const response = await fetch("http://localhost:5000/books");
+
+      if (!response.ok) {
+        throw new Error("Server error!");
+      }
+
+      const data = await response.json();
+
+      return data;
+    } catch (error: any) {
+      return rejectWithValue(error.message);
+    }
+  }
+);
 
 const initialState: BookState = {
   bookList: {
     isLoading: false,
     isSuccess: false,
-    isError: false,
+    error: null,
     data: null,
   },
 };
@@ -14,24 +33,24 @@ const initialState: BookState = {
 export const bookSclice = createSlice({
   name: "book",
   initialState,
-  reducers: {
-    bookListRequest: (state) => {
-      state.bookList.isLoading = true;
-    },
-    bookListRequestSuccess: (state, action: PayloadAction<Book[]>) => {
-      state.bookList.isLoading = false;
-      state.bookList.isSuccess = true;
-      state.bookList.isError = false;
-      state.bookList.data = action.payload;
-    },
-    bookListRequestError: (state) => {
-      state.bookList.isLoading = false;
-      state.bookList.isSuccess = false;
-      state.bookList.isError = true;
-      state.bookList.data = null;
-    },
+  reducers: {},
+  extraReducers: (builder) => {
+    builder
+      .addCase(fetchBooks.pending, (state) => {
+        state.bookList.isLoading = true;
+        state.bookList.error = null;
+      })
+      .addCase(fetchBooks.fulfilled, (state, action: PayloadAction<Book[]>) => {
+        state.bookList.isLoading = false;
+        state.bookList.isSuccess = true;
+        state.bookList.error = null;
+        state.bookList.data = action.payload;
+      })
+      .addCase(fetchBooks.rejected, (state, action: PayloadAction<any>) => {
+        state.bookList.isLoading = false;
+        state.bookList.isSuccess = false;
+        state.bookList.error = action.payload;
+        state.bookList.data = null;
+      });
   },
 });
-
-export const { bookListRequest, bookListRequestSuccess, bookListRequestError } =
-  bookSclice.actions;

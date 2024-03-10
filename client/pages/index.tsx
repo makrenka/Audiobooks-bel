@@ -1,7 +1,11 @@
+import { useEffect } from "react";
 import { GetServerSideProps } from "next";
 import { NextSeo } from "next-seo";
 
 import { wrapper } from "@/store";
+import { fetchBooks } from "@/store/books";
+import { useAppDispatch } from "@/store/hooks";
+
 import { Header } from "@/components/Header/Header";
 import { sections } from "@/constants/sectionsHome";
 import { SectionHome } from "@/components/SectionHome/SectionHome";
@@ -15,6 +19,12 @@ import styles from "./index.module.css";
 // };
 
 export default function Home() {
+  const dispatch = useAppDispatch();
+
+  useEffect(() => {
+    dispatch(fetchBooks());
+  }, [dispatch]);
+
   return (
     <>
       <NextSeo title="Аўдыёкнігі" description="Audiobooks app" />

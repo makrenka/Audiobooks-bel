@@ -1,14 +1,10 @@
 export type Book = {
-  cover: {
-    url: string;
-  };
-  coverBigSize: {
-    url: string;
-  };
+  cover: string;
+  coverBigSize: string;
   title: string;
   author: string;
   listeners: string;
-  id: string;
+  _id: string;
   audio: string;
   section: string[];
   category: string[];
@@ -27,7 +23,7 @@ export type BookState = {
   bookList: {
     isLoading: boolean;
     isSuccess: boolean;
-    isError: boolean;
+    error: null | any;
     data: Book[] | null;
   };
 };

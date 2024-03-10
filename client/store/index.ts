@@ -1,9 +1,8 @@
 import { createWrapper } from "next-redux-wrapper";
-import { Action, Store, applyMiddleware } from "redux";
+import { Action, Store } from "redux";
 import { playerSlice } from "./player";
 import { ThunkAction, configureStore } from "@reduxjs/toolkit";
 import { bookSclice } from "./books";
-import { thunk } from "redux-thunk";
 
 // create a makeStore function
 export const makeStore = () => {
@@ -12,9 +11,6 @@ export const makeStore = () => {
       player: playerSlice.reducer,
       book: bookSclice.reducer,
     },
-    middleware: (getDefaultMiddleware) =>
-      getDefaultMiddleware({ serializableCheck: false }),
-    devTools: true,
   });
 };
 
