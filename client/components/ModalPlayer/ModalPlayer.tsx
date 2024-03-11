@@ -62,7 +62,7 @@ export const ModalPlayer = ({ closeModal }: { closeModal: () => void }) => {
         <HeaderPlayer title={active?.title} closeModal={closeModal} />
         <div className={styles.imgWrapper}>
           <img
-            src={active?.cover.url}
+            src={"http://localhost:5000/" + active?.cover}
             alt="Book cover"
             className={styles.cardImg}
           />

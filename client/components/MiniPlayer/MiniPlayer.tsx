@@ -28,7 +28,7 @@ export const MiniPlayer = () => {
 
   const setAudio = () => {
     if (active) {
-      audioBook.src = active.audio;
+      audioBook.src = "http://localhost:5000/" + active.audio;
       audioBook.volume = volume / 100;
       audioBook.onloadedmetadata = () => {
         dispatch(setDuration(Math.ceil(audioBook.duration)));
@@ -39,11 +39,22 @@ export const MiniPlayer = () => {
     }
   };
 
+  const play = () => {
+    dispatch(playBook());
+    audioBook.play();
+  };
+
+  const setPause = () => {
+    dispatch(pauseBook());
+    audioBook.pause();
+  };
+
   useEffect(() => {
     if (!audioBook) {
       audioBook = new Audio();
     } else {
       setAudio();
+      play();
     }
   }, [active]);
 
@@ -51,20 +62,14 @@ export const MiniPlayer = () => {
     if (showMiniPlayer) setIsActive(true);
   }, [showMiniPlayer]);
 
-  const play = () => {
-    if (pause) {
-      dispatch(playBook());
-      audioBook.play();
-    } else {
-      dispatch(pauseBook());
-      audioBook.pause();
-    }
-  };
-
   const changeCurrentTime = (e: React.ChangeEvent<HTMLInputElement>) => {
     audioBook.currentTime = Number(e.target.value);
     dispatch(setCurrentTime(Number(e.target.value)));
   };
+
+  if (!active) {
+    return null;
+  }
 
   if (isActive)
     return (
@@ -85,7 +90,7 @@ export const MiniPlayer = () => {
           />
           <div className={styles.wrapper}>
             <img
-              src={active?.cover.url}
+              src={"http://localhost:5000/" + active?.cover}
               alt="book's cover"
               className={styles.cover}
               onClick={() => setShowPlayer(true)}
@@ -95,7 +100,7 @@ export const MiniPlayer = () => {
               <p className={styles.author}>{active?.author}</p>
             </div>
             {!pause ? (
-              <button onClick={play}>
+              <button onClick={setPause}>
                 <img
                   src="/icons/pause-button.png"
                   alt="Pause"

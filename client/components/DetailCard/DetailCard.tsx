@@ -2,11 +2,10 @@ import { useAppSelector } from "@/store/hooks";
 import { RatingGroup } from "../RatingGroup/RatingGroup";
 
 import styles from "./DetailCard.module.css";
+import { Book } from "@/store/books/types";
 
-export const DetailCard = () => {
-  const { book } = useAppSelector((state) => state.book);
-
-  const reviews = book.data?.reviews;
+export const DetailCard = ({ book }: { book: Book }) => {
+  const reviews = book.reviews;
   const ratingNumber = reviews?.length
     ? reviews.reduce((acc, item) => item.rating + acc, 0) / reviews?.length
     : 0;
@@ -15,13 +14,13 @@ export const DetailCard = () => {
     <div className={styles.card}>
       <div className={styles.imgWrapper}>
         <img
-          src={book.data?.cover}
+          src={"http://localhost:5000/" + book.cover}
           alt="Book cover"
           className={styles.cardImg}
         />
       </div>
-      <h2 className={styles.heading}>{book.data?.title}</h2>
-      <p className={styles.author}>{book.data?.author}</p>
+      <h2 className={styles.heading}>{book.title}</h2>
+      <p className={styles.author}>{book.author}</p>
       <div className={styles.ratingWrapper}>
         <RatingGroup reviews={reviews} />
         <p className={styles.ratingNumber}>{ratingNumber?.toFixed(1)}</p>

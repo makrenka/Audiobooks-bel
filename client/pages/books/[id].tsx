@@ -8,12 +8,12 @@ import { DetailSummary } from "@/components/DetailSummary/DetailSummary";
 import { DetailReviews } from "@/components/DetailReviews/DetailReviews";
 import { MiniPlayer } from "@/components/MiniPlayer/MiniPlayer";
 import { BottomBar } from "@/components/BottomBar/BottomBar";
-import { audiobooks } from "@/constants/audiobooks";
 
 import styles from "./page.module.css";
-import { useEffect } from "react";
-import { useAppDispatch, useAppSelector } from "@/store/hooks";
-import { fetchBook } from "@/store/books";
+import { useState } from "react";
+import { GetServerSideProps } from "next";
+import { Book } from "@/store/books/types";
+import axios from "axios";
 
 // export async function generateMetadata({
 //   params: { id },
@@ -25,21 +25,16 @@ import { fetchBook } from "@/store/books";
 //   };
 // }
 
-export default function DetailPage() {
-  const dispatch = useAppDispatch();
-  const { book } = useAppSelector((state) => state.book);
-
-  useEffect(() => {
-    dispatch(fetchBook());
-  }, [dispatch]);
+export default function DetailPage({ serverBook }: { serverBook: Book }) {
+  const [book, setBook] = useState(serverBook);
 
   return (
     <>
-      <NextSeo title={"Аўдыёкнігі | " + book.data?.title} />
+      <NextSeo title={"Аўдыёкнігі | " + book.title} />
       <div className={styles.container}>
-        <HeaderDetail title={book.data?.title} />
+        <HeaderDetail title={book.title} />
         <main className={styles.main}>
-          <DetailCard />
+          <DetailCard book={book} />
           <DetailCategories category={book?.category} />
           <DetailControlButtons book={book} />
           <DetailSummary summary={book?.summary} />
@@ -51,3 +46,13 @@ export default function DetailPage() {
     </>
   );
 }
+
+export const getServerSideProps: GetServerSideProps = async ({ params }) => {
+  const response = await axios.get("http://localhost:5000/books/" + params?.id);
+
+  return {
+    props: {
+      serverBook: response?.data,
+    },
+  };
+};
