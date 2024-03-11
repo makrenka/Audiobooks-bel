@@ -11,6 +11,9 @@ import { BottomBar } from "@/components/BottomBar/BottomBar";
 import { audiobooks } from "@/constants/audiobooks";
 
 import styles from "./page.module.css";
+import { useEffect } from "react";
+import { useAppDispatch, useAppSelector } from "@/store/hooks";
+import { fetchBook } from "@/store/books";
 
 // export async function generateMetadata({
 //   params: { id },
@@ -23,20 +26,20 @@ import styles from "./page.module.css";
 // }
 
 export default function DetailPage() {
-  const book = audiobooks[0];
+  const dispatch = useAppDispatch();
+  const { book } = useAppSelector((state) => state.book);
+
+  useEffect(() => {
+    dispatch(fetchBook());
+  }, [dispatch]);
 
   return (
     <>
-      <NextSeo title={"Аўдыёкнігі | " + book?.title} />
+      <NextSeo title={"Аўдыёкнігі | " + book.data?.title} />
       <div className={styles.container}>
-        <HeaderDetail title={book?.title} />
+        <HeaderDetail title={book.data?.title} />
         <main className={styles.main}>
-          <DetailCard
-            cover={book?.cover.url ? book?.cover.url : "no-image.png"}
-            title={book?.title}
-            author={book?.author}
-            reviews={book?.reviews}
-          />
+          <DetailCard />
           <DetailCategories category={book?.category} />
           <DetailControlButtons book={book} />
           <DetailSummary summary={book?.summary} />

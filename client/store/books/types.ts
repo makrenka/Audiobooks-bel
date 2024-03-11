@@ -26,4 +26,10 @@ export type BookState = {
     error: null | any;
     data: Book[] | null;
   };
+  book: {
+    isLoading: boolean;
+    isSuccess: boolean;
+    error: null | any;
+    data: null | Book;
+  };
 };
