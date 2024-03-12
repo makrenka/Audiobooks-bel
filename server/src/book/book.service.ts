@@ -42,7 +42,9 @@ export class BookService {
     const books = await this.bookModel
       .find()
       .skip(Number(offset))
-      .limit(Number(count));
+      .limit(Number(count))
+      .populate('sections')
+      .populate('categories');
     return books;
   }
 

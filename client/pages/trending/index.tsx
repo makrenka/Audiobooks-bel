@@ -1,26 +1,32 @@
+import { NextSeo } from "next-seo";
+
+import { useAppSelector } from "@/store/hooks";
+
 import { BottomBar } from "@/components/BottomBar/BottomBar";
 import { HeaderSection } from "@/components/HeaderSection/HeaderSection";
 import { audiobooks } from "@/constants/audiobooks";
 
 import styles from "../recommended/page.module.css";
-import { Metadata } from "next";
-
-export const metadata: Metadata = {
-  title: "Аўдыёкнігі - папулярнае",
-};
 
 export default function TrendingPage() {
+  const { bookList } = useAppSelector((state) => state.book);
+
   return (
     <>
+      <NextSeo title={"Аўдыёкнігі - папулярнае"} />
       <div className={styles.container}>
         <HeaderSection heading={"Папулярнае"} />
         <main className={styles.main}>
-          {audiobooks
-            .filter((item) => item.section.includes("trending"))
+          {bookList.data
+            ?.filter((item) =>
+              item.sections.map((i) => i.name).includes("trending")
+            )
             .map(({ cover, title, author }) => (
               <div className={styles.card} key={title}>
                 <img
-                  src={cover.url ? cover.url : "no-image.png"}
+                  src={
+                    cover ? "http://localhost:5000/" + cover : "no-image.png"
+                  }
                   alt="Cover of the book"
                   className={styles.img}
                 />

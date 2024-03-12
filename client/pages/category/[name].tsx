@@ -1,23 +1,25 @@
-import { NextSeo } from "next-seo";
+import { GetServerSideProps } from "next";
+import { useState } from "react";
 
 import { useAppSelector } from "@/store/hooks";
-
 import { BottomBar } from "@/components/BottomBar/BottomBar";
 import { HeaderSection } from "@/components/HeaderSection/HeaderSection";
 
 import styles from "../recommended/page.module.css";
 
-export default function NewPage() {
+export default function CategoryPage({ category }: { category: string }) {
+  const [categoryName, setCategoryName] = useState(category);
   const { bookList } = useAppSelector((state) => state.book);
 
   return (
     <>
-      <NextSeo title={"Аўдыёкнігі - навінкі"} />
       <div className={styles.container}>
-        <HeaderSection heading={"Навінкі"} />
+        <HeaderSection heading={categoryName} />
         <main className={styles.main}>
           {bookList.data
-            ?.filter((item) => item.sections.map((i) => i.name).includes("new"))
+            ?.filter((item) =>
+              item.categories.map((i) => i.name).includes(categoryName)
+            )
             .map(({ cover, title, author }) => (
               <div className={styles.card} key={title}>
                 <img
@@ -37,3 +39,11 @@ export default function NewPage() {
     </>
   );
 }
+
+export const getServerSideProps: GetServerSideProps = async ({ params }) => {
+  return {
+    props: {
+      category: params?.name,
+    },
+  };
+};

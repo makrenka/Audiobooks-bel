@@ -3,11 +3,17 @@ export type Book = {
   coverBigSize: string;
   title: string;
   author: string;
-  listeners: string;
+  listens: number;
   _id: string;
   audio: string;
-  section: string[];
-  category: string[];
+  sections: {
+    id: string;
+    name: string;
+  }[];
+  categories: {
+    id: string;
+    name: string;
+  }[];
   reviews: {
     id: number;
     image: { url: string };

@@ -8,6 +8,7 @@
 }
 
 .btn {
+  display: inline-block;
   height: 40px;
   background: #f5f5fa;
   border-radius: 12px;
@@ -21,4 +22,5 @@
   padding: 8px 16px;
   margin-right: 12px;
   margin-top: 12px;
+  text-decoration: none;
 }

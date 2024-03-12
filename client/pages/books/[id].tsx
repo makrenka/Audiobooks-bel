@@ -1,4 +1,7 @@
 import { NextSeo } from "next-seo";
+import { useState } from "react";
+import { GetServerSideProps } from "next";
+import axios from "axios";
 
 import { HeaderDetail } from "@/components/HeaderDetail/HeaderDetail";
 import { DetailCard } from "@/components/DetailCard/DetailCard";
@@ -8,12 +11,9 @@ import { DetailSummary } from "@/components/DetailSummary/DetailSummary";
 import { DetailReviews } from "@/components/DetailReviews/DetailReviews";
 import { MiniPlayer } from "@/components/MiniPlayer/MiniPlayer";
 import { BottomBar } from "@/components/BottomBar/BottomBar";
+import { Book } from "@/store/books/types";
 
 import styles from "./page.module.css";
-import { useState } from "react";
-import { GetServerSideProps } from "next";
-import { Book } from "@/store/books/types";
-import axios from "axios";
 
 // export async function generateMetadata({
 //   params: { id },
@@ -35,7 +35,7 @@ export default function DetailPage({ serverBook }: { serverBook: Book }) {
         <HeaderDetail title={book.title} />
         <main className={styles.main}>
           <DetailCard book={book} />
-          <DetailCategories category={book?.category} />
+          <DetailCategories categories={book?.categories} />
           <DetailControlButtons book={book} />
           <DetailSummary summary={book?.summary} />
           <DetailReviews reviews={book?.reviews} />

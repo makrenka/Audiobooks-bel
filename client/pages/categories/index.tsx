@@ -3,6 +3,7 @@ import { HeaderSection } from "@/components/HeaderSection/HeaderSection";
 import { categories } from "@/constants/categories";
 
 import styles from "./page.module.css";
+import Link from "next/link";
 
 export default function CategoriesPage() {
   return (
@@ -11,9 +12,9 @@ export default function CategoriesPage() {
         <HeaderSection heading={"Катэгорыі"} />
         <div className={styles.buttons}>
           {categories.map(({ name }) => (
-            <button type="button" className={styles.btn} key={name}>
+            <Link href={`/category/${name}`} key={name} className={styles.btn}>
               {name}
-            </button>
+            </Link>
           ))}
         </div>
       </div>
