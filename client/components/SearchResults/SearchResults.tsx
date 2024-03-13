@@ -1,25 +1,26 @@
 import { highlightMatches } from "@/pages/services/highlightMatches";
-import { audiobooks } from "@/constants/audiobooks";
+import { useAppSelector } from "@/store/hooks";
 
 import styles from "./SearchResults.module.css";
 
 export const SearchResults = ({ value }: { value: string }) => {
   const handleHighlight = (string: string) => highlightMatches(value, string);
+  const { bookList } = useAppSelector((state) => state.book);
 
   return (
     <section className={styles.results}>
       <h2 className={styles.heading}>Search Results</h2>
       <div className={styles.cards}>
-        {audiobooks
-          .filter(
+        {bookList.data
+          ?.filter(
             (item) =>
               item.title.toLowerCase().includes(value) ||
               item.author.toLowerCase().includes(value)
           )
-          .map(({ cover, title, author, id }) => (
-            <div className={styles.card} key={id}>
+          .map(({ cover, title, author, _id }) => (
+            <div className={styles.card} key={_id}>
               <img
-                src={cover.url ? cover.url : "no-image.png"}
+                src={cover ? "http://localhost:5000/" + cover : "no-image.png"}
                 alt="Cover of the book"
                 className={styles.cardImg}
               />
