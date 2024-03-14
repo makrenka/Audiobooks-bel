@@ -1,6 +1,6 @@
 .container {
   margin: 0 auto;
-  max-width: 319px;
+  max-width: 295px;
 }
 
 .wrapper {
@@ -13,4 +13,52 @@
   width: 120px;
   height: 120px;
   margin-top: 60px;
+}
+
+.forgetBox {
+  margin-top: 20px;
+  display: flex;
+  justify-content: flex-end;
+  width: 100%;
+}
+
+.formLink {
+  font-family: "Poppins", sans-serif;
+  font-style: normal;
+  font-weight: 600;
+  font-size: 14px;
+  color: #f77a55;
+  text-decoration: none;
+  margin-left: 6px;
+}
+
+.socialHeading {
+  font-family: "Poppins", sans-serif;
+  font-style: normal;
+  font-weight: 400;
+  font-size: 14px;
+  color: #2e2e5d;
+}
+
+.socialButtons {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  width: 100%;
+}
+
+.socialBtn {
+  width: 87px;
+  height: 56px;
+  border-color: #4838d1;
+  border-radius: 8px;
+  background: none;
+}
+
+.registry {
+  font-family: "Poppins", sans-serif;
+  font-style: normal;
+  font-weight: 400;
+  font-size: 14px;
+  color: #2e2e5d;
 }
