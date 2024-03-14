@@ -2,10 +2,13 @@ import { SubmitErrorHandler, SubmitHandler, useForm } from "react-hook-form";
 
 import styles from "./AuthForm.module.css";
 import { useRouter } from "next/router";
+import { useState } from "react";
+import Link from "next/link";
 
 type LoginForm = {
   email: string;
   password: string;
+  dateBirth: Date;
 };
 
 export const AuthForm = () => {
@@ -17,8 +20,9 @@ export const AuthForm = () => {
   } = useForm<LoginForm>({
     mode: "onBlur",
   });
+  const [inputType, setInputType] = useState("text");
+
   const router = useRouter();
-  console.log(router);
 
   const onSubmit: SubmitHandler<LoginForm> = (data) => {
     console.log(data);
@@ -72,13 +76,50 @@ export const AuthForm = () => {
           <p className={styles.errorText}>{errors?.password.message}</p>
         )}
       </div>
-      <label className={styles.labelCheckbox}>
-        <input type="checkbox" className={styles.inputCheckbox} />
-        <span>Запомніць мяне</span>
-      </label>
+      {router.pathname === "/auth/registry" && (
+        <>
+          <input
+            type={inputType}
+            placeholder="Дата нараджэньня"
+            onFocus={() => setInputType("date")}
+            className={styles.inputText}
+            {...register("dateBirth", {
+              required: "Увядзіце дату нараджэньня",
+            })}
+          />
+          <div className={styles.errorBox}>
+            {errors?.dateBirth && (
+              <p className={styles.errorText}>{errors?.dateBirth.message}</p>
+            )}
+          </div>
+          <p className={styles.registry}>
+            Зарэгістраваўшыся, вы пагаджаецеся з нашымі{" "}
+            <Link href={"/auth/registry"} className={styles.formLink}>
+              Правіламі
+            </Link>{" "}
+            і{" "}
+            <Link href={"/auth/registry"} className={styles.formLink}>
+              Палітыкай Cookies
+            </Link>{" "}
+          </p>
+        </>
+      )}
+      {router.pathname === "/auth/login" && (
+        <label className={styles.labelCheckbox}>
+          <input type="checkbox" className={styles.inputCheckbox} />
+          <span>Запомніць мяне</span>
+        </label>
+      )}
       <button className={styles.btn} disabled={!isValid}>
-        Увайсьці
+        {router.pathname === "/auth/login"
+          ? "Увайсьці"
+          : router.pathname === "/auth/registry"
+          ? "Зарэгістравацца"
+          : "Адправіць"}
       </button>
+      {router.pathname !== "/auth/login" && (
+        <button className={styles.cancelBtn}>Адмяніць</button>
+      )}
     </form>
   );
 };
