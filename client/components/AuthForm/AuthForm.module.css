@@ -100,3 +100,12 @@
   border-color: #4838d1;
   border-radius: 8px;
 }
+
+.forgetText {
+  margin-top: 12px;
+  font-family: "Poppins", sans-serif;
+  font-style: normal;
+  font-weight: 400;
+  font-size: 14px;
+  color: #2e2e5d;
+}

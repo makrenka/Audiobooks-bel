@@ -46,8 +46,8 @@ export class UserController {
     return this.userService.getAllUsers();
   }
 
-  @Roles('ADMIN')
-  @UseGuards(RolesGuard)
+  // @Roles('ADMIN')
+  // @UseGuards(RolesGuard)
   @Get(':id')
   getOneUser(@Param('id') id: ObjectId) {
     return this.userService.getOneUser(id);

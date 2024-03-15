@@ -59,23 +59,34 @@ export const AuthForm = () => {
           <p className={styles.errorText}>{errors?.email.message}</p>
         )}
       </div>
-      <input
-        type="text"
-        placeholder="Пароль"
-        className={styles.inputText}
-        {...register("password", {
-          required: "Увядзіце пароль",
-          minLength: {
-            value: 8,
-            message: "Мінімум 8 сымбаляў",
-          },
-        })}
-      />
-      <div className={styles.errorBox}>
-        {errors?.password && (
-          <p className={styles.errorText}>{errors?.password.message}</p>
-        )}
-      </div>
+      {router.pathname === "/auth/forget" && (
+        <p className={styles.forgetText}>
+          Калі ласка, увядзіце Ваш email, і мы адправім Вам спасылку для ўваходу
+          ў акаунт
+        </p>
+      )}
+      {router.pathname === "/auth/login" ||
+      router.pathname === "/auth/registry" ? (
+        <>
+          <input
+            type="text"
+            placeholder="Пароль"
+            className={styles.inputText}
+            {...register("password", {
+              required: "Увядзіце пароль",
+              minLength: {
+                value: 8,
+                message: "Мінімум 8 сымбаляў",
+              },
+            })}
+          />
+          <div className={styles.errorBox}>
+            {errors?.password && (
+              <p className={styles.errorText}>{errors?.password.message}</p>
+            )}
+          </div>
+        </>
+      ) : null}
       {router.pathname === "/auth/registry" && (
         <>
           <input
@@ -118,7 +129,9 @@ export const AuthForm = () => {
           : "Адправіць"}
       </button>
       {router.pathname !== "/auth/login" && (
-        <button className={styles.cancelBtn}>Адмяніць</button>
+        <Link href={"/auth/login"}>
+          <button className={styles.cancelBtn}>Адмяніць</button>
+        </Link>
       )}
     </form>
   );
