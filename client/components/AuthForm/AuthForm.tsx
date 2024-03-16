@@ -4,6 +4,8 @@ import styles from "./AuthForm.module.css";
 import { useRouter } from "next/router";
 import { useState } from "react";
 import Link from "next/link";
+import { useAppDispatch } from "@/store/hooks";
+import { registration } from "@/store/auth";
 
 type LoginForm = {
   email: string;
@@ -21,11 +23,12 @@ export const AuthForm = () => {
     mode: "onBlur",
   });
   const [inputType, setInputType] = useState("text");
-
+  const dispatch = useAppDispatch();
   const router = useRouter();
 
   const onSubmit: SubmitHandler<LoginForm> = (data) => {
     console.log(data);
+    dispatch(registration(data));
     reset();
   };
 

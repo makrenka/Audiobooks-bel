@@ -9,10 +9,6 @@ export const fetchBooks = createAsyncThunk(
     try {
       const response = await axios.get("http://localhost:5000/books");
 
-      if (response.status !== 200) {
-        throw new Error("Server error!");
-      }
-
       return response.data;
     } catch (error: any) {
       return rejectWithValue(error.message);

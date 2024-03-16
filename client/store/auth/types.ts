@@ -8,20 +8,20 @@ export type AuthState = {
   isAuthenticated: boolean;
   auth: BaseState & {
     isError: boolean;
-    userData: User | null;
+    userData: UserAuth | null;
   };
   register: BaseState;
   forgot: BaseState;
   createPassword: BaseState;
 };
 
-export type User = {
-  id: string;
+export type UserAuth = {
   email: string;
-  dateBirthday: Date;
+  password?: string;
+  dateBirthday?: Date;
 };
 
 export type AuthResponse = {
   token: string;
-  user: User;
+  user: UserAuth;
 };

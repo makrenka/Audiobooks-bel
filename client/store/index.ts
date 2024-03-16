@@ -3,6 +3,7 @@ import { Action, Store } from "redux";
 import { playerSlice } from "./player";
 import { ThunkAction, configureStore } from "@reduxjs/toolkit";
 import { bookSclice } from "./books";
+import { authSlice } from "./auth";
 
 // create a makeStore function
 export const makeStore = () => {
@@ -10,6 +11,7 @@ export const makeStore = () => {
     reducer: {
       player: playerSlice.reducer,
       book: bookSclice.reducer,
+      auth: authSlice.reducer,
     },
   });
 };
