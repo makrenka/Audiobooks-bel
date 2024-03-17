@@ -1,16 +1,16 @@
 import { SubmitErrorHandler, SubmitHandler, useForm } from "react-hook-form";
-
-import styles from "./AuthForm.module.css";
 import { useRouter } from "next/router";
-import { useState } from "react";
 import Link from "next/link";
+
 import { useAppDispatch } from "@/store/hooks";
 import { registration } from "@/store/auth";
+
+import styles from "./AuthForm.module.css";
 
 type LoginForm = {
   email: string;
   password: string;
-  dateBirth: Date;
+  name: string;
 };
 
 export const AuthForm = () => {
@@ -22,7 +22,6 @@ export const AuthForm = () => {
   } = useForm<LoginForm>({
     mode: "onBlur",
   });
-  const [inputType, setInputType] = useState("text");
   const dispatch = useAppDispatch();
   const router = useRouter();
 
@@ -45,6 +44,23 @@ export const AuthForm = () => {
           ? "Рэгістрацыя"
           : "Забылі пароль?"}
       </h3>
+      {router.pathname === "/auth/registry" && (
+        <>
+          <input
+            type="text"
+            placeholder="Вашае імя"
+            className={styles.inputText}
+            {...register("name", {
+              required: "Увядзіце вашае імя",
+            })}
+          />
+          <div className={styles.errorBox}>
+            {errors?.name && (
+              <p className={styles.errorText}>{errors?.name.message}</p>
+            )}
+          </div>
+        </>
+      )}
       <input
         type="text"
         placeholder="Email"
@@ -78,8 +94,8 @@ export const AuthForm = () => {
             {...register("password", {
               required: "Увядзіце пароль",
               minLength: {
-                value: 8,
-                message: "Мінімум 8 сымбаляў",
+                value: 4,
+                message: "Мінімум 4 сымбаляў",
               },
             })}
           />
@@ -91,32 +107,16 @@ export const AuthForm = () => {
         </>
       ) : null}
       {router.pathname === "/auth/registry" && (
-        <>
-          <input
-            type={inputType}
-            placeholder="Дата нараджэньня"
-            onFocus={() => setInputType("date")}
-            className={styles.inputText}
-            {...register("dateBirth", {
-              required: "Увядзіце дату нараджэньня",
-            })}
-          />
-          <div className={styles.errorBox}>
-            {errors?.dateBirth && (
-              <p className={styles.errorText}>{errors?.dateBirth.message}</p>
-            )}
-          </div>
-          <p className={styles.registry}>
-            Зарэгістраваўшыся, вы пагаджаецеся з нашымі{" "}
-            <Link href={"/auth/registry"} className={styles.formLink}>
-              Правіламі
-            </Link>{" "}
-            і{" "}
-            <Link href={"/auth/registry"} className={styles.formLink}>
-              Палітыкай Cookies
-            </Link>{" "}
-          </p>
-        </>
+        <p className={styles.registry}>
+          Зарэгістраваўшыся, вы пагаджаецеся з нашымі{" "}
+          <Link href={"/auth/registry"} className={styles.formLink}>
+            Правіламі
+          </Link>{" "}
+          і{" "}
+          <Link href={"/auth/registry"} className={styles.formLink}>
+            Палітыкай Cookies
+          </Link>{" "}
+        </p>
       )}
       {router.pathname === "/auth/login" && (
         <label className={styles.labelCheckbox}>

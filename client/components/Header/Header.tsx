@@ -12,7 +12,9 @@ export const Header = () => (
           <h1 className={styles.heading}>Аўдыёкнігі</h1>
         </Link>
       </div>
-      <img src="/icons/settings.svg" alt="settings" />
+      <Link href={"/settings"}>
+        <img src="/icons/settings.svg" alt="settings" />
+      </Link>
     </div>
   </header>
 );

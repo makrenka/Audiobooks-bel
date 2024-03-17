@@ -7,19 +7,51 @@ export const registration = createAsyncThunk(
   "auth/registration",
   async (userData: UserAuth, { rejectWithValue }) => {
     try {
+      const { email, password, name } = userData;
+
+      const { data }: AxiosResponse<AuthResponse> = await axios.post(
+        "http://localhost:5000/auth/registration",
+        {
+          email,
+          password,
+          name,
+        }
+      );
+
+      if (!data) {
+        throw new Error("Can't registry, server error!");
+      }
+
+      localStorage.setItem("token", data.token);
+
+      return jwtDecode(data.token);
+    } catch (error: any) {
+      return rejectWithValue(error.message);
+    }
+  }
+);
+
+export const login = createAsyncThunk(
+  "auth/login",
+  async (userData: UserAuth, { rejectWithValue }) => {
+    try {
       const { email, password } = userData;
 
-      const response: AxiosResponse<AuthResponse> = await axios.post(
-        "http://localhost:5000/auth/registration",
+      const { data }: AxiosResponse<AuthResponse> = await axios.post(
+        "http://localhost:5000/auth/login",
         {
           email,
           password,
         }
       );
 
-      localStorage.setItem("token", response.data.token);
+      if (!data) {
+        throw new Error("Can't login, server error!");
+      }
 
-      return jwtDecode(response.data.token);
+      localStorage.setItem("token", data.token);
+
+      return jwtDecode(data.token);
     } catch (error: any) {
       return rejectWithValue(error.message);
     }
@@ -33,21 +65,23 @@ const initialState: AuthState = {
     isSuccess: false,
     isError: false,
     errorMessage: "",
-    userData: null,
   },
   register: {
     isLoading: false,
     isSuccess: false,
+    isError: false,
     errorMessage: "",
   },
   forgot: {
     isLoading: false,
     isSuccess: false,
+    isError: false,
     errorMessage: "",
   },
   createPassword: {
     isLoading: false,
     isSuccess: false,
+    isError: false,
     errorMessage: "",
   },
 };
@@ -65,17 +99,38 @@ export const authSlice = createSlice({
       .addCase(registration.pending, (state) => {
         state.register.isLoading = true;
         state.register.isSuccess = false;
+        state.register.isError = false;
         state.register.errorMessage = "";
       })
       .addCase(registration.fulfilled, (state) => {
         state.register.isLoading = false;
         state.register.isSuccess = true;
+        state.register.isError = false;
         state.register.errorMessage = "";
       })
       .addCase(registration.rejected, (state, action: PayloadAction<any>) => {
         state.register.isLoading = false;
         state.register.isSuccess = false;
+        state.register.isError = true;
         state.register.errorMessage = action.payload;
+      })
+      .addCase(login.pending, (state) => {
+        state.auth.isLoading = true;
+        state.auth.isSuccess = false;
+        state.auth.isError = false;
+        state.auth.errorMessage = "";
+      })
+      .addCase(login.fulfilled, (state, action: PayloadAction<any>) => {
+        state.auth.isLoading = false;
+        state.auth.isSuccess = true;
+        state.auth.isError = false;
+        state.auth.errorMessage = "";
+      })
+      .addCase(login.rejected, (state, action: PayloadAction<any>) => {
+        state.auth.isLoading = false;
+        state.auth.isSuccess = false;
+        state.auth.isError = true;
+        state.auth.errorMessage = action.payload;
       });
   },
 });

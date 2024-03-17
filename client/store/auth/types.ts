@@ -1,15 +1,13 @@
 type BaseState = {
   isLoading: boolean;
   isSuccess: boolean;
+  isError: boolean;
   errorMessage: string;
 };
 
 export type AuthState = {
   isAuthenticated: boolean;
-  auth: BaseState & {
-    isError: boolean;
-    userData: UserAuth | null;
-  };
+  auth: BaseState;
   register: BaseState;
   forgot: BaseState;
   createPassword: BaseState;
@@ -18,7 +16,7 @@ export type AuthState = {
 export type UserAuth = {
   email: string;
   password?: string;
-  dateBirthday?: Date;
+  name?: string;
 };
 
 export type AuthResponse = {
