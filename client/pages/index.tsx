@@ -12,6 +12,7 @@ import { SectionHome } from "@/components/SectionHome/SectionHome";
 import { BottomBar } from "@/components/BottomBar/BottomBar";
 
 import styles from "./index.module.css";
+import { jwtDecode } from "jwt-decode";
 
 // export const metadata: Metadata = {
 //   title: "Аўдыёкнігі",
@@ -24,6 +25,13 @@ export default function Home() {
   useEffect(() => {
     dispatch(fetchBooks());
   }, [dispatch]);
+
+  useEffect(() => {
+    const token = localStorage.getItem("token");
+    if (jwtDecode(token).exp < Date.now() / 1000) {
+      localStorage.removeItem("token");
+    }
+  }, []);
 
   return (
     <>

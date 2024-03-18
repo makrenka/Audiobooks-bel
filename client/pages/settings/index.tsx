@@ -4,15 +4,23 @@ import { useEffect, useState } from "react";
 
 import { HeaderSection } from "@/components/HeaderSection/HeaderSection";
 import { UserAuth } from "@/store/auth/types";
+import { useAppDispatch, useAppSelector } from "@/store/hooks";
 
 import styles from "./page.module.css";
+import { fetchUser } from "@/store/users";
+
+type JwtPayload = {
+  id: string;
+};
 
 export default function SettingsPage() {
-  const [user, setUser] = useState<UserAuth>();
+  const dispatch = useAppDispatch();
+  const user = useAppSelector((state) => state.user.user.data);
 
   useEffect(() => {
     const token = localStorage.getItem("token");
-    setUser(jwtDecode(token || ""));
+    const { id } = jwtDecode(token || "") as JwtPayload;
+    dispatch(fetchUser(id));
   }, []);
 
   return (
