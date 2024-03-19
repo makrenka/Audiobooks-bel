@@ -38,6 +38,8 @@
   font-weight: 400;
   font-size: 14px;
   color: #2e2e5d;
+  margin-top: 32px;
+  margin-bottom: 20px;
 }
 
 .socialButtons {
@@ -61,4 +63,5 @@
   font-weight: 400;
   font-size: 14px;
   color: #2e2e5d;
+  margin-top: 24px;
 }

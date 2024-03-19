@@ -24,3 +24,14 @@
   width: 24px;
   height: 24px;
 }
+
+.saveBtn {
+  border: none;
+  background: none;
+  font-family: "Poppins", sans-serif;
+  font-style: normal;
+  font-weight: 500;
+  font-size: 16px;
+  color: #4838d1;
+  padding: 0;
+}

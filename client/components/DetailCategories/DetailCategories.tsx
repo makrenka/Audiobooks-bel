@@ -4,13 +4,12 @@ export const DetailCategories = ({
   categories,
 }: {
   categories: {
-    id: string;
     name: string;
   }[];
 }) => (
   <div className={styles.categories}>
-    {categories?.map(({ id, name }) => (
-      <div className={styles.category} key={id}>
+    {categories?.map(({ name }) => (
+      <div className={styles.category} key={name}>
         {name}
       </div>
     ))}

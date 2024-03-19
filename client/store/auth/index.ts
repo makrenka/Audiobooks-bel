@@ -107,6 +107,7 @@ export const authSlice = createSlice({
         state.register.isSuccess = true;
         state.register.isError = false;
         state.register.errorMessage = "";
+        state.isAuthenticated = true;
       })
       .addCase(registration.rejected, (state, action: PayloadAction<any>) => {
         state.register.isLoading = false;
@@ -125,6 +126,7 @@ export const authSlice = createSlice({
         state.auth.isSuccess = true;
         state.auth.isError = false;
         state.auth.errorMessage = "";
+        state.isAuthenticated = true;
       })
       .addCase(login.rejected, (state, action: PayloadAction<any>) => {
         state.auth.isLoading = false;

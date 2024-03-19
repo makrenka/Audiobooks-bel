@@ -2,10 +2,11 @@ import { SubmitErrorHandler, SubmitHandler, useForm } from "react-hook-form";
 import { useRouter } from "next/router";
 import Link from "next/link";
 
-import { useAppDispatch } from "@/store/hooks";
-import { registration } from "@/store/auth";
+import { useAppDispatch, useAppSelector } from "@/store/hooks";
+import { login, registration } from "@/store/auth";
 
 import styles from "./AuthForm.module.css";
+import { useEffect } from "react";
 
 type LoginForm = {
   email: string;
@@ -24,10 +25,19 @@ export const AuthForm = () => {
   });
   const dispatch = useAppDispatch();
   const router = useRouter();
+  const { isAuthenticated } = useAppSelector((state) => state.auth);
+
+  useEffect(() => {
+    isAuthenticated && router.push("/");
+  }, [isAuthenticated]);
 
   const onSubmit: SubmitHandler<LoginForm> = (data) => {
-    console.log(data);
-    dispatch(registration(data));
+    if (router.pathname === "/auth/login") {
+      dispatch(login(data));
+    }
+    if (router.pathname === "/auth/registry") {
+      dispatch(registration(data));
+    }
     reset();
   };
 

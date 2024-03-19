@@ -1,27 +1,34 @@
 import Link from "next/link";
 import { jwtDecode } from "jwt-decode";
-import { useEffect, useState } from "react";
+import { useEffect } from "react";
+import { useRouter } from "next/navigation";
 
 import { HeaderSection } from "@/components/HeaderSection/HeaderSection";
-import { UserAuth } from "@/store/auth/types";
 import { useAppDispatch, useAppSelector } from "@/store/hooks";
+import { fetchUser, logoutUser } from "@/store/users";
 
 import styles from "./page.module.css";
-import { fetchUser } from "@/store/users";
 
-type JwtPayload = {
+export type JwtPayload = {
   id: string;
 };
 
 export default function SettingsPage() {
   const dispatch = useAppDispatch();
   const user = useAppSelector((state) => state.user.user.data);
+  const router = useRouter();
 
   useEffect(() => {
     const token = localStorage.getItem("token");
     const { id } = jwtDecode(token || "") as JwtPayload;
     dispatch(fetchUser(id));
   }, []);
+
+  const logout = () => {
+    localStorage.removeItem("token");
+    dispatch(logoutUser());
+    router.push("/");
+  };
 
   return (
     <>
@@ -78,7 +85,9 @@ export default function SettingsPage() {
         </ul>
       </nav>
       <div className={styles.container}>
-        <button className={styles.logoutBtn}>Выйсьці</button>
+        <button className={styles.logoutBtn} onClick={logout}>
+          Выйсьці
+        </button>
       </div>
     </>
   );

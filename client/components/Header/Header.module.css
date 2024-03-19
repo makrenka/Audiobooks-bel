@@ -34,3 +34,10 @@
 .link {
   text-decoration: none;
 }
+
+.settingsBtn {
+  width: 24px;
+  height: 24px;
+  border: none;
+  background: none;
+}

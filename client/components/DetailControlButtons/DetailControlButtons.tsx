@@ -5,13 +5,20 @@ import { playBook, setActive } from "@/store/player";
 import { Book } from "@/store/books/types";
 
 import styles from "./DetailControlButtons.module.css";
+import { useRouter } from "next/navigation";
 
 export const DetailControlButtons = ({ book }: { book: Book }) => {
   const dispatch = useAppDispatch();
+  const router = useRouter();
 
   const play = () => {
-    dispatch(setActive(book));
-    dispatch(playBook());
+    const token = localStorage.getItem("token");
+    if (!token) {
+      router.push("/auth/login");
+    } else {
+      dispatch(setActive(book));
+      dispatch(playBook());
+    }
   };
 
   return (
