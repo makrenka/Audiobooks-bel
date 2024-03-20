@@ -13,3 +13,20 @@
   margin: 0 auto;
   max-width: 295px;
 }
+
+.heading {
+  font-family: "Poppins", sans-serif;
+  font-style: normal;
+  font-weight: 600;
+  font-size: 16px;
+  color: #2e2e5d;
+}
+
+.text {
+  font-family: "Poppins", sans-serif;
+  font-style: normal;
+  font-weight: 400;
+  font-size: 14px;
+  color: #2e2e5d;
+  margin-top: 12px;
+}
