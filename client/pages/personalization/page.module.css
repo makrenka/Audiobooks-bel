@@ -1,0 +1,15 @@
+* {
+  box-sizing: border-box;
+  padding: 0;
+  margin: 0;
+}
+
+.personalization {
+  background-image: url("/background-personalization.png");
+  padding-top: 204px;
+}
+
+.container {
+  margin: 0 auto;
+  max-width: 295px;
+}

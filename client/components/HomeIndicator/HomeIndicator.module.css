@@ -4,4 +4,6 @@
   justify-content: center;
   padding-top: 21px;
   padding-bottom: 8px;
+  position: fixed;
+  bottom: 0;
 }

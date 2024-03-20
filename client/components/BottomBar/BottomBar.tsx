@@ -25,10 +25,12 @@ const navItems = [
 ];
 
 export const BottomBar = () => (
-  <footer className={styles.footer}>
-    <div className={styles.tabBar}>
-      <Navigation navLinks={navItems} />
-    </div>
+  <>
+    <footer className={styles.footer}>
+      <div className={styles.tabBar}>
+        <Navigation navLinks={navItems} />
+      </div>
+    </footer>
     <HomeIndicator />
-  </footer>
+  </>
 );

@@ -6,10 +6,12 @@ import { useRouter } from "next/router";
 export const HeaderSection = ({ heading }: { heading: string }) => {
   const router = useRouter();
 
+  const reference = router.pathname === "/profile" ? "/settings" : "/";
+
   return (
     <header className={styles.header}>
       <div className={styles.wrapper}>
-        <Link href="/" className={styles.link}>
+        <Link href={reference} className={styles.link}>
           <img
             src="/icons/arrow-header-section.svg"
             alt="arrow home"

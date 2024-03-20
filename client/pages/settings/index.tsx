@@ -8,6 +8,7 @@ import { useAppDispatch, useAppSelector } from "@/store/hooks";
 import { fetchUser, logoutUser } from "@/store/users";
 
 import styles from "./page.module.css";
+import { HomeIndicator } from "@/components/HomeIndicator/HomeIndicator";
 
 export type JwtPayload = {
   id: string;
@@ -89,6 +90,7 @@ export default function SettingsPage() {
           Выйсьці
         </button>
       </div>
+      <HomeIndicator />
     </>
   );
 }
