@@ -1,6 +1,8 @@
 import { categories } from "@/constants/categories";
 import styles from "./PersonalizationForm.module.css";
 import { useState } from "react";
+import classNames from "classnames";
+import { CategoryButton } from "../CategoryButton/CategoryButton";
 
 export const PersonalizationForm = () => {
   const [genres, setGenres] = useState<string[]>([]);
@@ -27,14 +29,7 @@ export const PersonalizationForm = () => {
       />
       <div className={styles.buttons}>
         {categories.map(({ name }) => (
-          <button
-            type="button"
-            className={styles.btn}
-            onClick={() => onClick(name)}
-            key={name}
-          >
-            {name}
-          </button>
+          <CategoryButton name={name} onClick={onClick} key={name} />
         ))}
       </div>
       <div className={styles.topics}>{` жанраў выбрана`}</div>
