@@ -6,7 +6,8 @@
 
 .personalization {
   background-image: url("/background-personalization.png");
-  padding-top: 204px;
+  background-repeat: no-repeat;
+  padding-top: 175px;
 }
 
 .container {

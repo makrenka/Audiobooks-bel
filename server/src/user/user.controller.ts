@@ -87,7 +87,7 @@ export class UserController {
     return this.userService.addBook(dto);
   }
 
-  @UseGuards(JwtAuthGuard)
+  // @UseGuards(JwtAuthGuard)
   @Post('/category')
   addCategory(@Body() dto: AddCategoryUserDto) {
     return this.userService.addCategory(dto);

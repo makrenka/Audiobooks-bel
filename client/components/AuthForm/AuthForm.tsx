@@ -1,3 +1,4 @@
+import { useEffect } from "react";
 import { SubmitErrorHandler, SubmitHandler, useForm } from "react-hook-form";
 import { useRouter } from "next/router";
 import Link from "next/link";
@@ -6,7 +7,6 @@ import { useAppDispatch, useAppSelector } from "@/store/hooks";
 import { login, registration } from "@/store/auth";
 
 import styles from "./AuthForm.module.css";
-import { useEffect } from "react";
 
 type LoginForm = {
   email: string;

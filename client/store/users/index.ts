@@ -1,5 +1,5 @@
 import { PayloadAction, createAsyncThunk, createSlice } from "@reduxjs/toolkit";
-import { User, UserState } from "./types";
+import { AddCategoryUser, User, UserState } from "./types";
 import axios from "axios";
 
 export const fetchUser = createAsyncThunk(
@@ -7,6 +7,28 @@ export const fetchUser = createAsyncThunk(
   async (id: string, { rejectWithValue }) => {
     try {
       const { data } = await axios.get(`http://localhost:5000/users/${id}`);
+
+      return data;
+    } catch (error: any) {
+      return rejectWithValue(error.message);
+    }
+  }
+);
+
+export const addCategoryUser = createAsyncThunk(
+  "user/addCategoryUser",
+  async (body: AddCategoryUser, { rejectWithValue }) => {
+    try {
+      const { userId, name } = body;
+
+      const { data } = await axios.post(
+        "http://localhost:5000/users/category",
+        { userId, name }
+      );
+
+      if (!data) {
+        throw new Error("Can't add category!");
+      }
 
       return data;
     } catch (error: any) {
@@ -49,7 +71,29 @@ export const userSlice = createSlice({
         state.user.isSuccess = false;
         state.user.error = action.payload;
         state.user.data = null;
-      });
+      })
+      .addCase(addCategoryUser.pending, (state) => {
+        state.user.isLoading = true;
+        state.user.error = null;
+      })
+      .addCase(
+        addCategoryUser.fulfilled,
+        (state, action: PayloadAction<User>) => {
+          state.user.isLoading = false;
+          state.user.isSuccess = true;
+          state.user.error = null;
+          state.user.data = action.payload;
+        }
+      )
+      .addCase(
+        addCategoryUser.rejected,
+        (state, action: PayloadAction<any>) => {
+          state.user.isLoading = false;
+          state.user.isSuccess = false;
+          state.user.error = action.payload;
+          state.user.data = null;
+        }
+      );
   },
 });
 

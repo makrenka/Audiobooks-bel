@@ -16,3 +16,8 @@ export type User = {
   categories: { name: string }[];
   roles: { value: string }[];
 };
+
+export type AddCategoryUser = {
+  userId: string;
+  name: string[];
+};
