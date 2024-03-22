@@ -6,9 +6,9 @@ import { HeaderSection } from "@/components/HeaderSection/HeaderSection";
 import { useAppDispatch, useAppSelector } from "@/store/hooks";
 import { JwtPayload } from "../settings";
 import { fetchUser } from "@/store/users";
+import { HomeIndicator } from "@/components/HomeIndicator/HomeIndicator";
 
 import styles from "./page.module.css";
-import { HomeIndicator } from "@/components/HomeIndicator/HomeIndicator";
 
 export default function ProfilePage() {
   const user = useAppSelector((state) => state.user.user.data);
@@ -65,9 +65,9 @@ export default function ProfilePage() {
               ))
             )}
           </div>
-          <button className={styles.editBtn}>
+          <Link href={"/personalization"} className={styles.editBtn}>
             <img src="/icons/Edit.svg" alt="Edit icon" />
-          </button>
+          </Link>
         </li>
       </ul>
       <HomeIndicator />

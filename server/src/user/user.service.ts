@@ -105,12 +105,18 @@ export class UserService {
   async addCategory(dto: AddCategoryUserDto): Promise<User> {
     const user = await this.userModel.findById(dto.userId);
     user.categories = [];
-    for (let i = 0; i < dto.name.length; i++) {
-      const category = await dto.name.map((item) =>
+    await dto.categories.forEach((_, index) => {
+      const category = dto.categories.map((item) =>
         this.categoryModel.findOne({ name: item }),
-      )[i];
+      )[index];
       user.categories.push(category);
-    }
+    });
+    // for (let i = 0; i < dto.categories.length; i++) {
+    //   const category = await dto.categories.map((item) =>
+    //     this.categoryModel.findOne({ name: item }),
+    //   )[i];
+    //   user.categories.push(category);
+    // }
     await user.save();
     return user;
   }

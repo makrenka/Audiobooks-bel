@@ -40,9 +40,11 @@
 }
 
 .skipBtn {
+  display: flex;
+  align-items: center;
+  justify-content: center;
   margin-top: 16px;
   margin-bottom: 16px;
-  width: 100%;
   height: 56px;
   border-radius: 8px;
   background-color: white;
@@ -52,4 +54,13 @@
   font-weight: 500;
   font-size: 16px;
   color: #4838d1;
+  text-decoration: none;
+}
+
+.topicsText {
+  font-family: "Poppins", sans-serif;
+  font-style: normal;
+  font-weight: 400;
+  font-size: 14px;
+  color: #2e2e5d;
 }

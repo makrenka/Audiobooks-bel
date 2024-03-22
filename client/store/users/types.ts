@@ -18,6 +18,6 @@ export type User = {
 };
 
 export type AddCategoryUser = {
-  userId: string;
-  name: string[];
+  userId: string | undefined;
+  categories: string[];
 };

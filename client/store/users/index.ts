@@ -19,11 +19,11 @@ export const addCategoryUser = createAsyncThunk(
   "user/addCategoryUser",
   async (body: AddCategoryUser, { rejectWithValue }) => {
     try {
-      const { userId, name } = body;
+      const { userId, categories } = body;
 
       const { data } = await axios.post(
         "http://localhost:5000/users/category",
-        { userId, name }
+        { userId, categories }
       );
 
       if (!data) {
