@@ -9,6 +9,7 @@ import { FileService, FileType } from 'src/file/file.service';
 import { CreateSectionDto } from './dto/create-section.dto';
 import { Section } from './schemas/section.schema';
 import { Category } from './schemas/category.schema';
+import { AddCategoryBookDto } from './dto/add-category-book.dto';
 import { CreateCategoryDto } from './dto/create-category.dto';
 
 @Injectable()
@@ -91,11 +92,31 @@ export class BookService {
     return section;
   }
 
-  async addCategory(dto: CreateCategoryDto): Promise<Category> {
-    const book = await this.bookModel.findById(dto.bookId);
+  async createCategory(dto: CreateCategoryDto): Promise<Category> {
     const category = await this.categoryModel.create({ ...dto });
+    return category;
+  }
+
+  async getCategories(): Promise<Category[]> {
+    const categories = await this.categoryModel.find();
+    return categories;
+  }
+
+  async getOneCategory(id: ObjectId): Promise<Category> {
+    const category = await this.categoryModel.findById(id);
+    return category;
+  }
+
+  async addCategoryBook(dto: AddCategoryBookDto): Promise<Category> {
+    const book = await this.bookModel.findById(dto.bookId);
+    const category = await this.categoryModel.findOne({ name: dto.name });
     book.categories.push(category);
     await book.save();
+    return category;
+  }
+
+  async deleteCategory(id: ObjectId): Promise<Category> {
+    const category = await this.categoryModel.findByIdAndDelete(id);
     return category;
   }
 }

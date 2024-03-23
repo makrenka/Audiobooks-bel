@@ -10,12 +10,14 @@ import { CategoryButton } from "../CategoryButton/CategoryButton";
 
 import styles from "./PersonalizationForm.module.css";
 import { useRouter } from "next/navigation";
+import { useForm } from "react-hook-form";
 
 export const PersonalizationForm = () => {
   const [genres, setGenres] = useState<string[]>([]);
   const user = useAppSelector((state) => state.user.user.data);
   const dispatch = useAppDispatch();
   const router = useRouter();
+  const { handleSubmit } = useForm();
 
   useEffect(() => {
     const token = localStorage.getItem("token");
@@ -43,12 +45,14 @@ export const PersonalizationForm = () => {
   };
 
   const onSubmit = () => {
-    dispatch(addCategoryUser({ userId: user?._id, categories: genres }));
+    const data = { userId: user?._id, categories: genres };
+    dispatch(addCategoryUser(data));
     router.push("/profile");
+    console.log(data);
   };
 
   return (
-    <div className={styles.persForm}>
+    <form className={styles.persForm} onSubmit={handleSubmit(onSubmit)}>
       <input
         type="text"
         placeholder="Пошук жанраў"
@@ -73,12 +77,10 @@ export const PersonalizationForm = () => {
             : "жанраў выбрана"
         }`}</p>
       </div>
-      <button type="button" className={styles.submitBtn} onClick={onSubmit}>
-        Адправіць
-      </button>
+      <button className={styles.submitBtn}>Адправіць</button>
       <Link href={"/profile"} className={styles.skipBtn}>
         Адмяніць
       </Link>
-    </div>
+    </form>
   );
 };
