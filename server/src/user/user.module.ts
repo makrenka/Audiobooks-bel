@@ -2,7 +2,7 @@ import { Module } from '@nestjs/common';
 import { MongooseModule } from '@nestjs/mongoose';
 import { User, UserSchema } from './schemas/user.schema';
 import { Book, BookSchema } from 'src/book/schemas/book.schema';
-import { Category, CategorySchema } from 'src/book/schemas/category.schema';
+import { Category, CategorySchema } from 'src/category/schemas/category.schema';
 import { UserController } from './user.controller';
 import { UserService } from './user.service';
 import { Role, RoleSchema } from './schemas/role.schema';

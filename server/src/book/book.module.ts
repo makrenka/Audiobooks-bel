@@ -5,8 +5,8 @@ import { MongooseModule } from '@nestjs/mongoose';
 import { Book, BookSchema } from './schemas/book.schema';
 import { Review, ReviewSchema } from './schemas/review.schema';
 import { FileService } from 'src/file/file.service';
-import { Section, SectionSchema } from './schemas/section.schema';
-import { Category, CategorySchema } from './schemas/category.schema';
+import { Section, SectionSchema } from '../section/schemas/section.schema';
+import { Category, CategorySchema } from '../category/schemas/category.schema';
 import { User, UserSchema } from 'src/user/schemas/user.schema';
 import { AuthModule } from 'src/auth/auth.module';
 

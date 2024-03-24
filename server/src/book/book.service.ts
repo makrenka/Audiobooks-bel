@@ -6,11 +6,11 @@ import { Review } from './schemas/review.schema';
 import { CreateBookDto } from './dto/create-book.dto';
 import { CreateReviewDto } from './dto/create-review.dto';
 import { FileService, FileType } from 'src/file/file.service';
-import { CreateSectionDto } from './dto/create-section.dto';
-import { Section } from './schemas/section.schema';
-import { Category } from './schemas/category.schema';
-import { AddCategoryBookDto } from './dto/add-category-book.dto';
-import { CreateCategoryDto } from './dto/create-category.dto';
+import { CreateSectionDto } from '../section/dto/create-section.dto';
+import { Section } from '../section/schemas/section.schema';
+import { Category } from '../category/schemas/category.schema';
+import { AddCategoryBookDto } from 'src/book/dto/add-category-book.dto';
+import { AddSectionBookDto } from './dto/add-section-book.dto';
 
 @Injectable()
 export class BookService {
@@ -84,27 +84,12 @@ export class BookService {
     book.save();
   }
 
-  async addSection(dto: CreateSectionDto): Promise<Section> {
+  async addSectionBook(dto: AddSectionBookDto): Promise<Section> {
     const book = await this.bookModel.findById(dto.bookId);
-    const section = await this.sectionModel.create({ ...dto });
+    const section = await this.sectionModel.findOne({ name: dto.name });
     book.sections.push(section);
     await book.save();
     return section;
-  }
-
-  async createCategory(dto: CreateCategoryDto): Promise<Category> {
-    const category = await this.categoryModel.create({ ...dto });
-    return category;
-  }
-
-  async getCategories(): Promise<Category[]> {
-    const categories = await this.categoryModel.find();
-    return categories;
-  }
-
-  async getOneCategory(id: ObjectId): Promise<Category> {
-    const category = await this.categoryModel.findById(id);
-    return category;
   }
 
   async addCategoryBook(dto: AddCategoryBookDto): Promise<Category> {
@@ -115,8 +100,9 @@ export class BookService {
     return category;
   }
 
-  async deleteCategory(id: ObjectId): Promise<Category> {
-    const category = await this.categoryModel.findByIdAndDelete(id);
-    return category;
-  }
+  // async removeCategoryBook(dto: AddCategoryBookDto): Promise<Category> {
+  //   const book = await this.bookModel.findById(dto.bookId);
+  //   const category = await this.categoryModel.findOne({ name: dto.name });
+
+  // }
 }

@@ -15,12 +15,12 @@ import { CreateBookDto } from './dto/create-book.dto';
 import { ObjectId } from 'mongoose';
 import { CreateReviewDto } from './dto/create-review.dto';
 import { FileFieldsInterceptor } from '@nestjs/platform-express';
-import { CreateSectionDto } from './dto/create-section.dto';
+import { CreateSectionDto } from '../section/dto/create-section.dto';
 import { AddCategoryBookDto } from './dto/add-category-book.dto';
 import { Roles } from 'src/auth/roles-auth.decorator';
 import { RolesGuard } from 'src/auth/roles.guard';
 import { JwtAuthGuard } from 'src/auth/jwt-auth.guard';
-import { CreateCategoryDto } from './dto/create-category.dto';
+import { AddSectionBookDto } from './dto/add-section-book.dto';
 
 @Controller('/books')
 export class BookController {
@@ -77,38 +77,14 @@ export class BookController {
   @Roles('ADMIN')
   @UseGuards(RolesGuard)
   @Post('/section')
-  addSection(@Body() dto: CreateSectionDto) {
-    return this.bookService.addSection(dto);
+  addSection(@Body() dto: AddSectionBookDto) {
+    return this.bookService.addSectionBook(dto);
   }
 
   @Roles('ADMIN')
   @UseGuards(RolesGuard)
   @Post('/category')
-  createCategory(@Body() dto: CreateCategoryDto) {
-    return this.bookService.createCategory(dto);
-  }
-
-  // @Roles('ADMIN')
-  // @UseGuards(RolesGuard)
-  // @Post('/category')
-  // addCategoryBook(@Body() dto: AddCategoryBookDto) {
-  //   return this.bookService.addCategoryBook(dto);
-  // }
-
-  @Delete('/category/:id')
-  deleteCategory(@Param('id') id: ObjectId) {
-    return this.bookService.deleteCategory(id);
-  }
-
-  @Roles('ADMIN')
-  @UseGuards(RolesGuard)
-  @Get('/categories')
-  getCategories() {
-    return this.bookService.getCategories();
-  }
-
-  @Get('/category/:id')
-  getOneCategoty(@Param('id') id: ObjectId) {
-    return this.bookService.getOneCategory(id);
+  addCategoryBook(@Body() dto: AddCategoryBookDto) {
+    return this.bookService.addCategoryBook(dto);
   }
 }

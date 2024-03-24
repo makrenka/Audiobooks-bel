@@ -11,7 +11,7 @@ import { UnBanUserDto } from './dto/unban-user.dto';
 import { AddBookUserDto } from './dto/add-book-user.dto';
 import { Book } from 'src/book/schemas/book.schema';
 import { AddCategoryUserDto } from './dto/add-category-user.dto';
-import { Category } from 'src/book/schemas/category.schema';
+import { Category } from 'src/category/schemas/category.schema';
 
 @Injectable()
 export class UserService {

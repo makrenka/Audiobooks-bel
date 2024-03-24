@@ -7,7 +7,7 @@ import { JwtModule } from '@nestjs/jwt';
 import { UserService } from 'src/user/user.service';
 import { Role, RoleSchema } from 'src/user/schemas/role.schema';
 import { Book, BookSchema } from 'src/book/schemas/book.schema';
-import { Category, CategorySchema } from 'src/book/schemas/category.schema';
+import { Category, CategorySchema } from 'src/category/schemas/category.schema';
 
 @Module({
   controllers: [AuthController],
