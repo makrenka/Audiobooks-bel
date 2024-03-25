@@ -13,7 +13,7 @@ import { Book } from 'src/book/schemas/book.schema';
 import { AddCategoryUserDto } from './dto/add-category-user.dto';
 import { Category } from 'src/category/schemas/category.schema';
 import { FileService, FileType } from 'src/file/file.service';
-import * as mongoose from 'mongoose';
+import { AddPhotoDto } from './dto/add-photo.dto';
 
 @Injectable()
 export class UserService {
@@ -34,6 +34,17 @@ export class UserService {
     const user = await this.userModel.create({ ...dto });
     const role = await this.roleModel.findOne({ value: 'USER' });
     user.roles.push(role);
+    await user.save();
+    return user;
+  }
+
+  async addPhoto(dto: AddPhotoDto, img): Promise<User> {
+    const imgPath = this.fileService.createFile(FileType.IMAGE, img);
+    const user = await this.userModel.findById(dto.userId);
+    if (!user) {
+      throw new HttpException('User is not found', HttpStatus.NOT_FOUND);
+    }
+    user.img = imgPath;
     await user.save();
     return user;
   }
@@ -112,14 +123,6 @@ export class UserService {
       const category = await this.categoryModel.findOne({ name: item });
       user.categories.push(category);
     }
-    await user.save();
-    return user;
-  }
-
-  async addPhoto(userId: mongoose.Schema.Types.ObjectId, img): Promise<User> {
-    const imgPath = this.fileService.createFile(FileType.IMAGE, img);
-    const user = await this.userModel.findById(userId);
-    user.img = imgPath;
     await user.save();
     return user;
   }

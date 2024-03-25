@@ -25,7 +25,7 @@ import { RolesGuard } from 'src/auth/roles.guard';
 import { JwtAuthGuard } from 'src/auth/jwt-auth.guard';
 import { ValidationPipe } from 'src/pipes/validation.pipe';
 import { FileFieldsInterceptor } from '@nestjs/platform-express';
-import * as mongoose from 'mongoose';
+import { AddPhotoDto } from './dto/add-photo.dto';
 
 @Controller('/users')
 export class UserController {
@@ -42,6 +42,13 @@ export class UserController {
   @Post()
   createUser(@Body() dto: CreateUserDto) {
     return this.userService.createUser(dto);
+  }
+
+  @Post('/photo')
+  @UseInterceptors(FileFieldsInterceptor([{ name: 'img', maxCount: 1 }]))
+  addPhoto(@UploadedFiles() files, @Body() dto: AddPhotoDto) {
+    const { img } = files;
+    return this.userService.addPhoto(dto, img[0]);
   }
 
   @Roles('ADMIN')
@@ -96,15 +103,5 @@ export class UserController {
   @Post('/category')
   addCategory(@Body() dto: AddCategoryUserDto) {
     return this.userService.addCategory(dto);
-  }
-
-  @Post('/photo')
-  @UseInterceptors(FileFieldsInterceptor([{ name: 'img', maxCount: 1 }]))
-  addPhoto(
-    @UploadedFiles() files,
-    @Body() userId: mongoose.Schema.Types.ObjectId,
-  ) {
-    const { img } = files;
-    return this.userService.addPhoto(userId, img[0]);
   }
 }
