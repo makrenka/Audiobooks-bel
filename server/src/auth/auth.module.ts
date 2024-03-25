@@ -8,10 +8,11 @@ import { UserService } from 'src/user/user.service';
 import { Role, RoleSchema } from 'src/user/schemas/role.schema';
 import { Book, BookSchema } from 'src/book/schemas/book.schema';
 import { Category, CategorySchema } from 'src/category/schemas/category.schema';
+import { FileService } from 'src/file/file.service';
 
 @Module({
   controllers: [AuthController],
-  providers: [AuthService, UserService],
+  providers: [AuthService, UserService, FileService],
   imports: [
     MongooseModule.forFeature([{ name: User.name, schema: UserSchema }]),
     MongooseModule.forFeature([{ name: Role.name, schema: RoleSchema }]),

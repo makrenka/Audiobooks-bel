@@ -12,6 +12,8 @@ import { AddBookUserDto } from './dto/add-book-user.dto';
 import { Book } from 'src/book/schemas/book.schema';
 import { AddCategoryUserDto } from './dto/add-category-user.dto';
 import { Category } from 'src/category/schemas/category.schema';
+import { FileService, FileType } from 'src/file/file.service';
+import * as mongoose from 'mongoose';
 
 @Injectable()
 export class UserService {
@@ -20,6 +22,7 @@ export class UserService {
     @InjectModel(Role.name) private roleModel: Model<Role>,
     @InjectModel(Book.name) private bookModel: Model<Book>,
     @InjectModel(Category.name) private categoryModel: Model<Category>,
+    private fileService: FileService,
   ) {}
 
   async createRole(dto: CreateRoleDto): Promise<Role> {
@@ -109,12 +112,14 @@ export class UserService {
       const category = await this.categoryModel.findOne({ name: item });
       user.categories.push(category);
     }
-    // dto.categories.map(async (item) => {
-    //   const category = await this.categoryModel.findOne({ name: item });
-    //   const data = user.categories.push(category);
-    //   return data;
-    // });
+    await user.save();
+    return user;
+  }
 
+  async addPhoto(userId: mongoose.Schema.Types.ObjectId, img): Promise<User> {
+    const imgPath = this.fileService.createFile(FileType.IMAGE, img);
+    const user = await this.userModel.findById(userId);
+    user.img = imgPath;
     await user.save();
     return user;
   }

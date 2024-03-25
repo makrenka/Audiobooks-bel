@@ -7,6 +7,7 @@ import { UserController } from './user.controller';
 import { UserService } from './user.service';
 import { Role, RoleSchema } from './schemas/role.schema';
 import { AuthModule } from 'src/auth/auth.module';
+import { FileService } from 'src/file/file.service';
 
 @Module({
   imports: [
@@ -19,7 +20,7 @@ import { AuthModule } from 'src/auth/auth.module';
     AuthModule,
   ],
   controllers: [UserController],
-  providers: [UserService],
+  providers: [UserService, FileService],
   exports: [UserService],
 })
 export class UserModule {}

@@ -5,7 +5,10 @@ import {
   Get,
   Param,
   Post,
+  UploadedFile,
+  UploadedFiles,
   UseGuards,
+  UseInterceptors,
   UsePipes,
 } from '@nestjs/common';
 import { UserService } from './user.service';
@@ -21,6 +24,8 @@ import { Roles } from 'src/auth/roles-auth.decorator';
 import { RolesGuard } from 'src/auth/roles.guard';
 import { JwtAuthGuard } from 'src/auth/jwt-auth.guard';
 import { ValidationPipe } from 'src/pipes/validation.pipe';
+import { FileFieldsInterceptor } from '@nestjs/platform-express';
+import * as mongoose from 'mongoose';
 
 @Controller('/users')
 export class UserController {
@@ -91,5 +96,15 @@ export class UserController {
   @Post('/category')
   addCategory(@Body() dto: AddCategoryUserDto) {
     return this.userService.addCategory(dto);
+  }
+
+  @Post('/photo')
+  @UseInterceptors(FileFieldsInterceptor([{ name: 'img', maxCount: 1 }]))
+  addPhoto(
+    @UploadedFiles() files,
+    @Body() userId: mongoose.Schema.Types.ObjectId,
+  ) {
+    const { img } = files;
+    return this.userService.addPhoto(userId, img[0]);
   }
 }
