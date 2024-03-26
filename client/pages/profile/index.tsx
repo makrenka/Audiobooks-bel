@@ -44,14 +44,52 @@ export default function ProfilePage() {
     }
   }, [photo, user]);
 
+  const changeName = () => {
+    if (user) {
+      axios
+        .post("http://localhost:5000/users/change-name", {
+          userId: user._id,
+          name: name.value,
+        })
+        .then((resp) => router.reload())
+        .catch((e) => console.log(e));
+    }
+  };
+
+  const changeEmail = () => {
+    if (user) {
+      axios
+        .post("http://localhost:5000/users/change-email", {
+          userId: user._id,
+          email: email.value,
+        })
+        .then((resp) => router.reload())
+        .catch((e) => console.log(e));
+    }
+  };
+
+  const onSubmit = () => {
+    if (name.value) changeName();
+    if (email.value) changeEmail();
+  };
+
   return (
     <>
       <div className={styles.container}>
-        <HeaderSection heading={"Профіль"} />
+        <HeaderSection heading={"Профіль"} onSubmit={onSubmit} />
       </div>
       <PhotoUploader setFile={setPhoto} accept="image/*">
         <div className={styles.profileImg}>
-          <img src={"http://localhost:5000/" + user?.img} alt="Your photo" />
+          {user?.img ? (
+            <div className={styles.imgWrapper}>
+              <img
+                src={"http://localhost:5000/" + user?.img}
+                alt="Your photo"
+              />
+            </div>
+          ) : (
+            <p className={styles.uploadText}>Загрузіць фота</p>
+          )}
           <button className={styles.editBtnImg}>
             <img src="/icons/Edit.svg" alt="Edit icon" />
           </button>

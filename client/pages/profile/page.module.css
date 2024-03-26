@@ -14,6 +14,13 @@
   position: relative;
 }
 
+.imgWrapper {
+  width: 160px;
+  height: 160px;
+  border-radius: 20px;
+  border: 1px solid #f3f1fe;
+}
+
 .editBtnImg {
   position: absolute;
   top: 45px;
@@ -100,4 +107,12 @@
   font-weight: 500;
   font-size: 14px;
   padding-left: 24px;
+}
+
+.uploadText {
+  font-family: "Poppins", sans-serif;
+  font-style: normal;
+  font-weight: 500;
+  font-size: 14px;
+  color: #4838d1;
 }

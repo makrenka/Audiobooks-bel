@@ -3,7 +3,13 @@ import Link from "next/link";
 import styles from "./HeaderSection.module.css";
 import { useRouter } from "next/router";
 
-export const HeaderSection = ({ heading }: { heading: string }) => {
+export const HeaderSection = ({
+  heading,
+  onSubmit,
+}: {
+  heading: string;
+  onSubmit?: Function;
+}) => {
   const router = useRouter();
 
   const reference = router.pathname === "/profile" ? "/settings" : "/";
@@ -20,7 +26,11 @@ export const HeaderSection = ({ heading }: { heading: string }) => {
         </Link>
         <h2 className={styles.heading}>{heading}</h2>
         {router.pathname === "/profile" && (
-          <button type="button" className={styles.saveBtn}>
+          <button
+            type="button"
+            className={styles.saveBtn}
+            onClick={onSubmit && onSubmit()}
+          >
             Захаваць
           </button>
         )}

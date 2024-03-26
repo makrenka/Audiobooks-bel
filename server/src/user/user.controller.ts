@@ -26,6 +26,8 @@ import { JwtAuthGuard } from 'src/auth/jwt-auth.guard';
 import { ValidationPipe } from 'src/pipes/validation.pipe';
 import { FileFieldsInterceptor } from '@nestjs/platform-express';
 import { AddPhotoDto } from './dto/add-photo.dto';
+import { ChangeNameDto } from './dto/change-name.dto';
+import { ChangeEmailDto } from './dto/change-email.dto';
 
 @Controller('/users')
 export class UserController {
@@ -103,5 +105,15 @@ export class UserController {
   @Post('/category')
   addCategory(@Body() dto: AddCategoryUserDto) {
     return this.userService.addCategory(dto);
+  }
+
+  @Post('/change-name')
+  changeName(@Body() dto: ChangeNameDto) {
+    return this.userService.changeName(dto);
+  }
+
+  @Post('/change-email')
+  changeEmail(@Body() dto: ChangeEmailDto) {
+    return this.userService.changeEmail(dto);
   }
 }

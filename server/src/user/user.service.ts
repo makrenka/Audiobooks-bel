@@ -14,6 +14,8 @@ import { AddCategoryUserDto } from './dto/add-category-user.dto';
 import { Category } from 'src/category/schemas/category.schema';
 import { FileService, FileType } from 'src/file/file.service';
 import { AddPhotoDto } from './dto/add-photo.dto';
+import { ChangeNameDto } from './dto/change-name.dto';
+import { ChangeEmailDto } from './dto/change-email.dto';
 
 @Injectable()
 export class UserService {
@@ -123,6 +125,20 @@ export class UserService {
       const category = await this.categoryModel.findOne({ name: item });
       user.categories.push(category);
     }
+    await user.save();
+    return user;
+  }
+
+  async changeName(dto: ChangeNameDto): Promise<User> {
+    const user = await this.userModel.findById(dto.userId);
+    user.name = dto.name;
+    await user.save();
+    return user;
+  }
+
+  async changeEmail(dto: ChangeEmailDto): Promise<User> {
+    const user = await this.userModel.findById(dto.userId);
+    user.email = dto.email;
     await user.save();
     return user;
   }
