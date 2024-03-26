@@ -1,4 +1,3 @@
-"use client";
 import { useEffect, useRef, useState } from "react";
 import { createPortal } from "react-dom";
 
@@ -7,9 +6,9 @@ import { TrackProgress } from "../TrackProgress/TrackProgress";
 import { useAppDispatch, useAppSelector } from "@/store/hooks";
 import { setCurrentTime, setVolume } from "@/store/player";
 import { PlayerControlButtons } from "../PlayerControlButtons/PlayerControlButtons";
+import { audioBook } from "../MiniPlayer/MiniPlayer";
 
 import styles from "./ModalPlayer.module.css";
-import { audioBook } from "../MiniPlayer/MiniPlayer";
 
 export const ModalPlayer = ({ closeModal }: { closeModal: () => void }) => {
   const [showVolume, setShowVolume] = useState(false);

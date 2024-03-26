@@ -38,7 +38,14 @@ export default function SettingsPage() {
         <div className={styles.container}>
           <div className={styles.wrapper}>
             <div className={styles.profileImg}>
-              <p className={styles.profileText}>{user?.name?.slice(0, 1)}</p>
+              {user?.img ? (
+                <img
+                  src={"http://localhost:5000/" + user?.img}
+                  alt="Your photo"
+                />
+              ) : (
+                <p className={styles.profileText}>{user?.name?.slice(0, 1)}</p>
+              )}
             </div>
             <div className={styles.profileName}>
               <h3 className={styles.userName}>{user?.name}</h3>
