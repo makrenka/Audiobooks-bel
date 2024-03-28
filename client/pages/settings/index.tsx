@@ -2,13 +2,14 @@ import Link from "next/link";
 import { jwtDecode } from "jwt-decode";
 import { useEffect } from "react";
 import { useRouter } from "next/navigation";
+import { NextSeo } from "next-seo";
 
 import { HeaderSection } from "@/components/HeaderSection/HeaderSection";
 import { useAppDispatch, useAppSelector } from "@/store/hooks";
 import { fetchUser, logoutUser } from "@/store/users";
+import { HomeIndicator } from "@/components/HomeIndicator/HomeIndicator";
 
 import styles from "./page.module.css";
-import { HomeIndicator } from "@/components/HomeIndicator/HomeIndicator";
 
 export type JwtPayload = {
   id: string;
@@ -33,6 +34,7 @@ export default function SettingsPage() {
 
   return (
     <>
+      <NextSeo title={"Аўдыёкнігі | настройкі"} />
       <HeaderSection heading={"Налады"} />
       <div className={styles.profile}>
         <div className={styles.container}>

@@ -25,11 +25,11 @@ export const HeaderSection = ({
           />
         </Link>
         <h2 className={styles.heading}>{heading}</h2>
-        {router.pathname === "/profile" && (
+        {router.pathname === "/profile" && onSubmit && (
           <button
             type="button"
             className={styles.saveBtn}
-            onClick={onSubmit && onSubmit()}
+            onClick={() => onSubmit()}
           >
             Захаваць
           </button>

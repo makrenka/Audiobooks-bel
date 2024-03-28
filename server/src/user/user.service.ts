@@ -16,6 +16,7 @@ import { FileService, FileType } from 'src/file/file.service';
 import { AddPhotoDto } from './dto/add-photo.dto';
 import { ChangeNameDto } from './dto/change-name.dto';
 import { ChangeEmailDto } from './dto/change-email.dto';
+import { ChangePasswordDto } from './dto/change-password.dto';
 
 @Injectable()
 export class UserService {
@@ -141,5 +142,9 @@ export class UserService {
     user.email = dto.email;
     await user.save();
     return user;
+  }
+
+  async changePassword(dto: ChangePasswordDto) {
+    const user = await this.userModel.findById(dto.userId);
   }
 }

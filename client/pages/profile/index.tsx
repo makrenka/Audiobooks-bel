@@ -13,6 +13,7 @@ import { PhotoUploader } from "@/components/PhotoUploader/PhotoUploader";
 import { useInput } from "@/hooks/useInput";
 
 import styles from "./page.module.css";
+import { NextSeo } from "next-seo";
 
 export default function ProfilePage() {
   const [photo, setPhoto] = useState("");
@@ -42,7 +43,7 @@ export default function ProfilePage() {
         .then((resp) => router.reload())
         .catch((e) => console.log(e));
     }
-  }, [photo, user]);
+  }, [photo]);
 
   const changeName = () => {
     if (user) {
@@ -75,6 +76,7 @@ export default function ProfilePage() {
 
   return (
     <>
+      <NextSeo title={"Аўдыёкнігі | ваш профіль"} />
       <div className={styles.container}>
         <HeaderSection heading={"Профіль"} onSubmit={onSubmit} />
       </div>
