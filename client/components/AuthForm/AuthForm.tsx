@@ -105,7 +105,7 @@ export const AuthForm = () => {
               required: "Увядзіце пароль",
               minLength: {
                 value: 4,
-                message: "Мінімум 4 сымбаляў",
+                message: "Мінімум 4 сымбалі",
               },
             })}
           />

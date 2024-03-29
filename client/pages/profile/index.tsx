@@ -138,7 +138,7 @@ export default function ProfilePage() {
         </li>
         <li className={styles.profileItem}>
           <h4>Пароль</h4>
-          <Link href={"/profile"} className={styles.itemLink}>
+          <Link href={"/change-password"} className={styles.itemLink}>
             Змяніць пароль
           </Link>
         </li>

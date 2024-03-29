@@ -78,12 +78,6 @@ const initialState: AuthState = {
     isError: false,
     errorMessage: "",
   },
-  createPassword: {
-    isLoading: false,
-    isSuccess: false,
-    isError: false,
-    errorMessage: "",
-  },
 };
 
 export const authSlice = createSlice({

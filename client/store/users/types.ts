@@ -21,3 +21,10 @@ export type AddCategoryUser = {
   userId: string | undefined;
   categories: string[];
 };
+
+export type ChangePassword = {
+  userId: string | undefined;
+  oldPassword: string;
+  newPassword: string;
+  newPasswordRepeat: string;
+};

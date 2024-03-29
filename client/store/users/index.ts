@@ -1,6 +1,6 @@
 import { PayloadAction, createAsyncThunk, createSlice } from "@reduxjs/toolkit";
-import { AddCategoryUser, User, UserState } from "./types";
-import axios from "axios";
+import { AddCategoryUser, ChangePassword, User, UserState } from "./types";
+import axios, { AxiosResponse } from "axios";
 
 export const fetchUser = createAsyncThunk(
   "user/fetchUser",
@@ -21,13 +21,35 @@ export const addCategoryUser = createAsyncThunk(
     try {
       const { userId, categories } = body;
 
-      const { data } = await axios.post(
+      const { data }: AxiosResponse<User> = await axios.post(
         "http://localhost:5000/users/category",
         { userId, categories }
       );
 
       if (!data) {
         throw new Error("Can't add category!");
+      }
+
+      return data;
+    } catch (error: any) {
+      return rejectWithValue(error.message);
+    }
+  }
+);
+
+export const changePassword = createAsyncThunk(
+  "auth/changePassword",
+  async (body: ChangePassword, { rejectWithValue }) => {
+    try {
+      const { userId, oldPassword, newPassword, newPasswordRepeat } = body;
+
+      const { data }: AxiosResponse<User> = await axios.post(
+        "http://localhost:5000/users/change-password",
+        { userId, oldPassword, newPassword, newPasswordRepeat }
+      );
+
+      if (!data) {
+        throw new Error("Can't change password, server error!");
       }
 
       return data;
@@ -93,7 +115,26 @@ export const userSlice = createSlice({
           state.user.error = action.payload;
           state.user.data = null;
         }
-      );
+      )
+      .addCase(changePassword.pending, (state) => {
+        state.user.isLoading = true;
+        state.user.error = null;
+      })
+      .addCase(
+        changePassword.fulfilled,
+        (state, action: PayloadAction<User>) => {
+          state.user.isLoading = false;
+          state.user.isSuccess = true;
+          state.user.error = null;
+          state.user.data = action.payload;
+        }
+      )
+      .addCase(changePassword.rejected, (state, action: PayloadAction<any>) => {
+        state.user.isLoading = false;
+        state.user.isSuccess = false;
+        state.user.error = action.payload;
+        state.user.data = null;
+      });
   },
 });
 

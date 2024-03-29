@@ -10,7 +10,6 @@ export type AuthState = {
   auth: BaseState;
   register: BaseState;
   forgot: BaseState;
-  createPassword: BaseState;
 };
 
 export type UserAuth = {

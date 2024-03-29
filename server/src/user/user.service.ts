@@ -1,4 +1,9 @@
-import { HttpException, HttpStatus, Injectable } from '@nestjs/common';
+import {
+  HttpException,
+  HttpStatus,
+  Injectable,
+  UnauthorizedException,
+} from '@nestjs/common';
 import { InjectModel } from '@nestjs/mongoose';
 import { User } from './schemas/user.schema';
 import { Model, ObjectId } from 'mongoose';
@@ -17,6 +22,7 @@ import { AddPhotoDto } from './dto/add-photo.dto';
 import { ChangeNameDto } from './dto/change-name.dto';
 import { ChangeEmailDto } from './dto/change-email.dto';
 import { ChangePasswordDto } from './dto/change-password.dto';
+import * as bcrypt from 'bcryptjs';
 
 @Injectable()
 export class UserService {
@@ -144,7 +150,36 @@ export class UserService {
     return user;
   }
 
-  async changePassword(dto: ChangePasswordDto) {
+  async changePassword(dto: ChangePasswordDto): Promise<User> {
     const user = await this.userModel.findById(dto.userId);
+    const oldPasswordEquals = await bcrypt.compare(
+      dto.oldPassword,
+      user.password,
+    );
+    const hashPassword = await bcrypt.hash(dto.newPassword, 5);
+    if (!oldPasswordEquals) {
+      throw new UnauthorizedException({ message: 'Uncorrect old password' });
+    }
+    if (dto.newPassword !== dto.newPasswordRepeat) {
+      throw new HttpException(
+        'Uncorrect repeat new password',
+        HttpStatus.BAD_REQUEST,
+      );
+    }
+    if (dto.oldPassword === dto.newPassword) {
+      throw new HttpException(
+        'New password equals old password',
+        HttpStatus.BAD_REQUEST,
+      );
+    }
+    if (
+      oldPasswordEquals &&
+      dto.newPassword === dto.newPasswordRepeat &&
+      dto.oldPassword !== dto.newPassword
+    ) {
+      user.password = hashPassword;
+    }
+    await user.save();
+    return user;
   }
 }

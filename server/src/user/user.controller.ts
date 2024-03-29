@@ -28,6 +28,7 @@ import { FileFieldsInterceptor } from '@nestjs/platform-express';
 import { AddPhotoDto } from './dto/add-photo.dto';
 import { ChangeNameDto } from './dto/change-name.dto';
 import { ChangeEmailDto } from './dto/change-email.dto';
+import { ChangePasswordDto } from './dto/change-password.dto';
 
 @Controller('/users')
 export class UserController {
@@ -115,5 +116,11 @@ export class UserController {
   @Post('/change-email')
   changeEmail(@Body() dto: ChangeEmailDto) {
     return this.userService.changeEmail(dto);
+  }
+
+  @UsePipes(ValidationPipe)
+  @Post('/change-password')
+  changePassword(@Body() dto: ChangePasswordDto) {
+    return this.userService.changePassword(dto);
   }
 }
