@@ -3,7 +3,7 @@ import styles from "./ChangePasswordForm.module.css";
 import Link from "next/link";
 import { useAppDispatch, useAppSelector } from "@/store/hooks";
 import { changePassword, fetchUser } from "@/store/users";
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
 import { jwtDecode } from "jwt-decode";
 import { JwtPayload } from "@/pages/settings";
 import { useRouter } from "next/navigation";
@@ -16,16 +16,19 @@ type ChangePasswordForm = {
 };
 
 export const ChangePasswordForm = () => {
+  const [isError, setIsError] = useState(false);
+  console.log(isError);
   const {
     register,
     formState: { errors, isValid },
     handleSubmit,
     reset,
+    getValues,
   } = useForm<ChangePasswordForm>({
     mode: "onBlur",
   });
   const dispatch = useAppDispatch();
-  const user = useAppSelector((state) => state.user.user.data);
+  const user = useAppSelector((state) => state.user.user);
   const router = useRouter();
 
   useEffect(() => {
@@ -35,9 +38,15 @@ export const ChangePasswordForm = () => {
   }, []);
 
   const onSubmit: SubmitHandler<ChangePasswordForm> = (data) => {
-    dispatch(changePassword({ ...data, userId: user?._id }));
-    reset();
-    router.push("/profile");
+    dispatch(changePassword({ ...data, userId: user.data?._id })).then(() => {
+      // if (user.data) {
+      //   reset();
+      //   router.push("/profile");
+      // }
+      if (user.error) {
+        setIsError(true);
+      }
+    });
   };
 
   const onError: SubmitErrorHandler<ChangePasswordForm> = (data) => {
@@ -70,6 +79,13 @@ export const ChangePasswordForm = () => {
             value: 4,
             message: "Мінімум 4 сымбалі",
           },
+          validate: (match) => {
+            const password = getValues("oldPassword");
+            return (
+              match !== password ||
+              "Новы пароль павінен адрозьнівацца ад старога"
+            );
+          },
         })}
       />
       <div className={styles.errorBox}>
@@ -87,9 +103,10 @@ export const ChangePasswordForm = () => {
             value: 4,
             message: "Мінімум 4 сымбалі",
           },
-          //   pattern: {
-          //     value:
-          //   }
+          validate: (match) => {
+            const password = getValues("newPassword");
+            return match === password || "Пароль павінен супадаць!";
+          },
         })}
       />
       <div className={styles.errorBox}>
