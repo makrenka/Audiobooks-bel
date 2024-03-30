@@ -5,6 +5,12 @@ export type UserState = {
     error: null | any;
     data: User | null;
   };
+  changePassword: {
+    isLoading: boolean;
+    isSuccess: boolean;
+    error: null | any;
+    data: User | null;
+  };
 };
 
 export type User = {

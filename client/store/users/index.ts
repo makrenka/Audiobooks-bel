@@ -66,6 +66,12 @@ const initialState: UserState = {
     error: null,
     data: null,
   },
+  changePassword: {
+    isLoading: false,
+    isSuccess: false,
+    error: null,
+    data: null,
+  },
 };
 
 export const userSlice = createSlice({
@@ -80,7 +86,9 @@ export const userSlice = createSlice({
     builder
       .addCase(fetchUser.pending, (state) => {
         state.user.isLoading = true;
+        state.user.isSuccess = false;
         state.user.error = null;
+        state.user.data = null;
       })
       .addCase(fetchUser.fulfilled, (state, action: PayloadAction<User>) => {
         state.user.isLoading = false;
@@ -96,7 +104,9 @@ export const userSlice = createSlice({
       })
       .addCase(addCategoryUser.pending, (state) => {
         state.user.isLoading = true;
+        state.user.isSuccess = false;
         state.user.error = null;
+        state.user.data = null;
       })
       .addCase(
         addCategoryUser.fulfilled,
@@ -117,23 +127,25 @@ export const userSlice = createSlice({
         }
       )
       .addCase(changePassword.pending, (state) => {
-        state.user.isLoading = true;
-        state.user.error = null;
+        state.changePassword.isLoading = true;
+        state.changePassword.isSuccess = false;
+        state.changePassword.error = null;
+        state.changePassword.data = null;
       })
       .addCase(
         changePassword.fulfilled,
         (state, action: PayloadAction<User>) => {
-          state.user.isLoading = false;
-          state.user.isSuccess = true;
-          state.user.error = null;
-          state.user.data = action.payload;
+          state.changePassword.isLoading = false;
+          state.changePassword.isSuccess = true;
+          state.changePassword.error = null;
+          state.changePassword.data = action.payload;
         }
       )
       .addCase(changePassword.rejected, (state, action: PayloadAction<any>) => {
-        state.user.isLoading = false;
-        state.user.isSuccess = false;
-        state.user.error = action.payload;
-        state.user.data = null;
+        state.changePassword.isLoading = false;
+        state.changePassword.isSuccess = false;
+        state.changePassword.error = action.payload;
+        state.changePassword.data = null;
       });
   },
 });

@@ -17,7 +17,6 @@ type ChangePasswordForm = {
 
 export const ChangePasswordForm = () => {
   const [isError, setIsError] = useState(false);
-  console.log(isError);
   const {
     register,
     formState: { errors, isValid },
@@ -29,6 +28,9 @@ export const ChangePasswordForm = () => {
   });
   const dispatch = useAppDispatch();
   const user = useAppSelector((state) => state.user.user);
+  const changePasswordState = useAppSelector(
+    (state) => state.user.changePassword
+  );
   const router = useRouter();
 
   useEffect(() => {
@@ -37,16 +39,18 @@ export const ChangePasswordForm = () => {
     dispatch(fetchUser(id));
   }, []);
 
+  useEffect(() => {
+    if (changePasswordState.error) {
+      setIsError(true);
+    }
+    if (changePasswordState.data) {
+      reset();
+      router.push("/profile");
+    }
+  }, [changePasswordState.error, changePasswordState.data]);
+
   const onSubmit: SubmitHandler<ChangePasswordForm> = (data) => {
-    dispatch(changePassword({ ...data, userId: user.data?._id })).then(() => {
-      // if (user.data) {
-      //   reset();
-      //   router.push("/profile");
-      // }
-      if (user.error) {
-        setIsError(true);
-      }
-    });
+    dispatch(changePassword({ ...data, userId: user.data?._id }));
   };
 
   const onError: SubmitErrorHandler<ChangePasswordForm> = (data) => {
@@ -69,6 +73,11 @@ export const ChangePasswordForm = () => {
           <p className={styles.errorText}>{errors?.oldPassword.message}</p>
         )}
       </div>
+      {isError && (
+        <div className={styles.errorBox}>
+          <p className={styles.errorText}>Няправільны стары пароль</p>
+        </div>
+      )}
       <input
         type="text"
         placeholder="Новы пароль"
