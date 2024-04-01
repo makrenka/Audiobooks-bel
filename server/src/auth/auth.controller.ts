@@ -2,6 +2,7 @@ import { Body, Controller, Post, UsePipes } from '@nestjs/common';
 import { AuthService } from './auth.service';
 import { CreateUserDto } from 'src/user/dto/create-user.dto';
 import { ValidationPipe } from 'src/pipes/validation.pipe';
+import { ForgottenPasswordDto } from './dto/forgotten-password.dto';
 
 @Controller('/auth')
 export class AuthController {
@@ -17,5 +18,10 @@ export class AuthController {
   @Post('/registration')
   registration(@Body() dto: CreateUserDto) {
     return this.authService.registration(dto);
+  }
+
+  @Post('/forgotten-password')
+  forgottenPassword(@Body() dto: ForgottenPasswordDto) {
+    return this.authService.forgottenPassword(dto);
   }
 }

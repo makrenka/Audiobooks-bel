@@ -8,12 +8,20 @@ import { UserService } from 'src/user/user.service';
 import { JwtService } from '@nestjs/jwt';
 import * as bcrypt from 'bcryptjs';
 import { CreateUserDto } from 'src/user/dto/create-user.dto';
+import { User } from 'src/user/schemas/user.schema';
+import { MailService } from 'src/mail/mail.service';
+import generator from 'generate-password';
+import { InjectModel } from '@nestjs/mongoose';
+import { Model } from 'mongoose';
+import { ForgottenPasswordDto } from './dto/forgotten-password.dto';
 
 @Injectable()
 export class AuthService {
   constructor(
     private userService: UserService,
     private jwtService: JwtService,
+    private mailService: MailService,
+    @InjectModel(User.name) private userModel: Model<User>,
   ) {}
 
   async login(dto: CreateUserDto) {
@@ -54,5 +62,20 @@ export class AuthService {
       return user;
     }
     throw new UnauthorizedException({ message: 'Uncorrect email or password' });
+  }
+
+  async forgottenPassword(dto: ForgottenPasswordDto) {
+    const password = generator.generate({
+      length: 6,
+      numbers: true,
+    });
+
+    await this.mailService.sendMailForgottenPassword(dto, password);
+
+    const user = await this.userModel.findById(dto.userId);
+    const hashPassword = await bcrypt.hash(password, 5);
+    user.password = hashPassword;
+    await user.save();
+    return user;
   }
 }

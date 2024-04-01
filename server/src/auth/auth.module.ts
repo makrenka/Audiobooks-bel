@@ -9,6 +9,7 @@ import { Role, RoleSchema } from 'src/user/schemas/role.schema';
 import { Book, BookSchema } from 'src/book/schemas/book.schema';
 import { Category, CategorySchema } from 'src/category/schemas/category.schema';
 import { FileService } from 'src/file/file.service';
+import { MailModule } from 'src/mail/mail.module';
 
 @Module({
   controllers: [AuthController],
@@ -26,6 +27,7 @@ import { FileService } from 'src/file/file.service';
         expiresIn: '24h',
       },
     }),
+    MailModule,
   ],
   exports: [AuthService, JwtModule],
 })
