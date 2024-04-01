@@ -10,6 +10,7 @@ import { fetchUser, logoutUser } from "@/store/users";
 import { HomeIndicator } from "@/components/HomeIndicator/HomeIndicator";
 
 import styles from "./page.module.css";
+import { setAuthenticated } from "@/store/auth";
 
 export type JwtPayload = {
   id: string;
@@ -29,6 +30,7 @@ export default function SettingsPage() {
   const logout = () => {
     localStorage.removeItem("token");
     dispatch(logoutUser());
+    dispatch(setAuthenticated(false));
     router.push("/");
   };
 

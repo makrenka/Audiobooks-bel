@@ -10,7 +10,7 @@ import * as bcrypt from 'bcryptjs';
 import { CreateUserDto } from 'src/user/dto/create-user.dto';
 import { User } from 'src/user/schemas/user.schema';
 import { MailService } from 'src/mail/mail.service';
-import generator from 'generate-password';
+import * as generator from 'generate-password';
 import { InjectModel } from '@nestjs/mongoose';
 import { Model } from 'mongoose';
 import { ForgottenPasswordDto } from './dto/forgotten-password.dto';
