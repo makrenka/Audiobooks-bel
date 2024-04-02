@@ -11,11 +11,7 @@ export const registration = createAsyncThunk(
 
       const { data }: AxiosResponse<AuthResponse> = await axios.post(
         "http://localhost:5000/auth/registration",
-        {
-          email,
-          password,
-          name,
-        }
+        { email, password, name }
       );
 
       if (!data) {
@@ -26,7 +22,7 @@ export const registration = createAsyncThunk(
 
       return jwtDecode(data.token);
     } catch (error: any) {
-      return rejectWithValue(error.message);
+      return rejectWithValue(error.response.data.message);
     }
   }
 );
@@ -39,10 +35,7 @@ export const login = createAsyncThunk(
 
       const { data }: AxiosResponse<AuthResponse> = await axios.post(
         "http://localhost:5000/auth/login",
-        {
-          email,
-          password,
-        }
+        { email, password }
       );
 
       if (!data) {
@@ -53,7 +46,27 @@ export const login = createAsyncThunk(
 
       return jwtDecode(data.token);
     } catch (error: any) {
-      return rejectWithValue(error.message);
+      return rejectWithValue(error.response.data.message);
+    }
+  }
+);
+
+export const forgot = createAsyncThunk(
+  "auth/forgot",
+  async (email: string, { rejectWithValue }) => {
+    try {
+      const { data } = await axios.post(
+        "http://localhost:5000/auth/forgotten-password",
+        { email }
+      );
+
+      if (!data) {
+        throw new Error("Can't create password, server error!");
+      }
+
+      return data;
+    } catch (error: any) {
+      return rejectWithValue(error.response.data.message);
     }
   }
 );
@@ -127,6 +140,24 @@ export const authSlice = createSlice({
         state.auth.isSuccess = false;
         state.auth.isError = true;
         state.auth.errorMessage = action.payload;
+      })
+      .addCase(forgot.pending, (state) => {
+        state.forgot.isLoading = true;
+        state.forgot.isSuccess = false;
+        state.forgot.isError = false;
+        state.forgot.errorMessage = "";
+      })
+      .addCase(forgot.fulfilled, (state, action: PayloadAction<any>) => {
+        state.forgot.isLoading = false;
+        state.forgot.isSuccess = true;
+        state.forgot.isError = false;
+        state.forgot.errorMessage = "";
+      })
+      .addCase(forgot.rejected, (state, action: PayloadAction<any>) => {
+        state.forgot.isLoading = false;
+        state.forgot.isSuccess = false;
+        state.forgot.isError = true;
+        state.forgot.errorMessage = action.payload;
       });
   },
 });

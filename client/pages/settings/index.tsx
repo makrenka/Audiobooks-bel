@@ -19,6 +19,9 @@ export type JwtPayload = {
 export default function SettingsPage() {
   const dispatch = useAppDispatch();
   const user = useAppSelector((state) => state.user.user.data);
+  const changingPasswordData = useAppSelector(
+    (state) => state.user.changePassword.data
+  );
   const router = useRouter();
 
   useEffect(() => {
@@ -56,6 +59,11 @@ export default function SettingsPage() {
               <Link href={"/profile"} className={styles.link}>
                 Паглядзець профіль
               </Link>
+              {changingPasswordData && (
+                <p className={styles.changingPasswordText}>
+                  Пароль пасьпяхова зьменены
+                </p>
+              )}
             </div>
           </div>
         </div>

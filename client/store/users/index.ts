@@ -80,6 +80,7 @@ export const userSlice = createSlice({
   reducers: {
     logoutUser: (state) => {
       state.user.data = null;
+      state.changePassword.data = null;
     },
   },
   extraReducers: (builder) => {

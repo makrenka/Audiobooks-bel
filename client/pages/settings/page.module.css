@@ -93,3 +93,12 @@
   background-color: white;
   border: 1px solid #f77a55;
 }
+
+.changingPasswordText {
+  font-family: "Poppins", sans-serif;
+  font-style: normal;
+  font-weight: 400;
+  font-size: 14px;
+  color: green;
+  margin-top: 5px;
+}

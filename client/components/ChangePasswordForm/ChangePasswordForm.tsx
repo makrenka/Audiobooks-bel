@@ -45,7 +45,7 @@ export const ChangePasswordForm = () => {
     }
     if (changePasswordState.data) {
       reset();
-      router.push("/profile");
+      router.push("/settings");
     }
   }, [changePasswordState.error, changePasswordState.data]);
 

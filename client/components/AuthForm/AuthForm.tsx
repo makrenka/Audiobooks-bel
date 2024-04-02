@@ -4,7 +4,7 @@ import { useRouter } from "next/router";
 import Link from "next/link";
 
 import { useAppDispatch, useAppSelector } from "@/store/hooks";
-import { login, registration } from "@/store/auth";
+import { forgot, login, registration } from "@/store/auth";
 
 import styles from "./AuthForm.module.css";
 
@@ -26,10 +26,18 @@ export const AuthForm = () => {
   const dispatch = useAppDispatch();
   const router = useRouter();
   const { isAuthenticated } = useAppSelector((state) => state.auth);
+  const authErrorMessage = useAppSelector(
+    (state) => state.auth.auth.errorMessage
+  );
+  const sendedEmail = useAppSelector((state) => state.auth.forgot.isSuccess);
+  const sendedEmailError = useAppSelector(
+    (state) => state.auth.forgot.errorMessage
+  );
 
   useEffect(() => {
     isAuthenticated && router.push("/");
-  }, [isAuthenticated]);
+    sendedEmail && router.push("/");
+  }, [isAuthenticated, sendedEmail]);
 
   const onSubmit: SubmitHandler<LoginForm> = (data) => {
     if (router.pathname === "/auth/login") {
@@ -37,6 +45,9 @@ export const AuthForm = () => {
     }
     if (router.pathname === "/auth/registry") {
       dispatch(registration(data));
+    }
+    if (router.pathname === "/auth/forget") {
+      dispatch(forgot(data.email));
     }
     reset();
   };
@@ -54,6 +65,16 @@ export const AuthForm = () => {
           ? "Рэгістрацыя"
           : "Забылі пароль?"}
       </h3>
+      {authErrorMessage && (
+        <div className={styles.errorBox}>
+          <p className={styles.errorText}>{authErrorMessage}</p>
+        </div>
+      )}
+      {sendedEmailError && (
+        <div className={styles.errorBox}>
+          <p className={styles.errorText}>{sendedEmailError}</p>
+        </div>
+      )}
       {router.pathname === "/auth/registry" && (
         <>
           <input
@@ -72,7 +93,7 @@ export const AuthForm = () => {
         </>
       )}
       <input
-        type="text"
+        type="email"
         placeholder="Email"
         className={styles.inputText}
         {...register("email", {
