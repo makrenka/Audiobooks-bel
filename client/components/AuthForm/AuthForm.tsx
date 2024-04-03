@@ -36,7 +36,7 @@ export const AuthForm = () => {
 
   useEffect(() => {
     isAuthenticated && router.push("/");
-    sendedEmail && router.push("/");
+    sendedEmail && router.push("/auth/login");
   }, [isAuthenticated, sendedEmail]);
 
   const onSubmit: SubmitHandler<LoginForm> = (data) => {
@@ -75,6 +75,11 @@ export const AuthForm = () => {
           <p className={styles.errorText}>{sendedEmailError}</p>
         </div>
       )}
+      {sendedEmail && (
+        <p className={styles.sendedEmailText}>
+          Пароль для ўваходу адпраўлены на Ваш email
+        </p>
+      )}
       {router.pathname === "/auth/registry" && (
         <>
           <input
@@ -111,8 +116,8 @@ export const AuthForm = () => {
       </div>
       {router.pathname === "/auth/forget" && (
         <p className={styles.forgetText}>
-          Калі ласка, увядзіце Ваш email, і мы адправім Вам спасылку для ўваходу
-          ў акаунт
+          Калі ласка, увядзіце Ваш email, і мы адправім Вам пароль для ўваходу ў
+          акаунт
         </p>
       )}
       {router.pathname === "/auth/login" ||

@@ -13,6 +13,7 @@ import { MailService } from 'src/mail/mail.service';
 import * as generator from 'generate-password';
 import { InjectModel } from '@nestjs/mongoose';
 import { Model } from 'mongoose';
+import { ForgottenPasswordDto } from './dto/forgotten-password.dto';
 
 @Injectable()
 export class AuthService {
@@ -63,18 +64,18 @@ export class AuthService {
     throw new UnauthorizedException({ message: 'Няправільны email ці пароль' });
   }
 
-  async forgottenPassword(email: string) {
+  async forgottenPassword(dto: ForgottenPasswordDto) {
     const password = generator.generate({
       length: 6,
       numbers: true,
     });
-    const user = await this.userModel.findOne({ email });
+    const user = await this.userModel.findOne({ email: dto.email });
     if (!user) {
       throw new UnauthorizedException({ message: 'Няправільны email' });
     }
 
     await this.mailService.sendMailForgottenPassword(
-      email,
+      dto.email,
       user.name,
       password,
     );

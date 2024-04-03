@@ -2,8 +2,12 @@ import { AuthForm } from "@/components/AuthForm/AuthForm";
 import styles from "./page.module.css";
 import Link from "next/link";
 import { NextSeo } from "next-seo";
+import { useAppDispatch } from "@/store/hooks";
+import { setForgotDefault } from "@/store/auth";
 
 export default function Login() {
+  const dispatch = useAppDispatch();
+
   return (
     <>
       <NextSeo title={"Аўдыёкнігі | Уваход у акаунт"} />
@@ -12,7 +16,11 @@ export default function Login() {
           <img src="/icons/logo.svg" alt="logo" className={styles.logo} />
           <AuthForm />
           <div className={styles.forgetBox}>
-            <Link href={"/auth/forget"} className={styles.formLink}>
+            <Link
+              href={"/auth/forget"}
+              className={styles.formLink}
+              onClick={() => dispatch(setForgotDefault())}
+            >
               Забылі пароль?
             </Link>
           </div>

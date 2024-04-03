@@ -100,6 +100,12 @@ export const authSlice = createSlice({
     setAuthenticated: (state, action: PayloadAction<boolean>) => {
       state.isAuthenticated = action.payload;
     },
+    setForgotDefault: (state) => {
+      state.forgot.isLoading = false;
+      state.forgot.isSuccess = false;
+      state.forgot.isError = false;
+      state.forgot.errorMessage = "";
+    },
   },
   extraReducers: (builder) => {
     builder
@@ -162,4 +168,4 @@ export const authSlice = createSlice({
   },
 });
 
-export const { setAuthenticated } = authSlice.actions;
+export const { setAuthenticated, setForgotDefault } = authSlice.actions;
