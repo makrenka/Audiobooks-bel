@@ -16,6 +16,7 @@ export type UserAuth = {
   email: string;
   password?: string;
   name?: string;
+  remember?: boolean;
 };
 
 export type AuthResponse = {

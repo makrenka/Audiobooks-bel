@@ -10,4 +10,6 @@ export class CreateUserDto {
   @IsString({ message: 'Must be string' })
   @Length(4, 16, { message: 'Min 4 symbols, max - 16' })
   readonly password: string;
+
+  readonly remember: boolean;
 }

@@ -26,7 +26,7 @@ export class AuthService {
 
   async login(dto: CreateUserDto) {
     const user = await this.validateUser(dto);
-    return this.generateToken(user);
+    return this.generateToken(user, dto.remember);
   }
 
   async registration(dto: CreateUserDto) {
@@ -42,17 +42,19 @@ export class AuthService {
       ...dto,
       password: hashPassword,
     });
-    return this.generateToken(user);
+    return this.generateToken(user, dto.remember);
   }
 
-  private async generateToken(user: any) {
+  private async generateToken(user: any, remember: boolean) {
     const payload = {
       email: user.email,
       id: user.id,
       roles: user.roles,
       name: user.name,
     };
-    return { token: this.jwtService.sign(payload) };
+    return remember
+      ? { token: this.jwtService.sign(payload, { expiresIn: '60d' }) }
+      : { token: this.jwtService.sign(payload, { expiresIn: '24h' }) };
   }
 
   private async validateUser(dto: CreateUserDto) {

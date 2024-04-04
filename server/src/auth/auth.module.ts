@@ -22,10 +22,10 @@ import { MailModule } from 'src/mail/mail.module';
       { name: Category.name, schema: CategorySchema },
     ]),
     JwtModule.register({
-      secret: process.env.PRIVATE_KEY || 'SECRET',
-      signOptions: {
-        expiresIn: '24h',
-      },
+      secret: `${process.env.PRIVATE_KEY}`,
+      // signOptions: {
+      //   expiresIn: 5,
+      // },
     }),
     MailModule,
   ],

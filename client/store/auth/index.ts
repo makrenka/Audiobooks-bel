@@ -31,11 +31,11 @@ export const login = createAsyncThunk(
   "auth/login",
   async (userData: UserAuth, { rejectWithValue }) => {
     try {
-      const { email, password } = userData;
+      const { email, password, remember } = userData;
 
       const { data }: AxiosResponse<AuthResponse> = await axios.post(
         "http://localhost:5000/auth/login",
-        { email, password }
+        { email, password, remember }
       );
 
       if (!data) {

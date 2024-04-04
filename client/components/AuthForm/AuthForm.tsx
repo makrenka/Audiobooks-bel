@@ -12,6 +12,7 @@ type LoginForm = {
   email: string;
   password: string;
   name: string;
+  remember: boolean;
 };
 
 export const AuthForm = () => {
@@ -156,7 +157,11 @@ export const AuthForm = () => {
       )}
       {router.pathname === "/auth/login" && (
         <label className={styles.labelCheckbox}>
-          <input type="checkbox" className={styles.inputCheckbox} />
+          <input
+            type="checkbox"
+            className={styles.inputCheckbox}
+            {...register("remember")}
+          />
           <span>Запомніць мяне</span>
         </label>
       )}
