@@ -1,8 +1,16 @@
-import { Body, Controller, Post, UsePipes } from '@nestjs/common';
+import {
+  Body,
+  Controller,
+  Get,
+  Post,
+  UseGuards,
+  UsePipes,
+} from '@nestjs/common';
 import { AuthService } from './auth.service';
 import { CreateUserDto } from 'src/user/dto/create-user.dto';
 import { ValidationPipe } from 'src/pipes/validation.pipe';
 import { ForgottenPasswordDto } from './dto/forgotten-password.dto';
+import { GoogleAuthGuard } from './utils/Guards';
 
 @Controller('/auth')
 export class AuthController {
@@ -23,5 +31,17 @@ export class AuthController {
   @Post('/forgotten-password')
   forgottenPassword(@Body() dto: ForgottenPasswordDto) {
     return this.authService.forgottenPassword(dto);
+  }
+
+  @Get('/google/login')
+  @UseGuards(GoogleAuthGuard)
+  googleLogin() {
+    return { msg: 'Google authentication' };
+  }
+
+  @Get('/google/redirect')
+  @UseGuards(GoogleAuthGuard)
+  googleRedirect() {
+    return { msg: 'OK' };
   }
 }

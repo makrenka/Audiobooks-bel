@@ -57,7 +57,7 @@ export class AuthService {
       : { token: this.jwtService.sign(payload, { expiresIn: '24h' }) };
   }
 
-  private async validateUser(dto: CreateUserDto) {
+  async validateUser(dto: CreateUserDto) {
     const user = await this.userService.getUserByEmail(dto.email);
     const passwordEquals = await bcrypt.compare(dto.password, user.password);
     if (user && passwordEquals) {

@@ -10,10 +10,20 @@ import { Book, BookSchema } from 'src/book/schemas/book.schema';
 import { Category, CategorySchema } from 'src/category/schemas/category.schema';
 import { FileService } from 'src/file/file.service';
 import { MailModule } from 'src/mail/mail.module';
+import { GoogleStrategy } from './utils/GoogleStrategy';
 
 @Module({
   controllers: [AuthController],
-  providers: [AuthService, UserService, FileService],
+  providers: [
+    AuthService,
+    UserService,
+    FileService,
+    GoogleStrategy,
+    {
+      provide: 'AUTH_SERVICE',
+      useClass: AuthService,
+    },
+  ],
   imports: [
     MongooseModule.forFeature([{ name: User.name, schema: UserSchema }]),
     MongooseModule.forFeature([{ name: Role.name, schema: RoleSchema }]),
