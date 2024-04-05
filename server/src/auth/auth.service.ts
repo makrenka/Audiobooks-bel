@@ -12,7 +12,7 @@ import { User } from 'src/user/schemas/user.schema';
 import { MailService } from 'src/mail/mail.service';
 import * as generator from 'generate-password';
 import { InjectModel } from '@nestjs/mongoose';
-import { Model } from 'mongoose';
+import { Model, ObjectId } from 'mongoose';
 import { ForgottenPasswordDto } from './dto/forgotten-password.dto';
 import { GoogleUserDetailsDto } from './dto/google-user-details.dto';
 import { Role } from 'src/user/schemas/role.schema';
@@ -100,6 +100,11 @@ export class AuthService {
     const hashPassword = await bcrypt.hash(password, 5);
     user.password = hashPassword;
     await user.save();
+    return user;
+  }
+
+  async findUser(id: ObjectId) {
+    const user = await this.userModel.findOne({ id });
     return user;
   }
 }
