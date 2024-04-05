@@ -11,6 +11,7 @@ import { Category, CategorySchema } from 'src/category/schemas/category.schema';
 import { FileService } from 'src/file/file.service';
 import { MailModule } from 'src/mail/mail.module';
 import { GoogleStrategy } from './utils/GoogleStrategy';
+import { SessionSerializer } from './utils/Serializer';
 
 @Module({
   controllers: [AuthController],
@@ -19,6 +20,7 @@ import { GoogleStrategy } from './utils/GoogleStrategy';
     UserService,
     FileService,
     GoogleStrategy,
+    SessionSerializer,
     {
       provide: 'AUTH_SERVICE',
       useClass: AuthService,

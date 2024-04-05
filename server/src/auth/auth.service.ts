@@ -14,6 +14,8 @@ import * as generator from 'generate-password';
 import { InjectModel } from '@nestjs/mongoose';
 import { Model } from 'mongoose';
 import { ForgottenPasswordDto } from './dto/forgotten-password.dto';
+import { GoogleUserDetailsDto } from './dto/google-user-details.dto';
+import { Role } from 'src/user/schemas/role.schema';
 
 @Injectable()
 export class AuthService {
@@ -22,6 +24,7 @@ export class AuthService {
     private jwtService: JwtService,
     private mailService: MailService,
     @InjectModel(User.name) private userModel: Model<User>,
+    @InjectModel(Role.name) private roleModel: Model<Role>,
   ) {}
 
   async login(dto: CreateUserDto) {
@@ -57,13 +60,25 @@ export class AuthService {
       : { token: this.jwtService.sign(payload, { expiresIn: '24h' }) };
   }
 
-  async validateUser(dto: CreateUserDto) {
+  private async validateUser(dto: CreateUserDto) {
     const user = await this.userService.getUserByEmail(dto.email);
     const passwordEquals = await bcrypt.compare(dto.password, user.password);
     if (user && passwordEquals) {
       return user;
     }
     throw new UnauthorizedException({ message: 'Няправільны email ці пароль' });
+  }
+
+  async googleValidateUser(dto: GoogleUserDetailsDto) {
+    console.log(dto);
+    const user = await this.userService.getUserByEmail(dto.email);
+    console.log(user);
+    if (user) return user;
+    const newUser = await this.userModel.create({ ...dto });
+    const role = await this.roleModel.findOne({ value: 'USER' });
+    newUser.roles.push(role);
+    await newUser.save();
+    return newUser;
   }
 
   async forgottenPassword(dto: ForgottenPasswordDto) {
