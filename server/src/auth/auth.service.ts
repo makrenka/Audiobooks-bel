@@ -117,7 +117,7 @@ export class AuthService {
   }
 
   async findUser(id: ObjectId) {
-    const user = await this.userModel.findOne({ id });
+    const user = await this.userModel.findById(id);
     return user;
   }
 }

@@ -44,14 +44,20 @@ export class AuthController {
 
   @Get('/google/redirect')
   @UseGuards(GoogleAuthGuard)
-  googleRedirect(@Res() response: any) {
-    return response.redirect(process.env.ROUTE_TO_FE);
+  googleRedirect() {
+    // return response.redirect(process.env.ROUTE_TO_FE);
+    return { msg: 'OK' };
   }
 
   @Get('/google/user')
   googleUser(@Req() request: Request) {
     console.log('/google/user');
     console.log(request.user);
+    if (request.user) {
+      return { msg: 'Authenticated' };
+    } else {
+      return { msg: 'Not Authenticated' };
+    }
     // return this.authService.googleLogin(request.user);
   }
 }

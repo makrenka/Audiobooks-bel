@@ -26,8 +26,8 @@ export default function Home() {
 
   useEffect(() => {
     dispatch(fetchBooks());
-    dispatch(googleAuth());
-  }, [dispatch, user]);
+    // dispatch(googleAuth());
+  }, [dispatch]);
 
   return (
     <>
