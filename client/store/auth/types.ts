@@ -1,3 +1,5 @@
+import { User } from "../users/types";
+
 type BaseState = {
   isLoading: boolean;
   isSuccess: boolean;
@@ -10,6 +12,9 @@ export type AuthState = {
   auth: BaseState;
   register: BaseState;
   forgot: BaseState;
+  google: BaseState & {
+    data: User | null;
+  };
 };
 
 export type UserAuth = {

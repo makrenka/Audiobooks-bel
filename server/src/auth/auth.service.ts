@@ -70,8 +70,8 @@ export class AuthService {
   }
 
   async googleValidateUser(dto: GoogleUserDetailsDto) {
-    console.log(dto);
     const user = await this.userService.getUserByEmail(dto.email);
+    console.log('Service validate');
     console.log(user);
     if (user) return user;
     const newUser = await this.userModel.create({ ...dto });
@@ -79,6 +79,19 @@ export class AuthService {
     newUser.roles.push(role);
     await newUser.save();
     return newUser;
+  }
+
+  async googleLogin(user: User) {
+    console.log('googleLogin');
+    console.log(user);
+    const payload = {
+      email: user.email,
+      name: user.name,
+    };
+    return {
+      loggedInUser: user,
+      access_token: this.jwtService.sign(payload, { expiresIn: '24h' }),
+    };
   }
 
   async forgottenPassword(dto: ForgottenPasswordDto) {

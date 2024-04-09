@@ -4,7 +4,7 @@ import { NextSeo } from "next-seo";
 
 import { wrapper } from "@/store";
 import { fetchBooks } from "@/store/books";
-import { useAppDispatch } from "@/store/hooks";
+import { useAppDispatch, useAppSelector } from "@/store/hooks";
 
 import { Header } from "@/components/Header/Header";
 import { sections } from "@/constants/sectionsHome";
@@ -12,6 +12,7 @@ import { SectionHome } from "@/components/SectionHome/SectionHome";
 import { BottomBar } from "@/components/BottomBar/BottomBar";
 
 import styles from "./index.module.css";
+import { googleAuth } from "@/store/auth";
 
 // export const metadata: Metadata = {
 //   title: "Аўдыёкнігі",
@@ -20,10 +21,13 @@ import styles from "./index.module.css";
 
 export default function Home() {
   const dispatch = useAppDispatch();
+  const user = useAppSelector((state) => state.auth.google.data);
+  console.log(user);
 
   useEffect(() => {
     dispatch(fetchBooks());
-  }, [dispatch]);
+    dispatch(googleAuth());
+  }, [dispatch, user]);
 
   return (
     <>

@@ -3,7 +3,7 @@ import styles from "./page.module.css";
 import Link from "next/link";
 import { NextSeo } from "next-seo";
 import { useAppDispatch } from "@/store/hooks";
-import { setForgotDefault } from "@/store/auth";
+import { googleAuth, setForgotDefault } from "@/store/auth";
 
 export default function Login() {
   const dispatch = useAppDispatch();
@@ -26,12 +26,19 @@ export default function Login() {
           </div>
           <h4 className={styles.socialHeading}>Ці ўвайдзіце праз:</h4>
           <div className={styles.socialButtons}>
-            <button type="button" className={styles.socialBtn}>
-              <img
-                src="/icons/social-media/logos_google.svg"
-                alt="auth with google"
-              />
-            </button>
+            <Link href={"http://localhost:5000/auth/google/login"}>
+              <button
+                type="button"
+                className={styles.socialBtn}
+                // onClick={() => dispatch(googleAuth())}
+              >
+                <img
+                  src="/icons/social-media/logos_google.svg"
+                  alt="auth with google"
+                />
+              </button>
+            </Link>
+
             <button type="button" className={styles.socialBtn}>
               <img
                 src="/icons/social-media/logos_facebook.svg"

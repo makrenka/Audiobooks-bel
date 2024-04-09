@@ -2,6 +2,7 @@ import { PayloadAction, createAsyncThunk, createSlice } from "@reduxjs/toolkit";
 import { AuthResponse, AuthState, UserAuth } from "./types";
 import axios, { AxiosResponse } from "axios";
 import { jwtDecode } from "jwt-decode";
+import { User } from "../users/types";
 
 export const registration = createAsyncThunk(
   "auth/registration",
@@ -71,6 +72,27 @@ export const forgot = createAsyncThunk(
   }
 );
 
+export const googleAuth = createAsyncThunk(
+  "auth/googleAuth",
+  async (_, { rejectWithValue }) => {
+    try {
+      const { data } = await axios.get(
+        "http://localhost:5000/auth/google/user"
+      );
+
+      if (!data) {
+        throw new Error("Can't login with Google, server error!");
+      }
+
+      localStorage.setItem("token", data.token);
+
+      return data;
+    } catch (error: any) {
+      return rejectWithValue(error.response.data.message);
+    }
+  }
+);
+
 const initialState: AuthState = {
   isAuthenticated: false,
   auth: {
@@ -90,6 +112,13 @@ const initialState: AuthState = {
     isSuccess: false,
     isError: false,
     errorMessage: "",
+  },
+  google: {
+    isLoading: false,
+    isSuccess: false,
+    isError: false,
+    errorMessage: "",
+    data: null,
   },
 };
 
@@ -164,6 +193,25 @@ export const authSlice = createSlice({
         state.forgot.isSuccess = false;
         state.forgot.isError = true;
         state.forgot.errorMessage = action.payload;
+      })
+      .addCase(googleAuth.pending, (state) => {
+        state.google.isLoading = true;
+        state.google.isSuccess = false;
+        state.google.isError = false;
+        state.google.errorMessage = "";
+      })
+      .addCase(googleAuth.fulfilled, (state, action: PayloadAction<User>) => {
+        state.google.isLoading = false;
+        state.google.isSuccess = true;
+        state.google.isError = false;
+        state.google.errorMessage = "";
+        state.google.data = action.payload;
+      })
+      .addCase(googleAuth.rejected, (state, action: PayloadAction<any>) => {
+        state.google.isLoading = false;
+        state.google.isSuccess = false;
+        state.google.isError = true;
+        state.google.errorMessage = action.payload;
       });
   },
 });

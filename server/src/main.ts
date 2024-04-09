@@ -9,7 +9,7 @@ const start = async () => {
     const app = await NestFactory.create(AppModule);
     app.use(
       session({
-        secret: 'dkfhgnvrrfjoedkdkslfsfk',
+        secret: process.env.GOOGLE_SESSION_SECRET,
         saveUninitialized: false,
         resave: false,
         cookie: {
