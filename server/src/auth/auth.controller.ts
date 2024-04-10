@@ -4,7 +4,6 @@ import {
   Get,
   Post,
   Req,
-  Res,
   UseGuards,
   UsePipes,
 } from '@nestjs/common';
@@ -13,7 +12,6 @@ import { CreateUserDto } from 'src/user/dto/create-user.dto';
 import { ValidationPipe } from 'src/pipes/validation.pipe';
 import { ForgottenPasswordDto } from './dto/forgotten-password.dto';
 import { GoogleAuthGuard } from './utils/Guards';
-import { Request } from 'express';
 
 @Controller('/auth')
 export class AuthController {
@@ -50,7 +48,7 @@ export class AuthController {
   }
 
   @Get('/google/user')
-  googleUser(@Req() request: Request) {
+  googleUser(@Req() request: any) {
     console.log('/google/user');
     console.log(request.user);
     if (request.user) {

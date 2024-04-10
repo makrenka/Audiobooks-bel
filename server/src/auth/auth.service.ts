@@ -116,8 +116,8 @@ export class AuthService {
     return user;
   }
 
-  async findUser(id: ObjectId) {
-    const user = await this.userModel.findById(id);
-    return user;
-  }
+  // async findUser(id: ObjectId) {
+  //   const user = await this.userModel.findById(id);
+  //   return user;
+  // }
 }
