@@ -1,12 +1,59 @@
-import { AuthForm } from "@/components/AuthForm/AuthForm";
-import styles from "./page.module.css";
 import Link from "next/link";
 import { NextSeo } from "next-seo";
+import { useRouter } from "next/router";
+import axios from "axios";
+import Cookies from "js-cookie";
+
 import { useAppDispatch } from "@/store/hooks";
-import { googleAuth, setForgotDefault } from "@/store/auth";
+import { setForgotDefault, setToken } from "@/store/auth";
+
+import { AuthForm } from "@/components/AuthForm/AuthForm";
+
+import styles from "./page.module.css";
 
 export default function Login() {
   const dispatch = useAppDispatch();
+  const router = useRouter();
+
+  const fetchAuthUser = async () => {
+    const response = await axios
+      .get(`${process.env.APP_API_URL}/auth/user`, {
+        withCredentials: true,
+      })
+      .catch((err) => {
+        console.log(err);
+        router.push("/");
+      });
+
+    if (response && response.data) {
+      // dispatch(setIsAuthenticated(true));
+      // dispatch(setAuthUser(response.data));
+      await dispatch(
+        setToken(
+          Cookies.set("access_token", response.data.access_token) as string
+        )
+      );
+    }
+  };
+
+  const signIn = async () => {
+    let timer: any = null;
+    const newWindow = window.open(
+      `${process.env.APP_API_URL}/auth/google`
+      // "_blank",
+      // "width=500,height=600"
+    );
+
+    if (newWindow) {
+      timer = setInterval(() => {
+        if (newWindow.closed) {
+          console.log("authenticated");
+          fetchAuthUser();
+          if (timer) clearInterval(timer);
+        }
+      }, 500);
+    }
+  };
 
   return (
     <>
@@ -26,19 +73,12 @@ export default function Login() {
           </div>
           <h4 className={styles.socialHeading}>Ці ўвайдзіце праз:</h4>
           <div className={styles.socialButtons}>
-            <Link href={"http://localhost:5000/auth/google/login"}>
-              <button
-                type="button"
-                className={styles.socialBtn}
-                // onClick={() => dispatch(googleAuth())}
-              >
-                <img
-                  src="/icons/social-media/logos_google.svg"
-                  alt="auth with google"
-                />
-              </button>
-            </Link>
-
+            <button type="button" className={styles.socialBtn} onClick={signIn}>
+              <img
+                src="/icons/social-media/logos_google.svg"
+                alt="auth with google"
+              />
+            </button>
             <button type="button" className={styles.socialBtn}>
               <img
                 src="/icons/social-media/logos_facebook.svg"

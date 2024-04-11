@@ -12,7 +12,6 @@ import { SectionHome } from "@/components/SectionHome/SectionHome";
 import { BottomBar } from "@/components/BottomBar/BottomBar";
 
 import styles from "./index.module.css";
-import { googleAuth } from "@/store/auth";
 
 // export const metadata: Metadata = {
 //   title: "Аўдыёкнігі",
@@ -26,7 +25,6 @@ export default function Home() {
 
   useEffect(() => {
     dispatch(fetchBooks());
-    // dispatch(googleAuth());
   }, [dispatch]);
 
   return (

@@ -4,6 +4,7 @@ import {
   Get,
   Post,
   Req,
+  Res,
   UseGuards,
   UsePipes,
 } from '@nestjs/common';
@@ -42,20 +43,21 @@ export class AuthController {
 
   @Get('/google/redirect')
   @UseGuards(GoogleAuthGuard)
-  googleRedirect() {
-    // return response.redirect(process.env.ROUTE_TO_FE);
-    return { msg: 'OK' };
+  googleRedirect(@Res() response: any) {
+    return response.redirect(process.env.ROUTE_TO_FE);
+    // return this.authService.googleLogin(request.user);
+    // return { msg: 'OK' };
   }
 
   @Get('/google/user')
   googleUser(@Req() request: any) {
     console.log('/google/user');
     console.log(request.user);
-    if (request.user) {
-      return { msg: 'Authenticated' };
-    } else {
-      return { msg: 'Not Authenticated' };
-    }
-    // return this.authService.googleLogin(request.user);
+    // if (request.user) {
+    //   return { msg: 'Authenticated' };
+    // } else {
+    //   return { msg: 'Not Authenticated' };
+    // }
+    return this.authService.googleLogin(request.user);
   }
 }

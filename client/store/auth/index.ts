@@ -95,6 +95,7 @@ export const googleAuth = createAsyncThunk(
 
 const initialState: AuthState = {
   isAuthenticated: false,
+  token: null,
   auth: {
     isLoading: false,
     isSuccess: false,
@@ -134,6 +135,9 @@ export const authSlice = createSlice({
       state.forgot.isSuccess = false;
       state.forgot.isError = false;
       state.forgot.errorMessage = "";
+    },
+    setToken: (state, action: PayloadAction<string | null>) => {
+      state.token = action.payload;
     },
   },
   extraReducers: (builder) => {
@@ -216,4 +220,5 @@ export const authSlice = createSlice({
   },
 });
 
-export const { setAuthenticated, setForgotDefault } = authSlice.actions;
+export const { setAuthenticated, setForgotDefault, setToken } =
+  authSlice.actions;
