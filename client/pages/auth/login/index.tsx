@@ -17,13 +17,14 @@ export default function Login() {
 
   const fetchAuthUser = async () => {
     const response = await axios
-      .get(`${process.env.APP_API_URL}/auth/user`, {
+      .get(`http://localhost:5000/auth/user`, {
         withCredentials: true,
       })
       .catch((err) => {
         console.log(err);
         router.push("/");
       });
+    console.log(response);
 
     if (response && response.data) {
       // dispatch(setIsAuthenticated(true));
@@ -37,22 +38,26 @@ export default function Login() {
   };
 
   const signIn = async () => {
-    let timer: any = null;
-    const newWindow = window.open(
-      `${process.env.APP_API_URL}/auth/google`
-      // "_blank",
-      // "width=500,height=600"
-    );
+    // let timer: any = null;
+    // const newWindow = window.open(
+    //   `http://localhost:5000/auth/google/login`,
+    //   "_blank",
+    //   "width=500,height=600"
+    // );
 
-    if (newWindow) {
-      timer = setInterval(() => {
-        if (newWindow.closed) {
-          console.log("authenticated");
-          fetchAuthUser();
-          if (timer) clearInterval(timer);
-        }
-      }, 500);
-    }
+    // if (newWindow) {
+    //   timer = setInterval(() => {
+    //     if (newWindow.closed) {
+    //       console.log("authenticated");
+    //       fetchAuthUser();
+    //       if (timer) clearInterval(timer);
+    //     }
+    //   }, 500);
+    // }
+    await router.push("http://localhost:5000/auth/google/login").then(() => {
+      console.log("fetchAuthUser");
+      fetchAuthUser();
+    });
   };
 
   return (

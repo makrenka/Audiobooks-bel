@@ -43,9 +43,9 @@ export class AuthController {
 
   @Get('/google/redirect')
   @UseGuards(GoogleAuthGuard)
-  googleRedirect(@Res() response: any) {
-    return response.redirect(process.env.ROUTE_TO_FE);
-    // return this.authService.googleLogin(request.user);
+  googleRedirect(@Req() request: any) {
+    // return response.redirect(process.env.ROUTE_TO_FE);
+    return this.authService.googleLogin(request.user);
     // return { msg: 'OK' };
   }
 

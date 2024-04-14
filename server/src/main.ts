@@ -19,7 +19,10 @@ const start = async () => {
     );
     app.use(passport.initialize());
     app.use(passport.session());
-    app.enableCors();
+    app.enableCors({
+      origin: true,
+      credentials: true,
+    });
 
     await app.listen(PORT, () => console.log(`server started on PORT ${PORT}`));
   } catch (e) {

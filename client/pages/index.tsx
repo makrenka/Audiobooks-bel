@@ -21,7 +21,7 @@ import styles from "./index.module.css";
 export default function Home() {
   const dispatch = useAppDispatch();
   const user = useAppSelector((state) => state.auth.google.data);
-  console.log(user);
+  // console.log(user);
 
   useEffect(() => {
     dispatch(fetchBooks());
