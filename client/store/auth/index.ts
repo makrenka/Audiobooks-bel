@@ -84,8 +84,6 @@ export const googleAuth = createAsyncThunk(
         throw new Error("Can't login with Google, server error!");
       }
 
-      localStorage.setItem("token", data.token);
-
       return data;
     } catch (error: any) {
       return rejectWithValue(error.response.data.message);
@@ -95,7 +93,7 @@ export const googleAuth = createAsyncThunk(
 
 const initialState: AuthState = {
   isAuthenticated: false,
-  token: null,
+  token: "",
   auth: {
     isLoading: false,
     isSuccess: false,
@@ -136,7 +134,7 @@ export const authSlice = createSlice({
       state.forgot.isError = false;
       state.forgot.errorMessage = "";
     },
-    setToken: (state, action: PayloadAction<string | null>) => {
+    setToken: (state, action: PayloadAction<string>) => {
       state.token = action.payload;
     },
   },
@@ -210,6 +208,7 @@ export const authSlice = createSlice({
         state.google.isError = false;
         state.google.errorMessage = "";
         state.google.data = action.payload;
+        state.isAuthenticated = true;
       })
       .addCase(googleAuth.rejected, (state, action: PayloadAction<any>) => {
         state.google.isLoading = false;

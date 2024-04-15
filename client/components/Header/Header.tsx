@@ -1,5 +1,6 @@
 import Link from "next/link";
 import { useRouter } from "next/navigation";
+import Cookies from "js-cookie";
 
 import styles from "./Header.module.css";
 
@@ -8,7 +9,8 @@ export const Header = () => {
 
   const routSettings = () => {
     const token = localStorage.getItem("token");
-    if (token) {
+    const cookie = Cookies.get("access_token");
+    if (token || cookie) {
       router.push("/settings");
     } else {
       router.push("/auth/login");

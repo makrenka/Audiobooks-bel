@@ -3,6 +3,7 @@ import { jwtDecode } from "jwt-decode";
 import { useEffect } from "react";
 import { useRouter } from "next/navigation";
 import { NextSeo } from "next-seo";
+import Cookies from "js-cookie";
 
 import { HeaderSection } from "@/components/HeaderSection/HeaderSection";
 import { useAppDispatch, useAppSelector } from "@/store/hooks";
@@ -27,6 +28,12 @@ export default function SettingsPage() {
   useEffect(() => {
     const token = localStorage.getItem("token");
     const { id } = jwtDecode(token || "") as JwtPayload;
+    dispatch(fetchUser(id));
+  }, []);
+
+  useEffect(() => {
+    const cookie = Cookies.get("access_token");
+    const { id } = jwtDecode(cookie || "") as JwtPayload;
     dispatch(fetchUser(id));
   }, []);
 

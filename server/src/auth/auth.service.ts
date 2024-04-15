@@ -81,12 +81,14 @@ export class AuthService {
     return newUser;
   }
 
-  async googleLogin(user: User) {
+  async googleLogin(user: any) {
     console.log('googleLogin');
     console.log(user);
     const payload = {
+      id: user.id,
       email: user.email,
       name: user.name,
+      roles: user.roles,
     };
     return {
       loggedInUser: user,

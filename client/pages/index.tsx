@@ -4,7 +4,7 @@ import { NextSeo } from "next-seo";
 
 import { wrapper } from "@/store";
 import { fetchBooks } from "@/store/books";
-import { useAppDispatch, useAppSelector } from "@/store/hooks";
+import { useAppDispatch } from "@/store/hooks";
 
 import { Header } from "@/components/Header/Header";
 import { sections } from "@/constants/sectionsHome";
@@ -20,8 +20,6 @@ import styles from "./index.module.css";
 
 export default function Home() {
   const dispatch = useAppDispatch();
-  const user = useAppSelector((state) => state.auth.google.data);
-  // console.log(user);
 
   useEffect(() => {
     dispatch(fetchBooks());

@@ -5,7 +5,7 @@ import axios from "axios";
 import Cookies from "js-cookie";
 
 import { useAppDispatch } from "@/store/hooks";
-import { setForgotDefault, setToken } from "@/store/auth";
+import { googleAuth, setForgotDefault, setToken } from "@/store/auth";
 
 import { AuthForm } from "@/components/AuthForm/AuthForm";
 
@@ -15,49 +15,8 @@ export default function Login() {
   const dispatch = useAppDispatch();
   const router = useRouter();
 
-  const fetchAuthUser = async () => {
-    const response = await axios
-      .get(`http://localhost:5000/auth/user`, {
-        withCredentials: true,
-      })
-      .catch((err) => {
-        console.log(err);
-        router.push("/");
-      });
-    console.log(response);
-
-    if (response && response.data) {
-      // dispatch(setIsAuthenticated(true));
-      // dispatch(setAuthUser(response.data));
-      await dispatch(
-        setToken(
-          Cookies.set("access_token", response.data.access_token) as string
-        )
-      );
-    }
-  };
-
   const signIn = async () => {
-    // let timer: any = null;
-    // const newWindow = window.open(
-    //   `http://localhost:5000/auth/google/login`,
-    //   "_blank",
-    //   "width=500,height=600"
-    // );
-
-    // if (newWindow) {
-    //   timer = setInterval(() => {
-    //     if (newWindow.closed) {
-    //       console.log("authenticated");
-    //       fetchAuthUser();
-    //       if (timer) clearInterval(timer);
-    //     }
-    //   }, 500);
-    // }
-    await router.push("http://localhost:5000/auth/google/login").then(() => {
-      console.log("fetchAuthUser");
-      fetchAuthUser();
-    });
+    router.push("http://localhost:5000/auth/google/login");
   };
 
   return (
