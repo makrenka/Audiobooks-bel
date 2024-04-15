@@ -48,19 +48,10 @@ export class AuthController {
     return response.redirect(
       `${process.env.GOOGLE_AUTH_REDIRECT}/${user.access_token}`,
     );
-    // return this.authService.googleLogin(request.user);
-    // return { msg: 'OK' };
   }
 
   @Get('/google/user')
   googleUser(@Req() request: any) {
-    console.log('/google/user');
-    console.log(request.user);
-    // if (request.user) {
-    //   return { msg: 'Authenticated' };
-    // } else {
-    //   return { msg: 'Not Authenticated' };
-    // }
     return this.authService.googleLogin(request.user);
   }
 }

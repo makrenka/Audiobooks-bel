@@ -72,28 +72,8 @@ export const forgot = createAsyncThunk(
   }
 );
 
-export const googleAuth = createAsyncThunk(
-  "auth/googleAuth",
-  async (_, { rejectWithValue }) => {
-    try {
-      const { data } = await axios.get(
-        "http://localhost:5000/auth/google/user"
-      );
-
-      if (!data) {
-        throw new Error("Can't login with Google, server error!");
-      }
-
-      return data;
-    } catch (error: any) {
-      return rejectWithValue(error.response.data.message);
-    }
-  }
-);
-
 const initialState: AuthState = {
   isAuthenticated: false,
-  token: "",
   auth: {
     isLoading: false,
     isSuccess: false,
@@ -133,9 +113,6 @@ export const authSlice = createSlice({
       state.forgot.isSuccess = false;
       state.forgot.isError = false;
       state.forgot.errorMessage = "";
-    },
-    setToken: (state, action: PayloadAction<string>) => {
-      state.token = action.payload;
     },
   },
   extraReducers: (builder) => {
@@ -195,29 +172,8 @@ export const authSlice = createSlice({
         state.forgot.isSuccess = false;
         state.forgot.isError = true;
         state.forgot.errorMessage = action.payload;
-      })
-      .addCase(googleAuth.pending, (state) => {
-        state.google.isLoading = true;
-        state.google.isSuccess = false;
-        state.google.isError = false;
-        state.google.errorMessage = "";
-      })
-      .addCase(googleAuth.fulfilled, (state, action: PayloadAction<User>) => {
-        state.google.isLoading = false;
-        state.google.isSuccess = true;
-        state.google.isError = false;
-        state.google.errorMessage = "";
-        state.google.data = action.payload;
-        state.isAuthenticated = true;
-      })
-      .addCase(googleAuth.rejected, (state, action: PayloadAction<any>) => {
-        state.google.isLoading = false;
-        state.google.isSuccess = false;
-        state.google.isError = true;
-        state.google.errorMessage = action.payload;
       });
   },
 });
 
-export const { setAuthenticated, setForgotDefault, setToken } =
-  authSlice.actions;
+export const { setAuthenticated, setForgotDefault } = authSlice.actions;

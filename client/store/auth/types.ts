@@ -9,7 +9,6 @@ type BaseState = {
 
 export type AuthState = {
   isAuthenticated: boolean;
-  token: string;
   auth: BaseState;
   register: BaseState;
   forgot: BaseState;

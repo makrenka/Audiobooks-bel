@@ -1,6 +1,9 @@
-import { FormEvent, FormEventHandler, useEffect, useState } from "react";
+import { useEffect, useState } from "react";
 import Link from "next/link";
 import { jwtDecode } from "jwt-decode";
+import { useRouter } from "next/navigation";
+import { useForm } from "react-hook-form";
+import Cookies from "js-cookie";
 
 import { useAppDispatch, useAppSelector } from "@/store/hooks";
 import { categories } from "@/constants/categories";
@@ -9,8 +12,6 @@ import { addCategoryUser, fetchUser } from "@/store/users";
 import { CategoryButton } from "../CategoryButton/CategoryButton";
 
 import styles from "./PersonalizationForm.module.css";
-import { useRouter } from "next/navigation";
-import { useForm } from "react-hook-form";
 
 export const PersonalizationForm = () => {
   const [genres, setGenres] = useState<string[]>([]);
@@ -21,8 +22,18 @@ export const PersonalizationForm = () => {
 
   useEffect(() => {
     const token = localStorage.getItem("token");
-    const { id } = jwtDecode(token || "") as JwtPayload;
-    dispatch(fetchUser(id));
+    if (token) {
+      const { id } = jwtDecode(token || "") as JwtPayload;
+      dispatch(fetchUser(id));
+    }
+  }, []);
+
+  useEffect(() => {
+    const cookie = Cookies.get("access_token");
+    if (cookie) {
+      const { id } = jwtDecode(cookie || "") as JwtPayload;
+      dispatch(fetchUser(id));
+    }
   }, []);
 
   useEffect(() => {

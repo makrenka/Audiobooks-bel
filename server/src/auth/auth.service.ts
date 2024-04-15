@@ -71,8 +71,6 @@ export class AuthService {
 
   async googleValidateUser(dto: GoogleUserDetailsDto) {
     const user = await this.userService.getUserByEmail(dto.email);
-    console.log('Service validate');
-    console.log(user);
     if (user) return user;
     const newUser = await this.userModel.create({ ...dto });
     const role = await this.roleModel.findOne({ value: 'USER' });
@@ -82,8 +80,6 @@ export class AuthService {
   }
 
   async googleLogin(user: any) {
-    console.log('googleLogin');
-    console.log(user);
     const payload = {
       id: user.id,
       email: user.email,
@@ -117,9 +113,4 @@ export class AuthService {
     await user.save();
     return user;
   }
-
-  // async findUser(id: ObjectId) {
-  //   const user = await this.userModel.findById(id);
-  //   return user;
-  // }
 }

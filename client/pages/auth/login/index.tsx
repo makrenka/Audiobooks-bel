@@ -1,11 +1,9 @@
 import Link from "next/link";
 import { NextSeo } from "next-seo";
 import { useRouter } from "next/router";
-import axios from "axios";
-import Cookies from "js-cookie";
 
 import { useAppDispatch } from "@/store/hooks";
-import { googleAuth, setForgotDefault, setToken } from "@/store/auth";
+import { setForgotDefault } from "@/store/auth";
 
 import { AuthForm } from "@/components/AuthForm/AuthForm";
 
@@ -15,7 +13,7 @@ export default function Login() {
   const dispatch = useAppDispatch();
   const router = useRouter();
 
-  const signIn = async () => {
+  const signIn = () => {
     router.push("http://localhost:5000/auth/google/login");
   };
 

@@ -9,9 +9,9 @@ import { HeaderSection } from "@/components/HeaderSection/HeaderSection";
 import { useAppDispatch, useAppSelector } from "@/store/hooks";
 import { fetchUser, logoutUser } from "@/store/users";
 import { HomeIndicator } from "@/components/HomeIndicator/HomeIndicator";
+import { setAuthenticated } from "@/store/auth";
 
 import styles from "./page.module.css";
-import { setAuthenticated } from "@/store/auth";
 
 export type JwtPayload = {
   id: string;
@@ -27,18 +27,23 @@ export default function SettingsPage() {
 
   useEffect(() => {
     const token = localStorage.getItem("token");
-    const { id } = jwtDecode(token || "") as JwtPayload;
-    dispatch(fetchUser(id));
+    if (token) {
+      const { id } = jwtDecode(token || "") as JwtPayload;
+      dispatch(fetchUser(id));
+    }
   }, []);
 
   useEffect(() => {
     const cookie = Cookies.get("access_token");
-    const { id } = jwtDecode(cookie || "") as JwtPayload;
-    dispatch(fetchUser(id));
+    if (cookie) {
+      const { id } = jwtDecode(cookie || "") as JwtPayload;
+      dispatch(fetchUser(id));
+    }
   }, []);
 
   const logout = () => {
     localStorage.removeItem("token");
+    Cookies.remove("access_token");
     dispatch(logoutUser());
     dispatch(setAuthenticated(false));
     router.push("/");

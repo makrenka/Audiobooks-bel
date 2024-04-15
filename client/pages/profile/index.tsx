@@ -3,6 +3,8 @@ import Link from "next/link";
 import { jwtDecode } from "jwt-decode";
 import axios from "axios";
 import { useRouter } from "next/router";
+import Cookies from "js-cookie";
+import { NextSeo } from "next-seo";
 
 import { HeaderSection } from "@/components/HeaderSection/HeaderSection";
 import { useAppDispatch, useAppSelector } from "@/store/hooks";
@@ -13,7 +15,6 @@ import { PhotoUploader } from "@/components/PhotoUploader/PhotoUploader";
 import { useInput } from "@/hooks/useInput";
 
 import styles from "./page.module.css";
-import { NextSeo } from "next-seo";
 
 export default function ProfilePage() {
   const [photo, setPhoto] = useState("");
@@ -29,8 +30,18 @@ export default function ProfilePage() {
 
   useEffect(() => {
     const token = localStorage.getItem("token");
-    const { id } = jwtDecode(token || "") as JwtPayload;
-    dispatch(fetchUser(id));
+    if (token) {
+      const { id } = jwtDecode(token || "") as JwtPayload;
+      dispatch(fetchUser(id));
+    }
+  }, []);
+
+  useEffect(() => {
+    const cookie = Cookies.get("access_token");
+    if (cookie) {
+      const { id } = jwtDecode(cookie || "") as JwtPayload;
+      dispatch(fetchUser(id));
+    }
   }, []);
 
   useEffect(() => {
