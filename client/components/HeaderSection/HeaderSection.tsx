@@ -12,7 +12,10 @@ export const HeaderSection = ({
 }) => {
   const router = useRouter();
 
-  const reference = router.pathname === "/profile" ? "/settings" : "/";
+  const reference =
+    router.pathname === "/profile" || router.pathname === "/admin"
+      ? "/settings"
+      : "/";
 
   return (
     <header className={styles.header}>

@@ -1,0 +1,41 @@
+import { useEffect } from "react";
+import { NextSeo } from "next-seo";
+
+import { useAppDispatch, useAppSelector } from "@/store/hooks";
+import { fetchBooks } from "@/store/books";
+
+import { HeaderSection } from "@/components/HeaderSection/HeaderSection";
+
+import styles from "./page.module.css";
+
+export default function AdminPage() {
+  const dispatch = useAppDispatch();
+  const { bookList } = useAppSelector((state) => state.book);
+
+  useEffect(() => {
+    dispatch(fetchBooks());
+  }, [dispatch]);
+
+  return (
+    <>
+      <NextSeo title={"Аўдыёкнігі | адміністраваньне"} />
+      <div className={styles.container}>
+        <HeaderSection heading={"Адміністраваньне"} />
+        <main className={styles.main}>
+          <button className={styles.addBtn}>Дадаць новую кнігу</button>
+          {bookList.data?.map(({ cover, title, author }) => (
+            <div className={styles.card} key={title}>
+              <img
+                src={cover ? "http://localhost:5000/" + cover : "no-image.png"}
+                alt="Cover of the book"
+                className={styles.img}
+              />
+              <h3 className={styles.heading}>{title}</h3>
+              <p className={styles.author}>{author}</p>
+            </div>
+          ))}
+        </main>
+      </div>
+    </>
+  );
+}

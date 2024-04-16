@@ -12,6 +12,7 @@ import { HomeIndicator } from "@/components/HomeIndicator/HomeIndicator";
 import { setAuthenticated } from "@/store/auth";
 
 import styles from "./page.module.css";
+import classNames from "classnames";
 
 export type JwtPayload = {
   id: string;
@@ -71,6 +72,15 @@ export default function SettingsPage() {
               <Link href={"/profile"} className={styles.link}>
                 Паглядзець профіль
               </Link>
+              {user?.roles.map((item) => item.value).includes("ADMIN") && (
+                <Link
+                  href={"/admin"}
+                  className={classNames(styles.link, styles.adminLink)}
+                >
+                  Адміністраваньне
+                </Link>
+              )}
+
               {changingPasswordData && (
                 <p className={styles.changingPasswordText}>
                   Пароль пасьпяхова зьменены

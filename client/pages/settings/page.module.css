@@ -62,6 +62,12 @@
   font-size: 12px;
   color: #4838d1;
   text-decoration: none;
+  display: block;
+  margin-bottom: 5px;
+}
+
+.adminLink {
+  color: red;
 }
 
 .space {
@@ -92,6 +98,7 @@
   border-radius: 8px;
   background-color: white;
   border: 1px solid #f77a55;
+  margin-bottom: 50px;
 }
 
 .changingPasswordText {

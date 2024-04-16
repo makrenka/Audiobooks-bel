@@ -1,6 +1,8 @@
+import { useEffect } from "react";
 import { NextSeo } from "next-seo";
 
-import { useAppSelector } from "@/store/hooks";
+import { useAppDispatch, useAppSelector } from "@/store/hooks";
+import { fetchBooks } from "@/store/books";
 
 import { BottomBar } from "@/components/BottomBar/BottomBar";
 import { HeaderSection } from "@/components/HeaderSection/HeaderSection";
@@ -8,7 +10,12 @@ import { HeaderSection } from "@/components/HeaderSection/HeaderSection";
 import styles from "../recommended/page.module.css";
 
 export default function NewPage() {
+  const dispatch = useAppDispatch();
   const { bookList } = useAppSelector((state) => state.book);
+
+  useEffect(() => {
+    dispatch(fetchBooks());
+  }, [dispatch]);
 
   return (
     <>
