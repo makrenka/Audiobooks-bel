@@ -59,7 +59,6 @@ export const PersonalizationForm = () => {
     const data = { userId: user?._id, categories: genres };
     dispatch(addCategoryUser(data));
     router.push("/profile");
-    console.log(data);
   };
 
   return (
