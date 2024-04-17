@@ -29,6 +29,10 @@
   background: none;
 }
 
+.profileList {
+  margin-bottom: 50px;
+}
+
 .profileItem {
   list-style: none;
   display: grid;

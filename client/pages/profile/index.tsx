@@ -108,7 +108,7 @@ export default function ProfilePage() {
           </button>
         </div>
       </PhotoUploader>
-      <ul>
+      <ul className={styles.profileList}>
         <li className={styles.profileItem}>
           <h4>Імя</h4>
           {!isEditName ? (

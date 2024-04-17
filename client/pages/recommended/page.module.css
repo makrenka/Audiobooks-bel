@@ -10,6 +10,10 @@
   margin-bottom: 100px;
 }
 
+.cardLink {
+  text-decoration: none;
+}
+
 .card {
   margin-top: 16px;
 }
@@ -46,4 +50,15 @@
   overflow: hidden;
   max-width: 160px;
   text-overflow: ellipsis;
+}
+
+.text {
+  font-family: "Poppins", sans-serif;
+  font-style: normal;
+  font-weight: 500;
+  font-size: 12px;
+  line-height: 21px;
+  text-align: center;
+  color: red;
+  width: 319px;
 }

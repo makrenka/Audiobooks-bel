@@ -1,5 +1,6 @@
 import { useEffect } from "react";
 import { NextSeo } from "next-seo";
+import Link from "next/link";
 
 import { useAppDispatch, useAppSelector } from "@/store/hooks";
 import { fetchBooks } from "@/store/books";
@@ -23,16 +24,20 @@ export default function AdminPage() {
         <HeaderSection heading={"Адміністраваньне"} />
         <main className={styles.main}>
           <button className={styles.addBtn}>Дадаць новую кнігу</button>
-          {bookList.data?.map(({ cover, title, author }) => (
-            <div className={styles.card} key={title}>
-              <img
-                src={cover ? "http://localhost:5000/" + cover : "no-image.png"}
-                alt="Cover of the book"
-                className={styles.img}
-              />
-              <h3 className={styles.heading}>{title}</h3>
-              <p className={styles.author}>{author}</p>
-            </div>
+          {bookList.data?.map(({ cover, title, author, _id }) => (
+            <Link href={`/books/${_id}`} key={_id} className={styles.cardLink}>
+              <div className={styles.card}>
+                <img
+                  src={
+                    cover ? "http://localhost:5000/" + cover : "no-image.png"
+                  }
+                  alt="Cover of the book"
+                  className={styles.img}
+                />
+                <h3 className={styles.heading}>{title}</h3>
+                <p className={styles.author}>{author}</p>
+              </div>
+            </Link>
           ))}
         </main>
       </div>

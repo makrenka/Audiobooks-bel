@@ -27,6 +27,10 @@
   grid-column: 1/3;
 }
 
+.cardLink {
+  text-decoration: none;
+}
+
 .card {
   margin-top: 16px;
 }
