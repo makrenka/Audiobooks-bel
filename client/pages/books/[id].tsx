@@ -12,27 +12,24 @@ import { DetailReviews } from "@/components/DetailReviews/DetailReviews";
 import { MiniPlayer } from "@/components/MiniPlayer/MiniPlayer";
 import { BottomBar } from "@/components/BottomBar/BottomBar";
 import { Book } from "@/store/books/types";
+import { BookModalSettings } from "@/components/BookModalSettings/BookModalSettings";
+import useClickOutside from "@/hooks/useClickOutside";
 
 import styles from "./page.module.css";
 
-// export async function generateMetadata({
-//   params: { id },
-// }: Props): Promise<Metadata> {
-//   const book = audiobooks.filter((item) => item.id === id)[0];
-
-//   return {
-//     title: `Аўдыёкнігі - ${book?.title}`,
-//   };
-// }
-
 export default function DetailPage({ serverBook }: { serverBook: Book }) {
   const [book, setBook] = useState(serverBook);
+  const { ref, isShow, setIsShow } = useClickOutside(false);
+
+  const openMoal = () => {
+    setIsShow(!isShow);
+  };
 
   return (
     <>
       <NextSeo title={"Аўдыёкнігі | " + book.title} />
       <div className={styles.container}>
-        <HeaderDetail title={book.title} />
+        <HeaderDetail title={book.title} openMoal={openMoal} />
         <main className={styles.main}>
           <DetailCard book={book} />
           <DetailCategories categories={book?.categories} />
@@ -43,6 +40,7 @@ export default function DetailPage({ serverBook }: { serverBook: Book }) {
       </div>
       <MiniPlayer />
       <BottomBar />
+      {isShow && <BookModalSettings node={ref} />}
     </>
   );
 }

@@ -1,8 +1,7 @@
-import { useAppSelector } from "@/store/hooks";
+import { Book } from "@/store/books/types";
 import { RatingGroup } from "../RatingGroup/RatingGroup";
 
 import styles from "./DetailCard.module.css";
-import { Book } from "@/store/books/types";
 
 export const DetailCard = ({ book }: { book: Book }) => {
   const reviews = book.reviews;
