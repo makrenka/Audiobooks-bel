@@ -32,4 +32,16 @@ export type BookState = {
     error: null | any;
     data: Book[] | null;
   };
+  deleteBook: {
+    isLoading: boolean;
+    isSuccess: boolean;
+    error: null | any;
+    data: Book | null;
+  };
+};
+
+export type BookDeletePayload = {
+  id: string | string[] | undefined;
+  token?: string;
+  cookie?: string;
 };

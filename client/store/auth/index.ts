@@ -2,7 +2,6 @@ import { PayloadAction, createAsyncThunk, createSlice } from "@reduxjs/toolkit";
 import { AuthResponse, AuthState, UserAuth } from "./types";
 import axios, { AxiosResponse } from "axios";
 import { jwtDecode } from "jwt-decode";
-import { User } from "../users/types";
 
 export const registration = createAsyncThunk(
   "auth/registration",

@@ -1,9 +1,42 @@
 .modal {
   width: 160px;
-  height: 80px;
   background-color: rgb(233, 231, 231);
   position: absolute;
   top: 80px;
   right: 37px;
   border-radius: 10px;
+}
+
+.list {
+  list-style: none;
+  padding: 0 10px;
+  margin: 0;
+}
+
+.item {
+  border-bottom: 1px solid #2e2e5d;
+  width: 100%;
+  text-align: center;
+  padding: 10px 0;
+}
+
+.item:last-child {
+  border-bottom: none;
+}
+
+.reviewLink {
+  text-decoration: none;
+  font-family: "Poppins", sans-serif;
+  font-style: normal;
+  font-weight: 400;
+  font-size: 14px;
+  color: #2e2e5d;
+}
+
+.deleteBtn {
+  font-family: "Poppins", sans-serif;
+  font-style: normal;
+  font-weight: 400;
+  font-size: 14px;
+  color: red;
 }
