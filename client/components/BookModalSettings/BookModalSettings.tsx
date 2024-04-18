@@ -1,12 +1,12 @@
 import React, { useEffect, useRef } from "react";
 import Cookies from "js-cookie";
+import Link from "next/link";
+import { useRouter } from "next/router";
+
+import { deleteBook } from "@/store/books";
+import { useAppDispatch, useAppSelector } from "@/store/hooks";
 
 import styles from "./BookModalSettings.module.css";
-import Link from "next/link";
-import { useAppDispatch, useAppSelector } from "@/store/hooks";
-import axios from "axios";
-import { useRouter } from "next/router";
-import { deleteBook } from "@/store/books";
 
 export const BookModalSettings = () => {
   const dispatch = useAppDispatch();
@@ -30,7 +30,7 @@ export const BookModalSettings = () => {
     let confirmed = confirm("Вы сапраўды хочаце выдаліць гэтую кнігу?");
     if (confirmed && token) dispatch(deleteBook({ id, token }));
     if (confirmed && cookie) dispatch(deleteBook({ id, cookie }));
-    // router.push("/admin");
+    router.push("/admin");
   };
 
   return (
