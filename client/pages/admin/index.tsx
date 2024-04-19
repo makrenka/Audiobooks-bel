@@ -8,10 +8,12 @@ import { fetchBooks } from "@/store/books";
 import { HeaderSection } from "@/components/HeaderSection/HeaderSection";
 
 import styles from "./page.module.css";
+import { useRouter } from "next/router";
 
 export default function AdminPage() {
   const dispatch = useAppDispatch();
   const { bookList } = useAppSelector((state) => state.book);
+  const router = useRouter();
 
   useEffect(() => {
     dispatch(fetchBooks());
@@ -23,7 +25,12 @@ export default function AdminPage() {
       <div className={styles.container}>
         <HeaderSection heading={"Адміністраваньне"} />
         <main className={styles.main}>
-          <button className={styles.addBtn}>Дадаць новую кнігу</button>
+          <button
+            className={styles.addBtn}
+            onClick={() => router.push("/add-book")}
+          >
+            Дадаць новую кнігу
+          </button>
           {bookList.data?.map(({ cover, title, author, _id }) => (
             <Link href={`/books/${_id}`} key={_id} className={styles.cardLink}>
               <div className={styles.card}>
