@@ -6,7 +6,6 @@ import { Review } from './schemas/review.schema';
 import { CreateBookDto } from './dto/create-book.dto';
 import { CreateReviewDto } from './dto/create-review.dto';
 import { FileService, FileType } from 'src/file/file.service';
-import { CreateSectionDto } from '../section/dto/create-section.dto';
 import { Section } from '../section/schemas/section.schema';
 import { Category } from '../category/schemas/category.schema';
 import { AddCategoryBookDto } from 'src/book/dto/add-category-book.dto';

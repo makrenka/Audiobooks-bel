@@ -45,3 +45,11 @@ export type BookDeletePayload = {
   token?: string;
   cookie?: string;
 };
+
+export type AddBookPayload = {
+  title: string;
+  author: string;
+  summary: string;
+  token?: string;
+  cookie?: string;
+};

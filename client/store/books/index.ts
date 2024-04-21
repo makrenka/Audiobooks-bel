@@ -1,6 +1,6 @@
 import { PayloadAction, createAsyncThunk, createSlice } from "@reduxjs/toolkit";
 
-import { Book, BookDeletePayload, BookState } from "./types";
+import { AddBookPayload, Book, BookDeletePayload, BookState } from "./types";
 import axios from "axios";
 
 export const fetchBooks = createAsyncThunk(
@@ -19,11 +19,11 @@ export const fetchBooks = createAsyncThunk(
 export const deleteBook = createAsyncThunk(
   "books/deleteBook",
   async (payload: BookDeletePayload, { rejectWithValue }) => {
-    const { id, token } = payload;
+    const { id, token, cookie } = payload;
     try {
       const response = await axios.delete(`http://localhost:5000/books/${id}`, {
         headers: {
-          Authorization: `Bearer ${token}`,
+          Authorization: `Bearer ${token ? token : cookie}`,
         },
       });
 

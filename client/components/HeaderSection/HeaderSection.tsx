@@ -15,6 +15,8 @@ export const HeaderSection = ({
   const reference =
     router.pathname === "/profile" || router.pathname === "/admin"
       ? "/settings"
+      : router.pathname === "/add-book"
+      ? "/admin"
       : "/";
 
   return (

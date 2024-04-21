@@ -15,7 +15,6 @@ import { CreateBookDto } from './dto/create-book.dto';
 import { ObjectId } from 'mongoose';
 import { CreateReviewDto } from './dto/create-review.dto';
 import { FileFieldsInterceptor } from '@nestjs/platform-express';
-import { CreateSectionDto } from '../section/dto/create-section.dto';
 import { AddCategoryBookDto } from './dto/add-category-book.dto';
 import { Roles } from 'src/auth/roles-auth.decorator';
 import { RolesGuard } from 'src/auth/roles.guard';
