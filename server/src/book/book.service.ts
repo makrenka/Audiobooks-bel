@@ -91,6 +91,11 @@ export class BookService {
     return section;
   }
 
+  async getSections() {
+    const sections = await this.sectionModel.find();
+    return sections;
+  }
+
   async addCategoryBook(dto: AddCategoryBookDto): Promise<Category> {
     const book = await this.bookModel.findById(dto.bookId);
     const category = await this.categoryModel.findOne({ name: dto.name });
@@ -99,9 +104,8 @@ export class BookService {
     return category;
   }
 
-  // async removeCategoryBook(dto: AddCategoryBookDto): Promise<Category> {
-  //   const book = await this.bookModel.findById(dto.bookId);
-  //   const category = await this.categoryModel.findOne({ name: dto.name });
-
-  // }
+  async getCategories() {
+    const categories = await this.categoryModel.find();
+    return categories;
+  }
 }

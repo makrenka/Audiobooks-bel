@@ -1,6 +1,6 @@
 import { PayloadAction, createAsyncThunk, createSlice } from "@reduxjs/toolkit";
 
-import { AddBookPayload, Book, BookDeletePayload, BookState } from "./types";
+import { Book, BookDeletePayload, BookState } from "./types";
 import axios from "axios";
 
 export const fetchBooks = createAsyncThunk(
