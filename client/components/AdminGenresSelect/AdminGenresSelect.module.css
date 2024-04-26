@@ -1,0 +1,51 @@
+.genres {
+  margin-top: 15px;
+}
+
+.genresLabel {
+  font-family: "Poppins", sans-serif;
+  font-style: normal;
+  font-weight: 500;
+  font-size: 14px;
+  color: #2e2e5d;
+}
+
+.genresSelect {
+  height: 30px;
+  width: 100%;
+  margin-top: 5px;
+  border: 1px solid #4838d1;
+  border-radius: 8px;
+}
+
+.genresOption {
+  font-family: "Poppins", sans-serif;
+  font-style: normal;
+  font-weight: 500;
+  font-size: 14px;
+  color: #2e2e5d;
+}
+
+.selectedGenres {
+  display: flex;
+  align-items: center;
+}
+
+.selectedGenresBtn {
+  background: #f1f1f7;
+  border: 1px solid #4838d1;
+  border-radius: 4px;
+  display: flex;
+  align-items: center;
+  padding: 7px;
+  font-family: "Poppins", sans-serif;
+  font-style: normal;
+  font-weight: 500;
+  font-size: 12px;
+  color: #2e2e5d;
+  margin: 5px 10px 5px 0;
+}
+
+.selectedGenresCloseBtn {
+  margin-left: 7px;
+}

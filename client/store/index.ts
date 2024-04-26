@@ -5,6 +5,8 @@ import { ThunkAction, configureStore } from "@reduxjs/toolkit";
 import { bookSclice } from "./books";
 import { authSlice } from "./auth";
 import { userSlice } from "./users";
+import { categoriesSlice } from "./categories";
+import { sectionsSlice } from "./sections";
 
 // create a makeStore function
 export const makeStore = () => {
@@ -14,6 +16,8 @@ export const makeStore = () => {
       book: bookSclice.reducer,
       auth: authSlice.reducer,
       user: userSlice.reducer,
+      categories: categoriesSlice.reducer,
+      sections: sectionsSlice.reducer,
     },
   });
 };

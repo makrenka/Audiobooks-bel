@@ -31,8 +31,6 @@ export class CategoryController {
     return this.categoryService.deleteCategory(id);
   }
 
-  @Roles('ADMIN')
-  @UseGuards(RolesGuard)
   @Get()
   getCategories() {
     return this.categoryService.getCategories();

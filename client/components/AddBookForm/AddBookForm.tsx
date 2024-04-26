@@ -8,6 +8,7 @@ import { useInput } from "@/hooks/useInput";
 import { useTextArea } from "@/hooks/useTextArea";
 
 import styles from "./AddBookForm.module.css";
+import { AdminGenresSelect } from "../AdminGenresSelect/AdminGenresSelect";
 
 export const AddBookForm = () => {
   const [cover, setCover] = useState<File | null>(null);
@@ -16,9 +17,6 @@ export const AddBookForm = () => {
   const title = useInput("");
   const author = useInput("");
   const summary = useTextArea("");
-
-  const [selectedGenre, setSelectedGenre] = useState<string[]>([]);
-  console.log(selectedGenre);
 
   const router = useRouter();
 
@@ -45,10 +43,6 @@ export const AddBookForm = () => {
       })
       .then((resp) => router.push("/admin"))
       .catch((e) => console.log(e));
-  };
-
-  const selectOnChange: ChangeEventHandler<HTMLSelectElement> = (e) => {
-    setSelectedGenre([...selectedGenre, e.target.value]);
   };
 
   return (
@@ -98,30 +92,7 @@ export const AddBookForm = () => {
         {audio && <p className={styles.filename}>{audio?.name}</p>}
       </div>
 
-      <div className={styles.genres}>
-        <label className={styles.genresLabel}>
-          Жанры:
-          <select
-            name="genres"
-            className={styles.genresSelect}
-            onChange={selectOnChange}
-          >
-            <option value="">Абярыце жанры</option>
-            <option value="art">Мастацтва</option>
-            <option value="buisness">Бізнэс</option>
-            <option value="biography">Біяграфія</option>
-            <option value="comedy">Камэдыя</option>
-            <option value="cultury">Культура</option>
-            <option value="education">Адукацыя</option>
-            <option value="philosophy">Філязофія</option>
-            <option value="psychology">Псыхалёгія</option>
-            <option value="technology">Тэхналёгія</option>
-            <option value="fantasy">Фэнтэзі</option>
-            <option value="drama">Драма</option>
-            <option value="fiction">Фікшн</option>
-          </select>
-        </label>
-      </div>
+      <AdminGenresSelect />
 
       <button className={styles.btn} onClick={onSubmit}>
         Дадаць кнігу

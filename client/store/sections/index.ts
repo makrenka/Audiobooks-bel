@@ -6,7 +6,7 @@ export const fetchSections = createAsyncThunk(
   "sections/fetchSections",
   async (_, { rejectWithValue }) => {
     try {
-      const response = await axios.get("http://localhost:5000/books/sections");
+      const response = await axios.get("http://localhost:5000/sections");
 
       return response.data;
     } catch (error: any) {

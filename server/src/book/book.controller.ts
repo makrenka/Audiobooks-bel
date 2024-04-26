@@ -80,20 +80,10 @@ export class BookController {
     return this.bookService.addSectionBook(dto);
   }
 
-  @Get('/sections')
-  getSections() {
-    return this.bookService.getSections();
-  }
-
   @Roles('ADMIN')
   @UseGuards(RolesGuard)
   @Post('/category')
   addCategoryBook(@Body() dto: AddCategoryBookDto) {
     return this.bookService.addCategoryBook(dto);
-  }
-
-  @Get('/categories')
-  getCategories() {
-    return this.bookService.getCategories();
   }
 }

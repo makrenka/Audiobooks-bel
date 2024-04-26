@@ -24,8 +24,6 @@ export class SectionController {
     return this.sectionService.createSection(dto);
   }
 
-  @Roles('ADMIN')
-  @UseGuards(RolesGuard)
   @Get()
   getSections() {
     return this.sectionService.getSections();

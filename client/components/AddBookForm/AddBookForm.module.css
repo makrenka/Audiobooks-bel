@@ -101,23 +101,3 @@
   overflow: hidden;
   text-overflow: ellipsis;
 }
-
-.genres {
-  margin-top: 15px;
-}
-
-.genresLabel {
-  font-family: "Poppins", sans-serif;
-  font-style: normal;
-  font-weight: 500;
-  font-size: 14px;
-  color: #2e2e5d;
-}
-
-.genresSelect {
-  height: 30px;
-  width: 100%;
-  margin-top: 5px;
-  border: 1px solid #4838d1;
-  border-radius: 8px;
-}

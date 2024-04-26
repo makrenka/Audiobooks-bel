@@ -91,21 +91,11 @@ export class BookService {
     return section;
   }
 
-  async getSections() {
-    const sections = await this.sectionModel.find();
-    return sections;
-  }
-
   async addCategoryBook(dto: AddCategoryBookDto): Promise<Category> {
     const book = await this.bookModel.findById(dto.bookId);
     const category = await this.categoryModel.findOne({ name: dto.name });
     book.categories.push(category);
     await book.save();
     return category;
-  }
-
-  async getCategories() {
-    const categories = await this.categoryModel.find();
-    return categories;
   }
 }
