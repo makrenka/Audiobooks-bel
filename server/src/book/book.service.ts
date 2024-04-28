@@ -28,12 +28,14 @@ export class BookService {
       FileType.IMAGE,
       coverBigSize,
     );
+
     const book = await this.bookModel.create({
       ...dto,
       listens: 0,
       audio: audioPath,
       cover: coverPath,
       coverBigSize: coverBigSizePath,
+      categories: dto.categories,
     });
     return book;
   }
@@ -91,11 +93,14 @@ export class BookService {
     return section;
   }
 
-  async addCategoryBook(dto: AddCategoryBookDto): Promise<Category> {
+  async addCategoryBook(dto: AddCategoryBookDto): Promise<Book> {
     const book = await this.bookModel.findById(dto.bookId);
-    const category = await this.categoryModel.findOne({ name: dto.name });
-    book.categories.push(category);
+    book.categories = [];
+    for (const item of dto.categories) {
+      const category = await this.categoryModel.findOne({ name: item });
+      book.categories.push(category);
+    }
     await book.save();
-    return category;
+    return book;
   }
 }

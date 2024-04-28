@@ -32,6 +32,12 @@ export type BookState = {
     error: null | any;
     data: Book[] | null;
   };
+  book: {
+    isLoading: boolean;
+    isSuccess: boolean;
+    error: null | any;
+    data: Book | null;
+  };
   deleteBook: {
     isLoading: boolean;
     isSuccess: boolean;
@@ -52,4 +58,9 @@ export type AddBookPayload = {
   summary: string;
   token?: string;
   cookie?: string;
+};
+
+export type AddCategoryBook = {
+  bookId: string | undefined;
+  categories: string[];
 };

@@ -17,6 +17,7 @@ export const AddBookForm = () => {
   const title = useInput("");
   const author = useInput("");
   const summary = useTextArea("");
+  const [categories, setCategories] = useState<string[]>([]);
 
   const router = useRouter();
 
@@ -37,6 +38,7 @@ export const AddBookForm = () => {
     formdata.append("cover", cover as File);
     formdata.append("coverBigSize", coverBigSize as File);
     formdata.append("audio", audio as File);
+    formdata.append("categories", JSON.stringify(categories));
     axios
       .post("http://localhost:5000/books", formdata, {
         headers: { Authorization: `Bearer ${token ? token : cookie}` },
@@ -92,7 +94,7 @@ export const AddBookForm = () => {
         {audio && <p className={styles.filename}>{audio?.name}</p>}
       </div>
 
-      <AdminGenresSelect />
+      <AdminGenresSelect setGenres={setCategories} />
 
       <button className={styles.btn} onClick={onSubmit}>
         Дадаць кнігу

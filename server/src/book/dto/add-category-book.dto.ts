@@ -1,6 +1,6 @@
 import { ObjectId } from 'mongoose';
 
 export class AddCategoryBookDto {
-  readonly name: string;
+  readonly categories: string[];
   readonly bookId: ObjectId;
 }

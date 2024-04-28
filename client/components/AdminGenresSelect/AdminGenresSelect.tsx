@@ -4,7 +4,11 @@ import styles from "./AdminGenresSelect.module.css";
 import { useAppDispatch, useAppSelector } from "@/store/hooks";
 import { fetchCategories } from "@/store/categories";
 
-export const AdminGenresSelect = () => {
+export const AdminGenresSelect = ({
+  setGenres,
+}: {
+  setGenres: (genres: string[]) => void;
+}) => {
   const [selectedGenre, setSelectedGenre] = useState<string[]>([]);
   const dispatch = useAppDispatch();
   const categories = useAppSelector(
@@ -16,7 +20,16 @@ export const AdminGenresSelect = () => {
   }, []);
 
   const selectOnChange: ChangeEventHandler<HTMLSelectElement> = (e) => {
-    setSelectedGenre([...selectedGenre, e.target.value]);
+    const arr = [...selectedGenre, e.target.value];
+    const setArr = new Set(arr);
+    const filteredArr = Array.from(setArr);
+    setSelectedGenre(filteredArr);
+    setGenres(filteredArr);
+  };
+
+  const deleteCategory = (item: string) => {
+    setSelectedGenre(selectedGenre.filter((genre) => genre !== item));
+    setGenres(selectedGenre.filter((genre) => genre !== item));
   };
 
   return (
@@ -25,12 +38,17 @@ export const AdminGenresSelect = () => {
         Жанры:
         <div className={styles.selectedGenres}>
           {selectedGenre.map((item) => (
-            <button key={item} className={styles.selectedGenresBtn}>
+            <button
+              key={item}
+              className={styles.selectedGenresBtn}
+              type="button"
+            >
               {item}
               <img
-                src="/icons/delete-category-btn.svg"
+                src="/icons/Close Square.svg"
                 alt="delete category button"
                 className={styles.selectedGenresCloseBtn}
+                onClick={() => deleteCategory(item)}
               />
             </button>
           ))}

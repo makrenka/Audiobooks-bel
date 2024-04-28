@@ -3,6 +3,34 @@ import { PayloadAction, createAsyncThunk, createSlice } from "@reduxjs/toolkit";
 import { Book, BookDeletePayload, BookState } from "./types";
 import axios from "axios";
 
+export const createBook = createAsyncThunk(
+  "books/createBook",
+  async (dataBook: Book, { rejectWithValue }) => {
+    try {
+      const { title, author, summary, cover, coverBigSize, audio, categories } =
+        dataBook;
+
+      const book = await axios.post("http://localhost:5000/books", {
+        title,
+        author,
+        summary,
+        cover,
+        coverBigSize,
+        audio,
+        categories,
+      });
+
+      if (!book.data) {
+        throw new Error("Can't create the book, server error!");
+      }
+
+      return book.data;
+    } catch (error: any) {
+      return rejectWithValue(error.response.data.message);
+    }
+  }
+);
+
 export const fetchBooks = createAsyncThunk(
   "books/fetchBooks",
   async (_, { rejectWithValue }) => {
@@ -41,6 +69,12 @@ const initialState: BookState = {
     error: null,
     data: null,
   },
+  book: {
+    isLoading: false,
+    isSuccess: false,
+    error: null,
+    data: null,
+  },
   deleteBook: {
     isLoading: false,
     isSuccess: false,
@@ -55,6 +89,24 @@ export const bookSclice = createSlice({
   reducers: {},
   extraReducers: (builder) => {
     builder
+      .addCase(createBook.pending, (state) => {
+        state.book.isLoading = true;
+        state.book.isSuccess = false;
+        state.book.error = null;
+        state.book.data = null;
+      })
+      .addCase(createBook.fulfilled, (state, action: PayloadAction<Book>) => {
+        state.book.isLoading = false;
+        state.book.isSuccess = true;
+        state.book.error = null;
+        state.book.data = action.payload;
+      })
+      .addCase(createBook.rejected, (state, action: PayloadAction<any>) => {
+        state.book.isLoading = false;
+        state.book.isSuccess = false;
+        state.book.error = action.payload;
+        state.book.data = null;
+      })
       .addCase(fetchBooks.pending, (state) => {
         state.bookList.isLoading = true;
         state.bookList.isSuccess = false;
