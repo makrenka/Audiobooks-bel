@@ -1,44 +1,42 @@
 import { ChangeEventHandler, useEffect, useState } from "react";
 
 import { useAppDispatch, useAppSelector } from "@/store/hooks";
-import { fetchCategories } from "@/store/categories";
+import { fetchSections } from "@/store/sections";
 
-import styles from "./AdminGenresSelect.module.css";
+import styles from "../AdminGenresSelect/AdminGenresSelect.module.css";
 
-export const AdminGenresSelect = ({
-  setGenres,
+export const AdminSectionsSelect = ({
+  setSections,
 }: {
-  setGenres: (genres: string[]) => void;
+  setSections: (section: string[]) => void;
 }) => {
-  const [selectedGenre, setSelectedGenre] = useState<string[]>([]);
+  const [selectedSection, setSelectedSection] = useState<string[]>([]);
   const dispatch = useAppDispatch();
-  const categories = useAppSelector(
-    (state) => state.categories.categoriesList.data
-  );
+  const sections = useAppSelector((state) => state.sections.sectionsList.data);
 
   useEffect(() => {
-    dispatch(fetchCategories());
+    dispatch(fetchSections());
   }, []);
 
   const selectOnChange: ChangeEventHandler<HTMLSelectElement> = (e) => {
-    const arr = [...selectedGenre, e.target.value];
+    const arr = [...selectedSection, e.target.value];
     const setArr = new Set(arr);
     const filteredArr = Array.from(setArr);
-    setSelectedGenre(filteredArr);
-    setGenres(filteredArr);
+    setSelectedSection(filteredArr);
+    setSections(filteredArr);
   };
 
-  const deleteCategory = (item: string) => {
-    setSelectedGenre(selectedGenre.filter((genre) => genre !== item));
-    setGenres(selectedGenre.filter((genre) => genre !== item));
+  const deleteSection = (item: string) => {
+    setSelectedSection(selectedSection.filter((section) => section !== item));
+    setSections(selectedSection.filter((section) => section !== item));
   };
 
   return (
     <div className={styles.genres}>
       <label className={styles.genresLabel}>
-        Жанры:
+        Сэкцыі:
         <div className={styles.selectedGenres}>
-          {selectedGenre.map((item) => (
+          {selectedSection.map((item) => (
             <button
               key={item}
               className={styles.selectedGenresBtn}
@@ -49,7 +47,7 @@ export const AdminGenresSelect = ({
                 src="/icons/Close Square.svg"
                 alt="delete category button"
                 className={styles.selectedGenresCloseBtn}
-                onClick={() => deleteCategory(item)}
+                onClick={() => deleteSection(item)}
               />
             </button>
           ))}
@@ -60,9 +58,9 @@ export const AdminGenresSelect = ({
           onChange={selectOnChange}
         >
           <option value="" className={styles.genresOption}>
-            Абярыце жанры
+            Абярыце сэкцыі
           </option>
-          {categories?.map((item) => (
+          {sections?.map((item) => (
             <option
               value={item.name}
               key={item._id}

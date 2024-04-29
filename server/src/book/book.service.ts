@@ -35,7 +35,6 @@ export class BookService {
       audio: audioPath,
       cover: coverPath,
       coverBigSize: coverBigSizePath,
-      categories: dto.categories,
     });
     return book;
   }
@@ -85,12 +84,15 @@ export class BookService {
     book.save();
   }
 
-  async addSectionBook(dto: AddSectionBookDto): Promise<Section> {
+  async addSectionBook(dto: AddSectionBookDto): Promise<Book> {
     const book = await this.bookModel.findById(dto.bookId);
-    const section = await this.sectionModel.findOne({ name: dto.name });
-    book.sections.push(section);
+    book.sections = [];
+    for (const item of dto.sections) {
+      const section = await this.sectionModel.findOne({ name: item });
+      book.sections.push(section);
+    }
     await book.save();
-    return section;
+    return book;
   }
 
   async addCategoryBook(dto: AddCategoryBookDto): Promise<Book> {

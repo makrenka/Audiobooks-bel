@@ -6,9 +6,10 @@ import Cookies from "js-cookie";
 import { FileUpload } from "../FileUpload/FileUpload";
 import { useInput } from "@/hooks/useInput";
 import { useTextArea } from "@/hooks/useTextArea";
+import { AdminGenresSelect } from "../AdminGenresSelect/AdminGenresSelect";
+import { AdminSectionsSelect } from "../AdminSectionsSelect/AdminSectionsSelect";
 
 import styles from "./AddBookForm.module.css";
-import { AdminGenresSelect } from "../AdminGenresSelect/AdminGenresSelect";
 
 export const AddBookForm = () => {
   const [cover, setCover] = useState<File | null>(null);
@@ -18,6 +19,7 @@ export const AddBookForm = () => {
   const author = useInput("");
   const summary = useTextArea("");
   const [categories, setCategories] = useState<string[]>([]);
+  const [sections, setSections] = useState<string[]>([]);
 
   const router = useRouter();
 
@@ -38,11 +40,34 @@ export const AddBookForm = () => {
     formdata.append("cover", cover as File);
     formdata.append("coverBigSize", coverBigSize as File);
     formdata.append("audio", audio as File);
-    formdata.append("categories", JSON.stringify(categories));
     axios
       .post("http://localhost:5000/books", formdata, {
         headers: { Authorization: `Bearer ${token ? token : cookie}` },
       })
+      .then((resp) =>
+        axios.post(
+          "http://localhost:5000/books/category",
+          {
+            bookId: resp.data._id,
+            categories,
+          },
+          {
+            headers: { Authorization: `Bearer ${token ? token : cookie}` },
+          }
+        )
+      )
+      .then((resp) =>
+        axios.post(
+          "http://localhost:5000/books/section",
+          {
+            bookId: resp.data._id,
+            sections,
+          },
+          {
+            headers: { Authorization: `Bearer ${token ? token : cookie}` },
+          }
+        )
+      )
       .then((resp) => router.push("/admin"))
       .catch((e) => console.log(e));
   };
@@ -95,6 +120,7 @@ export const AddBookForm = () => {
       </div>
 
       <AdminGenresSelect setGenres={setCategories} />
+      <AdminSectionsSelect setSections={setSections} />
 
       <button className={styles.btn} onClick={onSubmit}>
         Дадаць кнігу
