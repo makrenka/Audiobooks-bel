@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react";
+import { ChangeEvent, useEffect, useState } from "react";
 import Link from "next/link";
 import { jwtDecode } from "jwt-decode";
 import { useRouter } from "next/navigation";
@@ -6,19 +6,31 @@ import { useForm } from "react-hook-form";
 import Cookies from "js-cookie";
 
 import { useAppDispatch, useAppSelector } from "@/store/hooks";
-import { categories } from "@/constants/categories";
+// import { categories } from "@/constants/categories";
 import { JwtPayload } from "@/pages/settings";
 import { addCategoryUser, fetchUser } from "@/store/users";
 import { CategoryButton } from "../CategoryButton/CategoryButton";
 
 import styles from "./PersonalizationForm.module.css";
+import { fetchCategories } from "@/store/categories";
+import { highlightMatches } from "@/pages/services/highlightMatches";
 
 export const PersonalizationForm = () => {
   const [genres, setGenres] = useState<string[]>([]);
+  const [searchValue, setSearchValue] = useState("");
   const user = useAppSelector((state) => state.user.user.data);
   const dispatch = useAppDispatch();
   const router = useRouter();
   const { handleSubmit } = useForm();
+  const handleHighlight = (string: string) =>
+    highlightMatches(searchValue, string);
+  const categories = useAppSelector(
+    (state) => state.categories.categoriesList.data
+  );
+
+  useEffect(() => {
+    dispatch(fetchCategories());
+  }, []);
 
   useEffect(() => {
     const token = localStorage.getItem("token");
@@ -61,22 +73,29 @@ export const PersonalizationForm = () => {
     router.push("/profile");
   };
 
+  const changeSearchValue = (e: ChangeEvent<HTMLInputElement>) => {
+    setSearchValue(e.target.value);
+  };
+
   return (
     <form className={styles.persForm} onSubmit={handleSubmit(onSubmit)}>
       <input
         type="text"
         placeholder="Пошук жанраў"
         className={styles.searchInput}
+        onChange={changeSearchValue}
       />
       <div className={styles.buttons}>
-        {categories.map(({ name }) => (
-          <CategoryButton
-            categoryName={name}
-            genres={genres}
-            onClick={onClick}
-            key={name}
-          />
-        ))}
+        {categories
+          ?.filter((item) => item.name.toLowerCase().includes(searchValue))
+          .map(({ name }) => (
+            <CategoryButton
+              categoryName={handleHighlight(name) as string}
+              genres={genres}
+              onClick={onClick}
+              key={name}
+            />
+          ))}
       </div>
       <div className={styles.topics}>
         <p className={styles.topicsText}>{`${genres.length} ${

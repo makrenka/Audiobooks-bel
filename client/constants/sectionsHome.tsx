@@ -1,3 +1,4 @@
+import { AllBooksCardsGroup } from "@/components/AllBooksCardsGroup/AllBooksCardsGroup";
 import { BestSellerCardsGroup } from "@/components/BestSellerCardsGroup/BestSellerCardsGroup";
 import { CategoriesHomeBtnGroup } from "@/components/CategoriesHomeBtnGroup/CategoriesHomeBtnGroup";
 import { NewAndTrendCardsGroup } from "@/components/NewAndTrendCardsGroup/NewAndTrendCardsGroup";
@@ -24,5 +25,10 @@ export const sections = [
     name: "Папулярнае",
     content: <NewAndTrendCardsGroup section="trending" />,
     url: "trending",
+  },
+  {
+    name: "Усе кнігі",
+    content: <AllBooksCardsGroup section="all" />,
+    url: "all-books",
   },
 ];
