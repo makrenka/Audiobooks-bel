@@ -18,7 +18,7 @@ export type User = {
   name: string;
   email: string;
   img: string;
-  books: { title: string }[];
+  books: string[];
   categories: { name: string }[];
   roles: { value: string }[];
 };

@@ -1,15 +1,18 @@
 import classNames from "classnames";
+import { useRouter } from "next/navigation";
+import axios from "axios";
 
-import { useAppDispatch } from "@/store/hooks";
+import { useAppDispatch, useAppSelector } from "@/store/hooks";
 import { playBook, setActive } from "@/store/player";
 import { Book } from "@/store/books/types";
 
 import styles from "./DetailControlButtons.module.css";
-import { useRouter } from "next/navigation";
 
 export const DetailControlButtons = ({ book }: { book: Book }) => {
   const dispatch = useAppDispatch();
   const router = useRouter();
+  const user = useAppSelector((state) => state.user.user.data);
+  const activePlayer = useAppSelector((state) => state.player.active);
 
   const play = () => {
     const token = localStorage.getItem("token");
@@ -18,6 +21,17 @@ export const DetailControlButtons = ({ book }: { book: Book }) => {
     } else {
       dispatch(setActive(book));
       dispatch(playBook());
+      axios.post(`http://localhost:5000/books/listen/${book._id}`);
+      if (!user?.books.includes(book._id) && !activePlayer) {
+        axios.post(
+          "http://localhost:5000/users/book",
+          {
+            userId: user?._id,
+            bookId: book._id,
+          },
+          { headers: { Authorization: `Bearer ${token}` } }
+        );
+      }
     }
   };
 
