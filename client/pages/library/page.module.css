@@ -1,39 +1,46 @@
-.results {
-  margin-top: 32px;
+* {
+  box-sizing: border-box;
+  padding: 0;
+  margin: 0;
 }
 
-.heading {
-  margin: 0;
-  font-family: "Poppins", sans-serif;
-  font-style: normal;
-  font-weight: 500;
-  font-size: 16px;
-  line-height: 24px;
-  color: var(--headings);
+.container {
+  margin: 0 auto;
+  max-width: 319px;
+}
+
+.main {
+  margin-top: 40px;
+  margin-bottom: 133px;
 }
 
 .cards {
   margin-top: 16px;
-  display: grid;
-  grid-template-columns: 1fr 1fr;
-  grid-column-gap: 15px;
-  grid-row-gap: 16px;
+}
+
+.card {
+  padding: 12px;
+  display: flex;
+  align-items: center;
 }
 
 .cardImg {
-  width: 160px;
-  height: 160px;
+  width: 80px;
+  height: 80px;
+}
+
+.cardDescr {
+  margin-left: 16px;
 }
 
 .cardHeading {
-  margin-top: 8px;
-  margin-bottom: 0;
+  margin-bottom: 4px;
   font-family: "Poppins", sans-serif;
   font-style: normal;
   font-weight: 500;
   font-size: 16px;
   line-height: 24px;
-  color: var(--headings);
+  color: #010104;
   white-space: nowrap;
   overflow: hidden;
   max-width: 160px;
@@ -52,6 +59,17 @@
   overflow: hidden;
   max-width: 160px;
   text-overflow: ellipsis;
+}
+
+.message {
+  margin-top: 16px;
+  font-family: "Poppins", sans-serif;
+  font-style: normal;
+  font-weight: 400;
+  font-size: 14px;
+  line-height: 18px;
+  color: red;
+  text-align: center;
 }
 
 .cardLink {

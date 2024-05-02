@@ -4,7 +4,7 @@ import { Book } from "../books/types";
 
 const initialState: PlayerState = {
   active: null,
-  volume: 50,
+  volume: 100,
   duration: 0,
   currentTime: 0,
   pause: true,
@@ -36,6 +36,13 @@ export const playerSlice = createSlice({
       state.currentTime = 0;
       state.showMiniPlayer = true;
     },
+    setPlayerUnActive: (state) => {
+      state.active = null;
+      state.pause = true;
+      state.duration = 0;
+      state.currentTime = 0;
+      state.showMiniPlayer = false;
+    },
   },
 });
 
@@ -46,4 +53,5 @@ export const {
   setVolume,
   setDuration,
   setActive,
+  setPlayerUnActive,
 } = playerSlice.actions;

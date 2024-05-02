@@ -15,6 +15,7 @@ import { SectionHome } from "@/components/SectionHome/SectionHome";
 import { BottomBar } from "@/components/BottomBar/BottomBar";
 
 import styles from "./index.module.css";
+import { setPlayerUnActive } from "@/store/player";
 
 export type JwtPayload = {
   id: string;
@@ -41,6 +42,10 @@ export default function Home() {
       const { id } = jwtDecode(cookie || "") as JwtPayload;
       dispatch(fetchUser(id));
     }
+  }, []);
+
+  useEffect(() => {
+    dispatch(setPlayerUnActive());
   }, []);
 
   return (

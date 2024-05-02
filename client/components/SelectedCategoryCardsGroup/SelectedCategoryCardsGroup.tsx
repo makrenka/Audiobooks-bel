@@ -1,3 +1,5 @@
+import Link from "next/link";
+
 import { useAppSelector } from "@/store/hooks";
 
 import styles from "../LatestSearchCardsGroup/LatestSearchCardsGroup.module.css";
@@ -18,14 +20,18 @@ export const SelectedCategoryCardsGroup = ({
             item.categories.map((i) => i.name).includes(selectedCategory)
           )
           .map(({ cover, title, _id }) => (
-            <div className={styles.card} key={_id}>
-              <img
-                src={cover ? "http://localhost:5000/" + cover : "no-image.png"}
-                alt="Cover of the book"
-                className={styles.img}
-              />
-              <h3 className={styles.cardheading}>{title}</h3>
-            </div>
+            <Link href={`/books/${_id}`} key={_id} className={styles.cardLink}>
+              <div className={styles.card} key={_id}>
+                <img
+                  src={
+                    cover ? "http://localhost:5000/" + cover : "no-image.png"
+                  }
+                  alt="Cover of the book"
+                  className={styles.img}
+                />
+                <h3 className={styles.cardheading}>{title}</h3>
+              </div>
+            </Link>
           ))}
       </div>
     </section>

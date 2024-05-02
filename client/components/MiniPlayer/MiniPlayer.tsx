@@ -12,7 +12,7 @@ import { ModalPlayer } from "../ModalPlayer/ModalPlayer";
 
 import styles from "./MiniPlayer.module.css";
 
-export let audioBook: HTMLAudioElement;
+export let audioBook: HTMLAudioElement | null = null;
 
 export const MiniPlayer = () => {
   const [showPlayer, setShowPlayer] = useState(false);
@@ -26,29 +26,30 @@ export const MiniPlayer = () => {
   };
 
   const setAudio = () => {
-    if (active) {
+    if (active && audioBook) {
       audioBook.src = "http://localhost:5000/" + active.audio;
       audioBook.volume = volume / 100;
       audioBook.onloadedmetadata = () => {
-        dispatch(setDuration(Math.ceil(audioBook.duration)));
+        audioBook && dispatch(setDuration(Math.ceil(audioBook.duration)));
       };
       audioBook.ontimeupdate = () => {
-        dispatch(setCurrentTime(Math.ceil(audioBook.currentTime)));
+        audioBook && dispatch(setCurrentTime(Math.ceil(audioBook.currentTime)));
       };
     }
   };
 
   const play = () => {
     dispatch(playBook());
-    audioBook.play();
+    audioBook && audioBook.play();
   };
 
   const setPause = () => {
     dispatch(pauseBook());
-    audioBook.pause();
+    audioBook && audioBook.pause();
   };
 
   useEffect(() => {
+    if (!active) audioBook = null;
     if (!audioBook) {
       audioBook = new Audio();
     } else {
@@ -62,7 +63,7 @@ export const MiniPlayer = () => {
   }, [showMiniPlayer]);
 
   const changeCurrentTime = (e: React.ChangeEvent<HTMLInputElement>) => {
-    audioBook.currentTime = Number(e.target.value);
+    if (audioBook) audioBook.currentTime = Number(e.target.value);
     dispatch(setCurrentTime(Number(e.target.value)));
   };
 

@@ -43,3 +43,7 @@
   margin-top: 12px;
   margin-bottom: 0;
 }
+
+.cardLink {
+  text-decoration: none;
+}

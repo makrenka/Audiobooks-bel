@@ -36,3 +36,7 @@
   line-height: 21px;
   color: #4838d1;
 }
+
+.btnDisabled {
+  background: #7e72e9;
+}

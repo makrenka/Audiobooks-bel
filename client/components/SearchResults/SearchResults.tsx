@@ -1,3 +1,5 @@
+import Link from "next/link";
+
 import { highlightMatches } from "@/pages/services/highlightMatches";
 import { useAppSelector } from "@/store/hooks";
 
@@ -18,15 +20,19 @@ export const SearchResults = ({ value }: { value: string }) => {
               item.author.toLowerCase().includes(value)
           )
           .map(({ cover, title, author, _id }) => (
-            <div className={styles.card} key={_id}>
-              <img
-                src={cover ? "http://localhost:5000/" + cover : "no-image.png"}
-                alt="Cover of the book"
-                className={styles.cardImg}
-              />
-              <h3 className={styles.cardHeading}>{handleHighlight(title)}</h3>
-              <p className={styles.cardAuthor}>{handleHighlight(author)}</p>
-            </div>
+            <Link href={`/books/${_id}`} key={_id} className={styles.cardLink}>
+              <div className={styles.card} key={_id}>
+                <img
+                  src={
+                    cover ? "http://localhost:5000/" + cover : "no-image.png"
+                  }
+                  alt="Cover of the book"
+                  className={styles.cardImg}
+                />
+                <h3 className={styles.cardHeading}>{handleHighlight(title)}</h3>
+                <p className={styles.cardAuthor}>{handleHighlight(author)}</p>
+              </div>
+            </Link>
           ))}
       </div>
     </section>

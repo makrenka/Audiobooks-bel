@@ -1,9 +1,10 @@
 import classNames from "classnames";
 import { useRouter } from "next/navigation";
 import axios from "axios";
+import Cookies from "js-cookie";
 
 import { useAppDispatch, useAppSelector } from "@/store/hooks";
-import { playBook, setActive } from "@/store/player";
+import { playBook, setActive, setPlayerUnActive } from "@/store/player";
 import { Book } from "@/store/books/types";
 
 import styles from "./DetailControlButtons.module.css";
@@ -16,7 +17,8 @@ export const DetailControlButtons = ({ book }: { book: Book }) => {
 
   const play = () => {
     const token = localStorage.getItem("token");
-    if (!token) {
+    const cookie = Cookies.get("access_token");
+    if (!token && !cookie) {
       router.push("/auth/login");
     } else {
       dispatch(setActive(book));
@@ -29,7 +31,7 @@ export const DetailControlButtons = ({ book }: { book: Book }) => {
             userId: user?._id,
             bookId: book._id,
           },
-          { headers: { Authorization: `Bearer ${token}` } }
+          { headers: { Authorization: `Bearer ${token || cookie}` } }
         );
       }
     }
@@ -39,8 +41,13 @@ export const DetailControlButtons = ({ book }: { book: Book }) => {
     <div className={styles.buttons}>
       <button
         type="button"
-        className={classNames(styles.btn, styles.btnPlay)}
+        className={classNames(
+          styles.btn,
+          styles.btnPlay,
+          activePlayer && styles.btnDisabled
+        )}
         onClick={play}
+        disabled={!!activePlayer}
       >
         <img
           src="/icons/audio-play-button.svg"

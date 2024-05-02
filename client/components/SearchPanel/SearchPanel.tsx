@@ -1,5 +1,5 @@
-"use client";
 import { ChangeEvent, useState } from "react";
+import { useRouter } from "next/router";
 
 import styles from "./SearchPanel.module.css";
 
@@ -9,6 +9,7 @@ type SearchPanelProps = {
 
 export const SearchPanel = ({ onValueChange }: SearchPanelProps) => {
   const [value, setValue] = useState("");
+  const router = useRouter();
 
   const changeValue = (e: ChangeEvent<HTMLInputElement>) => {
     const value = e.target.value;
@@ -19,7 +20,7 @@ export const SearchPanel = ({ onValueChange }: SearchPanelProps) => {
   return (
     <form className={styles.searchPanel}>
       <label htmlFor="search" className={styles.label}>
-        Шукаць
+        {router.pathname.includes("/search") ? "Шукаць" : "Вашы кнігі"}
       </label>
       <input
         id="search"
