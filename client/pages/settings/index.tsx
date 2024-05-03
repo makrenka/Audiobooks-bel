@@ -4,15 +4,17 @@ import { useEffect } from "react";
 import { useRouter } from "next/navigation";
 import { NextSeo } from "next-seo";
 import Cookies from "js-cookie";
+import classNames from "classnames";
 
-import { HeaderSection } from "@/components/HeaderSection/HeaderSection";
 import { useAppDispatch, useAppSelector } from "@/store/hooks";
 import { fetchUser, logoutUser } from "@/store/users";
-import { HomeIndicator } from "@/components/HomeIndicator/HomeIndicator";
 import { setAuthenticated } from "@/store/auth";
 
+import { HeaderSection } from "@/components/HeaderSection/HeaderSection";
+import { HomeIndicator } from "@/components/HomeIndicator/HomeIndicator";
+import { Loader } from "@/components/Loader/Loader";
+
 import styles from "./page.module.css";
-import classNames from "classnames";
 
 export type JwtPayload = {
   id: string;
@@ -20,7 +22,7 @@ export type JwtPayload = {
 
 export default function SettingsPage() {
   const dispatch = useAppDispatch();
-  const user = useAppSelector((state) => state.user.user.data);
+  const { data: user, isLoading } = useAppSelector((state) => state.user.user);
   const changingPasswordData = useAppSelector(
     (state) => state.user.changePassword.data
   );
@@ -49,6 +51,8 @@ export default function SettingsPage() {
     dispatch(setAuthenticated(false));
     router.push("/");
   };
+
+  if (isLoading) return <Loader />;
 
   return (
     <>

@@ -2,6 +2,7 @@ import { ChangeEventHandler, useEffect, useState } from "react";
 
 import { useAppDispatch, useAppSelector } from "@/store/hooks";
 import { fetchCategories } from "@/store/categories";
+import { Loader } from "../Loader/Loader";
 
 import styles from "./AdminGenresSelect.module.css";
 
@@ -12,8 +13,8 @@ export const AdminGenresSelect = ({
 }) => {
   const [selectedGenre, setSelectedGenre] = useState<string[]>([]);
   const dispatch = useAppDispatch();
-  const categories = useAppSelector(
-    (state) => state.categories.categoriesList.data
+  const { data: categories, isLoading } = useAppSelector(
+    (state) => state.categories.categoriesList
   );
 
   useEffect(() => {
@@ -32,6 +33,8 @@ export const AdminGenresSelect = ({
     setSelectedGenre(selectedGenre.filter((genre) => genre !== item));
     setGenres(selectedGenre.filter((genre) => genre !== item));
   };
+
+  if (isLoading) return <Loader />;
 
   return (
     <div className={styles.genres}>

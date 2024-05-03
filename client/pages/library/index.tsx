@@ -13,6 +13,7 @@ import { highlightMatches } from "../services/highlightMatches";
 import { Header } from "@/components/Header/Header";
 import { BottomBar } from "@/components/BottomBar/BottomBar";
 import { SearchPanel } from "@/components/SearchPanel/SearchPanel";
+import { Loader } from "@/components/Loader/Loader";
 
 import styles from "./page.module.css";
 
@@ -20,7 +21,9 @@ export default function LibraryPage() {
   const [value, setValue] = useState("");
   const dispatch = useAppDispatch();
   const handleHighlight = (string: string) => highlightMatches(value, string);
-  const { bookList } = useAppSelector((state) => state.book);
+  const { data: books, isLoading } = useAppSelector(
+    (state) => state.book.bookList
+  );
   const user = useAppSelector((state) => state.user.user.data);
   console.log(user);
 
@@ -48,6 +51,8 @@ export default function LibraryPage() {
     setValue(value);
   };
 
+  if (isLoading) return <Loader />;
+
   return (
     <>
       <NextSeo title={"Аўдыёкнігі | бібліятэка"} />
@@ -57,7 +62,7 @@ export default function LibraryPage() {
           <SearchPanel onValueChange={onValueChange} />
           {user && user.books.length ? (
             <div className={styles.cards}>
-              {bookList.data
+              {books
                 ?.filter(
                   (item) =>
                     item.title.toLowerCase().includes(value) ||

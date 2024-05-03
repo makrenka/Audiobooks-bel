@@ -7,12 +7,15 @@ import Cookies from "js-cookie";
 import Link from "next/link";
 
 import { useAppDispatch, useAppSelector } from "@/store/hooks";
+import { Loader } from "../Loader/Loader";
 
 import styles from "./LatestSearchCardsGroup.module.css";
 
 export const LatestSearchCardsGroup = () => {
   const dispatch = useAppDispatch();
-  const books = useAppSelector((state) => state.book.bookList.data);
+  const { data: books, isLoading } = useAppSelector(
+    (state) => state.book.bookList
+  );
   const user = useAppSelector((state) => state.user.user.data);
 
   useEffect(() => {
@@ -34,6 +37,8 @@ export const LatestSearchCardsGroup = () => {
       dispatch(fetchUser(id));
     }
   }, []);
+
+  if (isLoading) return <Loader />;
 
   return (
     <section className={styles.latestSearch}>

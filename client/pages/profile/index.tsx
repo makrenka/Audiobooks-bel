@@ -13,6 +13,7 @@ import { fetchUser } from "@/store/users";
 import { HomeIndicator } from "@/components/HomeIndicator/HomeIndicator";
 import { PhotoUploader } from "@/components/PhotoUploader/PhotoUploader";
 import { useInput } from "@/hooks/useInput";
+import { Loader } from "@/components/Loader/Loader";
 
 import styles from "./page.module.css";
 
@@ -21,7 +22,7 @@ export default function ProfilePage() {
   const [isEditName, setIsEditName] = useState(false);
   const [isEditEmail, setIsEditEmail] = useState(false);
 
-  const user = useAppSelector((state) => state.user.user.data);
+  const { data: user, isLoading } = useAppSelector((state) => state.user.user);
   const dispatch = useAppDispatch();
   const router = useRouter();
 
@@ -84,6 +85,8 @@ export default function ProfilePage() {
     if (name.value) changeName();
     if (email.value) changeEmail();
   };
+
+  if (isLoading) return <Loader />;
 
   return (
     <>

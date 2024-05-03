@@ -2,6 +2,7 @@ import { ChangeEventHandler, useEffect, useState } from "react";
 
 import { useAppDispatch, useAppSelector } from "@/store/hooks";
 import { fetchSections } from "@/store/sections";
+import { Loader } from "../Loader/Loader";
 
 import styles from "../AdminGenresSelect/AdminGenresSelect.module.css";
 
@@ -12,7 +13,9 @@ export const AdminSectionsSelect = ({
 }) => {
   const [selectedSection, setSelectedSection] = useState<string[]>([]);
   const dispatch = useAppDispatch();
-  const sections = useAppSelector((state) => state.sections.sectionsList.data);
+  const { data: sections, isLoading } = useAppSelector(
+    (state) => state.sections.sectionsList
+  );
 
   useEffect(() => {
     dispatch(fetchSections());
@@ -30,6 +33,8 @@ export const AdminSectionsSelect = ({
     setSelectedSection(selectedSection.filter((section) => section !== item));
     setSections(selectedSection.filter((section) => section !== item));
   };
+
+  if (isLoading) return <Loader />;
 
   return (
     <div className={styles.genres}>

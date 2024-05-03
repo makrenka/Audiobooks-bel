@@ -11,16 +11,17 @@ export default function CategoryPage({ category }: { category: string }) {
   const [categoryName, setCategoryName] = useState(category);
   const { bookList } = useAppSelector((state) => state.book);
 
+  const filteredList = bookList.data?.filter((item) =>
+    item.categories.map((i) => i.name).includes(categoryName)
+  );
+
   return (
     <>
       <div className={styles.container}>
         <HeaderSection heading={categoryName} />
         <main className={styles.main}>
-          {bookList.data
-            ?.filter((item) =>
-              item.categories.map((i) => i.name).includes(categoryName)
-            )
-            .map(({ cover, title, author }) => (
+          {filteredList?.length ? (
+            filteredList.map(({ cover, title, author }) => (
               <div className={styles.card} key={title}>
                 <img
                   src={
@@ -32,7 +33,10 @@ export default function CategoryPage({ category }: { category: string }) {
                 <h3 className={styles.heading}>{title}</h3>
                 <p className={styles.author}>{author}</p>
               </div>
-            ))}
+            ))
+          ) : (
+            <p className={styles.message}>Яшчэ няма кніг у гэтай катэгорыі</p>
+          )}
         </main>
       </div>
       <BottomBar />

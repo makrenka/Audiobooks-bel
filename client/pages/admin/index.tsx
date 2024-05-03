@@ -1,4 +1,5 @@
 import { useEffect } from "react";
+import { useRouter } from "next/router";
 import { NextSeo } from "next-seo";
 import Link from "next/link";
 
@@ -6,18 +7,22 @@ import { useAppDispatch, useAppSelector } from "@/store/hooks";
 import { fetchBooks } from "@/store/books";
 
 import { HeaderSection } from "@/components/HeaderSection/HeaderSection";
+import { Loader } from "@/components/Loader/Loader";
 
 import styles from "./page.module.css";
-import { useRouter } from "next/router";
 
 export default function AdminPage() {
   const dispatch = useAppDispatch();
-  const { bookList } = useAppSelector((state) => state.book);
+  const { data: books, isLoading } = useAppSelector(
+    (state) => state.book.bookList
+  );
   const router = useRouter();
 
   useEffect(() => {
     dispatch(fetchBooks());
-  }, [dispatch]);
+  }, []);
+
+  if (isLoading) return <Loader />;
 
   return (
     <>
@@ -31,7 +36,7 @@ export default function AdminPage() {
           >
             Дадаць новую кнігу
           </button>
-          {bookList.data?.map(({ cover, title, author, _id }) => (
+          {books?.map(({ cover, title, author, _id }) => (
             <Link href={`/books/${_id}`} key={_id} className={styles.cardLink}>
               <div className={styles.card}>
                 <img

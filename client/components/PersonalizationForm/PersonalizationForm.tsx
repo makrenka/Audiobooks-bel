@@ -6,14 +6,14 @@ import { useForm } from "react-hook-form";
 import Cookies from "js-cookie";
 
 import { useAppDispatch, useAppSelector } from "@/store/hooks";
-// import { categories } from "@/constants/categories";
 import { JwtPayload } from "@/pages/settings";
 import { addCategoryUser, fetchUser } from "@/store/users";
 import { CategoryButton } from "../CategoryButton/CategoryButton";
-
-import styles from "./PersonalizationForm.module.css";
 import { fetchCategories } from "@/store/categories";
 import { highlightMatches } from "@/pages/services/highlightMatches";
+import { Loader } from "../Loader/Loader";
+
+import styles from "./PersonalizationForm.module.css";
 
 export const PersonalizationForm = () => {
   const [genres, setGenres] = useState<string[]>([]);
@@ -24,8 +24,8 @@ export const PersonalizationForm = () => {
   const { handleSubmit } = useForm();
   const handleHighlight = (string: string) =>
     highlightMatches(searchValue, string);
-  const categories = useAppSelector(
-    (state) => state.categories.categoriesList.data
+  const { data: categories, isLoading } = useAppSelector(
+    (state) => state.categories.categoriesList
   );
 
   useEffect(() => {
@@ -76,6 +76,8 @@ export const PersonalizationForm = () => {
   const changeSearchValue = (e: ChangeEvent<HTMLInputElement>) => {
     setSearchValue(e.target.value);
   };
+
+  if (isLoading) return <Loader />;
 
   return (
     <form className={styles.persForm} onSubmit={handleSubmit(onSubmit)}>

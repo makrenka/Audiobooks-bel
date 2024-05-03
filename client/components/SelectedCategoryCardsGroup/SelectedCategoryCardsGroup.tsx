@@ -1,6 +1,7 @@
 import Link from "next/link";
 
 import { useAppSelector } from "@/store/hooks";
+import { Loader } from "../Loader/Loader";
 
 import styles from "../LatestSearchCardsGroup/LatestSearchCardsGroup.module.css";
 
@@ -9,7 +10,11 @@ export const SelectedCategoryCardsGroup = ({
 }: {
   selectedCategory: string;
 }) => {
-  const books = useAppSelector((state) => state.book.bookList.data);
+  const { data: books, isLoading } = useAppSelector(
+    (state) => state.book.bookList
+  );
+
+  if (isLoading) return <Loader />;
 
   return (
     <section className={styles.latestSearch}>

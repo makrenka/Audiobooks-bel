@@ -2,13 +2,14 @@ import { useEffect, useState } from "react";
 import Cookies from "js-cookie";
 import { jwtDecode } from "jwt-decode";
 import { JwtPayload } from "@/pages";
+import classNames from "classnames";
 
 import { fetchCategories } from "@/store/categories";
 import { useAppDispatch, useAppSelector } from "@/store/hooks";
 import { fetchUser } from "@/store/users";
+import { Loader } from "../Loader/Loader";
 
 import styles from "./CategorySearchBtnGroup.module.css";
-import classNames from "classnames";
 
 export const CategorySearchBtnGroup = ({
   onSelectedCategory,
@@ -17,8 +18,8 @@ export const CategorySearchBtnGroup = ({
 }) => {
   const [selectedCategory, setSelectedCategory] = useState("");
   const dispatch = useAppDispatch();
-  const categories = useAppSelector(
-    (state) => state.categories.categoriesList.data
+  const { data: categories, isLoading } = useAppSelector(
+    (state) => state.categories.categoriesList
   );
   const user = useAppSelector((state) => state.user.user.data);
 
@@ -46,6 +47,8 @@ export const CategorySearchBtnGroup = ({
     onSelectedCategory(category);
     setSelectedCategory(category);
   };
+
+  if (isLoading) return <Loader />;
 
   return (
     <section className={styles.categories}>

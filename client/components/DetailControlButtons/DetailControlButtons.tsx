@@ -56,14 +56,14 @@ export const DetailControlButtons = ({ book }: { book: Book }) => {
         />
         Слухаць аўдыё
       </button>
-      <button type="button" className={classNames(styles.btn, styles.btnRead)}>
+      {/* <button type="button" className={classNames(styles.btn, styles.btnRead)}>
         <img
           src="/icons/read-book-button.svg"
           alt="Read Book"
           className={styles.icon}
         />
         Чытаць кнігу
-      </button>
+      </button> */}
     </div>
   );
 };

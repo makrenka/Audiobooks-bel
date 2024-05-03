@@ -7,16 +7,21 @@ import { fetchBooks } from "@/store/books";
 
 import { BottomBar } from "@/components/BottomBar/BottomBar";
 import { HeaderSection } from "@/components/HeaderSection/HeaderSection";
+import { Loader } from "@/components/Loader/Loader";
 
 import styles from "../recommended/page.module.css";
 
 export default function NewPage() {
   const dispatch = useAppDispatch();
-  const { bookList } = useAppSelector((state) => state.book);
+  const { data: books, isLoading } = useAppSelector(
+    (state) => state.book.bookList
+  );
 
   useEffect(() => {
     dispatch(fetchBooks());
   }, [dispatch]);
+
+  if (isLoading) return <Loader />;
 
   return (
     <>
@@ -24,7 +29,7 @@ export default function NewPage() {
       <div className={styles.container}>
         <HeaderSection heading={"Навінкі"} />
         <main className={styles.main}>
-          {bookList.data
+          {books
             ?.filter((item) => item.sections.map((i) => i.name).includes("new"))
             .map(({ cover, title, author, _id }) => (
               <Link

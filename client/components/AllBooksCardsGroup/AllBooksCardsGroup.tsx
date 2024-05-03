@@ -1,15 +1,20 @@
 import Link from "next/link";
 
 import { useAppSelector } from "@/store/hooks";
+import { Loader } from "../Loader/Loader";
 
 import styles from "../NewAndTrendCardsGroup/NewAndTrendCardsGroup.module.css";
 
 export const AllBooksCardsGroup = ({ section }: { section: string }) => {
-  const { bookList } = useAppSelector((state) => state.book);
+  const { data: books, isLoading } = useAppSelector(
+    (state) => state.book.bookList
+  );
+
+  if (isLoading) return <Loader />;
 
   return (
     <div className={styles.cards}>
-      {bookList.data?.map(({ cover, title, _id }) => (
+      {books?.map(({ cover, title, _id }) => (
         <Link href={`/books/${_id}`} className={styles.link} key={_id}>
           <div className={styles.card}>
             <img

@@ -10,6 +10,7 @@ import { fetchUser } from "@/store/users";
 
 import { BottomBar } from "@/components/BottomBar/BottomBar";
 import { HeaderSection } from "@/components/HeaderSection/HeaderSection";
+import { Loader } from "@/components/Loader/Loader";
 
 import styles from "./page.module.css";
 
@@ -19,7 +20,9 @@ export type JwtPayload = {
 
 export default function RecommendedPage() {
   const dispatch = useAppDispatch();
-  const { bookList } = useAppSelector((state) => state.book);
+  const { data: books, isLoading } = useAppSelector(
+    (state) => state.book.bookList
+  );
   const user = useAppSelector((state) => state.user.user.data);
 
   useEffect(() => {
@@ -44,11 +47,13 @@ export default function RecommendedPage() {
 
   const userGenres = user?.categories.map((item) => item.name);
 
-  const filteredBooks = bookList.data?.filter((book) =>
+  const filteredBooks = books?.filter((book) =>
     book.categories
       .map((i) => i.name)
       .some((genre) => userGenres?.includes(genre))
   );
+
+  if (isLoading) return <Loader />;
 
   return (
     <>

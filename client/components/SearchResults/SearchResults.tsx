@@ -2,18 +2,23 @@ import Link from "next/link";
 
 import { highlightMatches } from "@/pages/services/highlightMatches";
 import { useAppSelector } from "@/store/hooks";
+import { Loader } from "../Loader/Loader";
 
 import styles from "./SearchResults.module.css";
 
 export const SearchResults = ({ value }: { value: string }) => {
   const handleHighlight = (string: string) => highlightMatches(value, string);
-  const { bookList } = useAppSelector((state) => state.book);
+  const { data: books, isLoading } = useAppSelector(
+    (state) => state.book.bookList
+  );
+
+  if (isLoading) return <Loader />;
 
   return (
     <section className={styles.results}>
       <h2 className={styles.heading}>Search Results</h2>
       <div className={styles.cards}>
-        {bookList.data
+        {books
           ?.filter(
             (item) =>
               item.title.toLowerCase().includes(value) ||

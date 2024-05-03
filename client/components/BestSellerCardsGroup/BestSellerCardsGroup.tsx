@@ -2,15 +2,20 @@ import Link from "next/link";
 
 import { RatingGroup } from "../RatingGroup/RatingGroup";
 import { useAppSelector } from "@/store/hooks";
+import { Loader } from "../Loader/Loader";
 
 import styles from "./BestSellerCardsGroup.module.css";
 
 export const BestSellerCardsGroup = ({ section }: { section: string }) => {
-  const { bookList } = useAppSelector((state) => state.book);
+  const { data: books, isLoading } = useAppSelector(
+    (state) => state.book.bookList
+  );
+
+  if (isLoading) return <Loader />;
 
   return (
     <div className={styles.cards}>
-      {bookList.data
+      {books
         ?.filter((item) => item.sections.map((i) => i.name).includes(section))
         .map(({ cover, title, author, listens, _id, reviews }) => (
           <div className={styles.card} key={_id}>
