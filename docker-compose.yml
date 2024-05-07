@@ -1,0 +1,50 @@
+version: "3"
+
+services:
+  server:
+    container_name: server
+    build:
+      context: .
+    env_file:
+      - .env
+    volumes:
+      - .:/server
+      - /server/node_modules
+    ports:
+      - 5000:5000
+    command: npm run start:dev
+    depends_on:
+      - mongodb
+    restart: always
+
+  mongodb:
+    container_name: mongodb
+    image: mongodb/mongodb-community-server:6.0-ubi8
+    env_file:
+      - .env
+    environment:
+      MONGO_INITDB_ROOT_USERNAME: ${LOG_DB_ROOT_USER}
+      MONGO_INITDB_ROOT_PASSWORD: ${LOG_DB_ROOT_PASS}
+    ports:
+      - ${LOG_DB_PORTS}
+    volumes:
+      - type: bind
+        source: ./data
+        target: /data/db
+    restart: always
+
+  client:
+    container_name: client
+    build:
+      context: .
+    env_file:
+      - .env
+    volumes:
+      - .:/client
+      - /client/node_modules
+    ports:
+      - 3000:3000
+    command: npm run dev
+    depends_on:
+      - server
+    restart: always

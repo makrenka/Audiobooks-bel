@@ -1,6 +1,6 @@
 FROM node:22-alpine
 
-WORKDIR /server/
+WORKDIR /client/
 
 COPY package*.json ./
 
@@ -8,6 +8,4 @@ RUN npm install
 
 COPY . .
 
-COPY ./dist ./dist
-
-CMD [ "npm", "run", "start:dev" ]
+CMD [ "npm", "run", "dev" ]
