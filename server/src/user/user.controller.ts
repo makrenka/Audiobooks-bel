@@ -55,7 +55,7 @@ export class UserController {
   }
 
   @Roles('ADMIN')
-  @UseGuards(RolesGuard)
+  // @UseGuards(RolesGuard)
   @Get()
   getAllUsers() {
     return this.userService.getAllUsers();
@@ -69,7 +69,7 @@ export class UserController {
   }
 
   @Roles('ADMIN')
-  @UseGuards(RolesGuard)
+  // @UseGuards(RolesGuard)
   @Delete(':id')
   deleteUser(@Param('id') id: ObjectId) {
     return this.userService.deleteUser(id);

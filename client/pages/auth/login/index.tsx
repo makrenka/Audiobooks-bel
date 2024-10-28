@@ -13,8 +13,10 @@ export default function Login() {
   const dispatch = useAppDispatch();
   const router = useRouter();
 
+  const role = "ADMIN";
+
   const signIn = () => {
-    router.push("http://localhost:5000/auth/google/login");
+    router.push(`http://localhost:5000/auth/google/login/${role}`);
   };
 
   return (

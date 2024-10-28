@@ -2,6 +2,7 @@ import {
   Body,
   Controller,
   Get,
+  Param,
   Post,
   Req,
   Res,
@@ -35,7 +36,7 @@ export class AuthController {
     return this.authService.forgottenPassword(dto);
   }
 
-  @Get('/google/login')
+  @Get('/google/login/:role')
   @UseGuards(GoogleAuthGuard)
   googleLogin() {
     return { msg: 'Google authentication' };
